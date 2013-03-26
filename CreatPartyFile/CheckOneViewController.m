@@ -109,7 +109,7 @@ NSInteger prerow=-1;
     [donebutton setImage:[UIImage imageNamed:@"done"] forState:UIControlStateNormal];
     [donebutton addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchDown];
     UIBarButtonItem* Makedone=[[UIBarButtonItem alloc]initWithCustomView:donebutton];
-    if(temp!=0){
+    if(temp!=0||self.from_p_id!=0){
         self.navigationItem.rightBarButtonItem=Makedone;
     }else
     {
@@ -530,57 +530,50 @@ NSInteger prerow=-1;
         }
     }
     else{
-        if(temp==0){
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"至少选择一人" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
-        }
-        else{
-            NSLog(@"self.choiceFriends=======%@",choiceFriends);
-            NSLog(@"self.choiceFriends=======%@",sinaFriends);
-            
-            NSLog(@"传值。。。。。。%@,%@",self.check_time,self.check_name);
-            
-            party=[[CreatPartyViewController alloc]init];
-            
-            party.from_P_type=self.type;
-            
-            party.P_title=self.check_name;
-            
-            party.P_time=self.check_time;
-            
-            party.map_city=self.check_city;
-            
-            party.map_local=self.check_local;
-            
-            party.friengArr=choiceFriends;
-            
-            party.sinaArr=sinaFriends;
-            
-            party.lat=self.lat;
-            
-            party.lng=self.lng;
-            
-            party.time=self.time;
-            
-            NSLog(@"self.choiceFriends=======%@",choiceFriends);
-            NSLog(@"self.choiceFriends=======%@",sinaFriends);
-            
-            NSLog(@"传值。。。。。====%@",self.time);
-            
-            NSLog(@"self.choiceFriends=======%@",party.friengArr);
-            
-            NSLog(@"传值。。。。。。%@,%@",party.P_title,party.P_time);
-            
-            [self.navigationController pushViewController:party animated:YES];
-            
-            NSLog(@"传值。。。。。====%@",party.time);
+        NSLog(@"self.choiceFriends=======%@",choiceFriends);
+        NSLog(@"self.choiceFriends=======%@",sinaFriends);
+        
+        NSLog(@"传值。。。。。。%@,%@",self.check_time,self.check_name);
+        
+        party=[[CreatPartyViewController alloc]init];
+        
+        party.from_P_type=self.type;
+        
+        party.P_title=self.check_name;
+        
+        party.P_time=self.check_time;
+        
+        party.map_city=self.check_city;
+        
+        party.map_local=self.check_local;
+        
+        party.friengArr=choiceFriends;
+        
+        party.sinaArr=sinaFriends;
+        
+        party.lat=self.lat;
+        
+        party.lng=self.lng;
+        
+        party.time=self.time;
+        
+        NSLog(@"self.choiceFriends=======%@",choiceFriends);
+        NSLog(@"self.choiceFriends=======%@",sinaFriends);
+        
+        NSLog(@"传值。。。。。====%@",self.time);
+        
+        NSLog(@"self.choiceFriends=======%@",party.friengArr);
+        
+        NSLog(@"传值。。。。。。%@,%@",party.P_title,party.P_time);
+        
+        [self.navigationController pushViewController:party animated:YES];
+        
+        NSLog(@"传值。。。。。====%@",party.time);
 
-            
-            NSLog(@"传值。。。。。。%@,%@",party.P_title,party.P_time);
+        
+        NSLog(@"传值。。。。。。%@,%@",party.P_title,party.P_time);
 
-            NSLog(@"self.choiceFriends=======%@",party.friengArr);
-        }
-    
+        NSLog(@"self.choiceFriends=======%@",party.friengArr);
     }
 //    
 //    if(self.spot==1){
