@@ -11,7 +11,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "JSONKit.h"
-
+int numberblock=0;
 NSString *WeiboOAuth2ErrorDomain = @"com.zhiweibo.OAuth2";
 
 @interface WeiboSignIn()
@@ -37,6 +37,7 @@ NSString *WeiboOAuth2ErrorDomain = @"com.zhiweibo.OAuth2";
 
 - (void)signInOnViewController:(UIViewController *)viewController {
     WeiboSignInViewController *signInWeiboController = [[WeiboSignInViewController alloc]initWithNibName:nil bundle:nil];
+    numberblock=0;
     signInWeiboController.delegate = self;
     signInWeiboController.authentication = self.authentication;
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:signInWeiboController];
@@ -88,17 +89,18 @@ NSString *WeiboOAuth2ErrorDomain = @"com.zhiweibo.OAuth2";
         NSLog(@"11111accessToken==%@",accessToken);
         NSString *userId = [dict objectForKey:@"uid"];
         NSLog(@"222222userId==%@",userId);
-        
-        NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *fileName=[[paths objectAtIndex:0] stringByAppendingPathComponent:@"mySinaAccesstoken.txt"];
-        NSMutableArray *uuidMutablearray=[NSMutableArray arrayWithObject:accessToken];
-        [uuidMutablearray writeToFile:fileName atomically:YES];
-        
-        NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *fileNam=[[path objectAtIndex:0] stringByAppendingPathComponent:@"mySinaId.txt"];
-        NSMutableArray *Mutablearray=[NSMutableArray arrayWithObject:userId];
-        [Mutablearray writeToFile:fileNam atomically:YES];
-        
+        if (numberblock==0) {
+            numberblock=1;
+            NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *fileName=[[paths objectAtIndex:0] stringByAppendingPathComponent:@"mySinaAccesstoken.txt"];
+            NSMutableArray *uuidMutablearray=[NSMutableArray arrayWithObject:accessToken];
+            [uuidMutablearray writeToFile:fileName atomically:YES];
+            
+            NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *fileNam=[[path objectAtIndex:0] stringByAppendingPathComponent:@"mySinaId.txt"];
+            NSMutableArray *Mutablearray=[NSMutableArray arrayWithObject:userId];
+            [Mutablearray writeToFile:fileNam atomically:YES];
+        }
         
         int expiresIn = [[dict objectForKey:@"expires_in"] intValue];
         
