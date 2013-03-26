@@ -678,17 +678,37 @@ int MessFlag=0;
         NSLog(@"self.P_time======%@",M_stime);
         
         
-        [formatter setDateFormat:@"hh:mm"];
         //消息倒计时
-        NSInteger time3=[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STIME"]integerValue];
-        NSDate* date3=[NSDate dateWithTimeIntervalSince1970:time3];
-        M_dtime = [formatter stringFromDate:date3];
+        NSInteger time3=[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_DTIME"]integerValue];
+        if (time3>10||time3==10) {
+            M_dtime=[NSString stringWithFormat:@"00:%d",time3];
+        }
+        else if(time3>0||time3==0)
+            M_dtime=[NSString stringWithFormat:@"00:0%d",time3];
         NSLog(@"self.P_time======%@",M_dtime);
         
+        
         //派对倒计时
-        NSInteger time4=[[self.partyId objectForKey:@"P_STIME"]integerValue];
-        NSDate* date4=[NSDate dateWithTimeIntervalSince1970:time4];
-        P_dtime = [formatter stringFromDate:date4];
+        NSInteger time4=[[self.partyId objectForKey:@"P_DTIME"]integerValue];
+        if(time4>0||time4==0){
+            int i=time4/60;
+            NSString *hour;
+            if (i>10||i==10) {
+                hour=[NSString stringWithFormat:@"%d",i];
+            }
+            else
+                hour=[NSString stringWithFormat:@"0%d",i];
+            
+            int j=time4%60;
+            NSString *mins;
+            if (j>10||j==10) {
+                mins=[NSString stringWithFormat:@"%d",j];
+            }
+            else
+                mins=[NSString stringWithFormat:@"0%d",j];
+            
+            P_dtime = [NSString stringWithFormat:@"%@:%@",hour,mins];
+        }
         NSLog(@"self.P_time======%@",P_dtime);
         
         //************************************派对创建时间 end*****************************************
