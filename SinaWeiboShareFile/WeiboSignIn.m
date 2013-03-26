@@ -88,6 +88,18 @@ NSString *WeiboOAuth2ErrorDomain = @"com.zhiweibo.OAuth2";
         NSLog(@"11111accessToken==%@",accessToken);
         NSString *userId = [dict objectForKey:@"uid"];
         NSLog(@"222222userId==%@",userId);
+        
+        NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *fileName=[[paths objectAtIndex:0] stringByAppendingPathComponent:@"mySinaAccesstoken.txt"];
+        NSMutableArray *uuidMutablearray=[NSMutableArray arrayWithObject:accessToken];
+        [uuidMutablearray writeToFile:fileName atomically:YES];
+        
+        NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *fileNam=[[path objectAtIndex:0] stringByAppendingPathComponent:@"mySinaId.txt"];
+        NSMutableArray *Mutablearray=[NSMutableArray arrayWithObject:userId];
+        [Mutablearray writeToFile:fileNam atomically:YES];
+        
+        
         int expiresIn = [[dict objectForKey:@"expires_in"] intValue];
         
         if (accessToken.length > 0 && userId.length > 0) {
