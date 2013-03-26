@@ -265,7 +265,7 @@
     UIBarButtonItem* goback=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=goback;
     UIButton* homeButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [homeButton setImage:[UIImage imageNamed:@"Phome@2x.png"] forState:UIControlStateNormal];
+    [homeButton setImage:[UIImage imageNamed:@"homeReturn"] forState:UIControlStateNormal];
     homeButton.frame=CGRectMake(0.0, 0.0, 50, 31);
     [homeButton addTarget:self action:@selector(homePage) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:homeButton];

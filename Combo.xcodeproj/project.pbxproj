@@ -434,6 +434,10 @@
 		DCA24D2F1701AE6900BB9F47 /* LOC7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24D131701AE6900BB9F47 /* LOC7@2x.png */; };
 		DCA24D321701AE8300BB9F47 /* AddrDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24D311701AE8300BB9F47 /* AddrDetailViewController.m */; };
 		DCA24D331701AE8300BB9F47 /* AddrDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24D311701AE8300BB9F47 /* AddrDetailViewController.m */; };
+		DCA24D491701B26300BB9F47 /* homeReturn.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24D471701B26300BB9F47 /* homeReturn.png */; };
+		DCA24D4A1701B26300BB9F47 /* homeReturn.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24D471701B26300BB9F47 /* homeReturn.png */; };
+		DCA24D4B1701B26300BB9F47 /* homeReturn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24D481701B26300BB9F47 /* homeReturn@2x.png */; };
+		DCA24D4C1701B26300BB9F47 /* homeReturn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24D481701B26300BB9F47 /* homeReturn@2x.png */; };
 		DCA454EE16FC083E00AC8FCC /* CButton.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA454CA16FC083E00AC8FCC /* CButton.png */; };
 		DCA454EF16FC083E00AC8FCC /* CButton.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA454CA16FC083E00AC8FCC /* CButton.png */; };
 		DCA454F016FC083E00AC8FCC /* CButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA454CB16FC083E00AC8FCC /* CButton@2x.png */; };
@@ -1170,6 +1174,8 @@
 		DCA24D131701AE6900BB9F47 /* LOC7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOC7@2x.png"; sourceTree = "<group>"; };
 		DCA24D301701AE8300BB9F47 /* AddrDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddrDetailViewController.h; sourceTree = "<group>"; };
 		DCA24D311701AE8300BB9F47 /* AddrDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddrDetailViewController.m; sourceTree = "<group>"; };
+		DCA24D471701B26300BB9F47 /* homeReturn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeReturn.png; sourceTree = "<group>"; };
+		DCA24D481701B26300BB9F47 /* homeReturn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "homeReturn@2x.png"; sourceTree = "<group>"; };
 		DCA454CA16FC083E00AC8FCC /* CButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CButton.png; sourceTree = "<group>"; };
 		DCA454CB16FC083E00AC8FCC /* CButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CButton@2x.png"; sourceTree = "<group>"; };
 		DCA454CC16FC083E00AC8FCC /* Creaters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Creaters.png; sourceTree = "<group>"; };
@@ -1466,6 +1472,8 @@
 		9D08589016FAAC9D00A36ED5 /* PartyDetailImage */ = {
 			isa = PBXGroup;
 			children = (
+				DCA24D471701B26300BB9F47 /* homeReturn.png */,
+				DCA24D481701B26300BB9F47 /* homeReturn@2x.png */,
 				DCA24CA11701A51F00BB9F47 /* touxiangbeijing.png */,
 				DCA24CA21701A51F00BB9F47 /* touxiangbeijing@2x.png */,
 				DCA454CA16FC083E00AC8FCC /* CButton.png */,
@@ -2629,6 +2637,8 @@
 				DCA24D2A1701AE6900BB9F47 /* LOC6@2x.png in Resources */,
 				DCA24D2C1701AE6900BB9F47 /* LOC7.png in Resources */,
 				DCA24D2E1701AE6900BB9F47 /* LOC7@2x.png in Resources */,
+				DCA24D491701B26300BB9F47 /* homeReturn.png in Resources */,
+				DCA24D4B1701B26300BB9F47 /* homeReturn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2969,6 +2979,8 @@
 				DCA24D2B1701AE6900BB9F47 /* LOC6@2x.png in Resources */,
 				DCA24D2D1701AE6900BB9F47 /* LOC7.png in Resources */,
 				DCA24D2F1701AE6900BB9F47 /* LOC7@2x.png in Resources */,
+				DCA24D4A1701B26300BB9F47 /* homeReturn.png in Resources */,
+				DCA24D4C1701B26300BB9F47 /* homeReturn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
