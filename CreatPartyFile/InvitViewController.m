@@ -197,6 +197,7 @@
     }
     else{
         [self sendReason];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -223,7 +224,6 @@
     
     //[rrequest setDelegate:self];
     [rrequest startAsynchronous];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //******************************上传派对详细信息************************************
