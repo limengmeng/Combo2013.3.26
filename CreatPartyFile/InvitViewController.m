@@ -59,8 +59,8 @@
     [self getUUidForthis];
     //self.view.backgroundColor=[UIColor colorWithRed:248.0/255 green:247.0/255 blue:246.0/255 alpha:1];
     self.view.backgroundColor=[UIColor colorWithRed:226.0/255 green:224.0/255 blue:219.0/255 alpha:1];
-
-
+    
+    
     //******************************确定按钮************************************
     if(temp==1){
         UIButton* donebutton=[UIButton  buttonWithType:UIButtonTypeCustom];
@@ -130,7 +130,7 @@
         button =[[UIButton alloc]initWithFrame:CGRectMake(218 , 108 , 85 , 17 )];
         [button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor=[UIColor clearColor];
-         [button setBackgroundImage:[UIImage imageNamed:@"mobilenuber"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"mobilenuber"] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [button setTitle:@"你的联系方式" forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize: 10];
@@ -197,7 +197,6 @@
     }
     else{
         [self sendReason];
-        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -224,6 +223,7 @@
     
     //[rrequest setDelegate:self];
     [rrequest startAsynchronous];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //******************************上传派对详细信息************************************
@@ -270,18 +270,18 @@
     }
     NSLog(@"friendid 数组%@",friendId);
     for (int i=0; i<[self.friendId count]; i++) {
-           
+        
         NSString *tempString=[NSString stringWithFormat:@"@%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_NICK"]];
         stringnameShare=[stringnameShare stringByAppendingString:tempString];
-           
+        
     }
-//    WeiboRequest *request = [[WeiboRequest alloc] initWithDelegate:self];
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    NSString *postPath =@"statuses/update.json";
-//    //
-//    NSLog(@"111111111111%@",stringnameShare);
-//    [params setObject:stringnameShare forKey:@"status"];
-//    [request postToPath:postPath params:params];
+    //    WeiboRequest *request = [[WeiboRequest alloc] initWithDelegate:self];
+    //    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    //    NSString *postPath =@"statuses/update.json";
+    //    //
+    //    NSLog(@"111111111111%@",stringnameShare);
+    //    [params setObject:stringnameShare forKey:@"status"];
+    //    [request postToPath:postPath params:params];
     NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docDir=[path objectAtIndex:0];
     //NSFileManager *fm=[NSFileManager defaultManager];
@@ -296,7 +296,6 @@
         NSMutableArray *stringmutables=[NSMutableArray arrayWithContentsOfFile:imagePaths];
         NSString *accessToken=[stringmutables objectAtIndex:0];
         NSLog(@"输出新浪的token===%@",accessToken);
-        
         NSString *stringUrl=@"https://api.weibo.com/2/statuses/update.json";
         NSLog(@"接口1：：：：%@",stringUrl);
         NSURL* url=[NSURL URLWithString:stringUrl];
@@ -305,26 +304,8 @@
         [rrequest setPostValue:accessToken forKey: @"access_token"];
         [rrequest setDelegate:self];
         [rrequest startAsynchronous];
-        [self sendCreatDate];
-
     }
-    }
-- (void)request:(WeiboRequest *)request didFailWithError:(NSError *)error {
-    NSLog(@"Failed to post: %@", error);
-    
-}
-
-- (void)request:(WeiboRequest *)request didLoad:(id)result {
-    //    if ( [request hasSuffix:@"friendships/friends/bilateral.json"])
-    //    {
-    //        NSMutableArray * resultArray = [[NSMutableArray alloc] init];
-    //        resultArray = [result objectForKey:@"users"];
-    //        NSLog(@"---- %@",resultArray);
-    //    }
-    
-    Status *status = [Status statusWithJsonDictionary:result];
-    NSLog(@"1111111111111111111%@",status);
-    NSLog(@"status id: %lld", status.statusId);
+    [self sendCreatDate];
 }
 -(void)sendCreatDate{
     //上传派对相关信息
@@ -388,20 +369,61 @@
                        NSLog(@"self.phone=======%@",self.phone);
                        NSLog(@"stringFriId====%@",stringFriId);
                        NSLog(@"sinaFriId====%@",sinaFriId);
-                       
                        //rrequest.delegate=self;
                        [rrequest startSynchronous];
-                       
                        dispatch_async(dispatch_get_main_queue(), ^{
                            NSData* response=[rrequest responseData];
                            NSLog(@"%@",response);
                            NSError* error;
-                           
-                           
                            if (response!=nil) {
                                
                                NSDictionary* bizDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
                                NSLog(@"%@",bizDic);
+                               NSString *stringnameShare=@"我的新浪微博";
+                               
+                               for (int i=0; i<[sinaArray count]; i++) {
+                                   sinaTemp=i;
+                                   NSString *suid=[[self.sinaArray objectAtIndex:i] objectForKey:@"id"];
+                                   NSString *nick=[[self.sinaArray objectAtIndex:i] objectForKey:@"name"];
+                                   NSString *pic=[[self.sinaArray objectAtIndex:i] objectForKey:@"avatar_large"];
+                                   NSString *sex=[[self.sinaArray objectAtIndex:i] objectForKey:@"gender"];
+                                   NSString *location=[[self.sinaArray objectAtIndex:i] objectForKey:@"location"];
+                                   
+                                   NSString *tempString=[NSString stringWithFormat:@"@%@",nick];
+                                   stringnameShare=[stringnameShare stringByAppendingString:tempString];
+                                   NSLog(@"suid==%@,nick==%@,pic=%@,sex=%@,location==%@",suid,nick,pic,sex,location);
+                                   
+                               }
+                               NSLog(@"friendid 数组%@",friendId);
+                               for (int i=0; i<[self.friendId count]; i++) {
+                                   
+                                   NSString *tempString=[NSString stringWithFormat:@"@%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_NICK"]];
+                                   stringnameShare=[stringnameShare stringByAppendingString:tempString];
+                                   
+                               }
+                               NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                               NSString *docDir=[path objectAtIndex:0];
+                               //NSFileManager *fm=[NSFileManager defaultManager];
+                               NSString *imagePath=[docDir stringByAppendingPathComponent:@"mySinaShare.txt"];
+                               NSMutableArray *stringmutable=[NSMutableArray arrayWithContentsOfFile:imagePath];
+                               NSString *shareSina=[stringmutable objectAtIndex:0];
+                               NSLog(@"wwwwwwwwwwwwwwwwwwww%@",shareSina);
+                               if ([shareSina isEqualToString:@"YES"]) {
+                                   NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                                   NSString *docDirs=[paths objectAtIndex:0];
+                                   NSString *imagePaths=[docDirs stringByAppendingPathComponent:@"mySinaAccesstoken.txt"];
+                                   NSMutableArray *stringmutables=[NSMutableArray arrayWithContentsOfFile:imagePaths];
+                                   NSString *accessToken=[stringmutables objectAtIndex:0];
+                                   NSLog(@"输出新浪的token===%@",accessToken);
+                                   NSString *stringUrl=@"https://api.weibo.com/2/statuses/update.json";
+                                   NSLog(@"接口1：：：：%@",stringUrl);
+                                   NSURL* url=[NSURL URLWithString:stringUrl];
+                                   ASIFormDataRequest *request =  [ASIFormDataRequest  requestWithURL:url];
+                                   [request setPostValue:stringnameShare forKey: @"status"];
+                                   [request setPostValue:accessToken forKey: @"access_token"];
+                                   //[request setDelegate:self];
+                                   [request startAsynchronous];
+                               }
                            }
                        });
                    });
@@ -438,7 +460,7 @@
         
         [stringFriId appendFormat:@",%@",[self.dic objectForKey:@"uuid"]];
     }
-
+    
     if(sinaTemp==2)
     {
         NSData* response=[request responseData];
@@ -449,7 +471,7 @@
         self.dic=bizDic;
         [stringFriId appendFormat:@",%@",[self.dic objectForKey:@"uuid"]];
     }
-
+    
     if(sinaTemp==3)
     {
         NSData* response=[request responseData];
@@ -461,6 +483,14 @@
         
         [stringFriId appendFormat:@",%@",[self.dic objectForKey:@"uuid"]];
     }
+    if (sinaTemp==4) {
+        NSData* response=[request responseData];
+        NSLog(@"%@",response);
+        NSError* error;
+        NSDictionary* bizDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
+        NSLog(@"guojiangwei %@",bizDic);
+    }
+    
 }
 //*****************************给服务器上传数据end************************************
 
