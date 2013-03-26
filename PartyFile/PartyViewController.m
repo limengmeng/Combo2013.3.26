@@ -845,29 +845,37 @@ int itttt=0;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_slimeView scrollViewDidScroll];
-    //NSLog(@"固定的y值为：=====%f========%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-  
-    if (PreY>scrollView.contentOffset.y) {
+    if ((PreY<scrollView.contentOffset.y)&&(scrollView.contentOffset.y>0)) {
         
-        if (Allparty.frame.origin.y<0)
+        if (Allparty.frame.origin.y>-32)
         {
             [Allparty setFrame:CGRectMake(0, Allparty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 105, 32)];
-        
+            [ReliableParty setFrame:CGRectMake(105, ReliableParty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 110, 32)];
+            [MyParty setFrame:CGRectMake(215, MyParty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 105, 32)];
+            
         }
+        
         PreY=scrollView.contentOffset.y;
     }
     else
     {
-        if (Allparty.frame.origin.y>-32)
+        if (Allparty.frame.origin.y<0)
         {
             [Allparty setFrame:CGRectMake(0, Allparty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 105, 32)];
+            [ReliableParty setFrame:CGRectMake(105, ReliableParty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 110, 32)];
+            [MyParty setFrame:CGRectMake(215, MyParty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 105, 32)];
             
         }
+        
         PreY=scrollView.contentOffset.y;
     }
-//
-    if ((self.tableViewParty.contentOffset.y+mainscreenhight-self.tableViewParty.contentSize.height>0)&&(self.tableViewParty.contentSize.height>0))
-    {
+    
+    
+    if (scrollView.contentOffset.y<=0) {
+        
+        
+    }
+    if ((self.tableViewParty.contentOffset.y+mainscreenhight-self.tableViewParty.contentSize.height>0)&&(self.tableViewParty.contentSize.height>0)) {
         if (isLoading==NO) {
             [self PartyClickMore];
             isLoading=YES;
