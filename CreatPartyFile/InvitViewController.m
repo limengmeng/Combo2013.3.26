@@ -153,7 +153,7 @@
 //*****************************textViewdelegate*****************************
 -(void)textViewDidChange:(UITextView *)textView
 {
-    if (textView.tag=100) {
+    if (textView.tag==100) {
         self.examineText =  textView.text;
         if (textView.text.length == 0) {
             if(temp==1)
@@ -170,7 +170,7 @@
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView{
-    if(textView.tag=100){
+    if(textView.tag==100){
         self.examineText=textView.text;
     };
 }
@@ -275,14 +275,28 @@
         stringnameShare=[stringnameShare stringByAppendingString:tempString];
            
     }
-    WeiboRequest *request = [[WeiboRequest alloc] initWithDelegate:self];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    NSString *postPath =@"statuses/update.json";
-    //
-    NSLog(@"111111111111%@",stringnameShare);
-    [params setObject:stringnameShare forKey:@"status"];
-    [request postToPath:postPath params:params];
+//    WeiboRequest *request = [[WeiboRequest alloc] initWithDelegate:self];
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    NSString *postPath =@"statuses/update.json";
+//    //
+//    NSLog(@"111111111111%@",stringnameShare);
+//    [params setObject:stringnameShare forKey:@"status"];
+//    [request postToPath:postPath params:params];
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDirs=[paths objectAtIndex:0];
+    NSString *imagePaths=[docDirs stringByAppendingPathComponent:@"mySinaId.txt"];
+    NSMutableArray *stringmutables=[NSMutableArray arrayWithContentsOfFile:imagePaths];
+    NSString *accessToken=[stringmutables objectAtIndex:0];
+    NSLog(@"输出新浪的token===%@",accessToken);
 
+    NSString *stringUrl=@"https://api.weibo.com/2/statuses/update.json";
+    NSLog(@"接口1：：：：%@",stringUrl);
+    NSURL* url=[NSURL URLWithString:stringUrl];
+    ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
+    [rrequest setPostValue:stringnameShare forKey: @"status"];
+    [rrequest setPostValue:accessToken forKey: @"access_token"];
+    [rrequest setDelegate:self];
+    [rrequest startAsynchronous];
     [self sendCreatDate];
 }
 - (void)request:(WeiboRequest *)request didFailWithError:(NSError *)error {

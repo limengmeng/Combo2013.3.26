@@ -154,11 +154,20 @@ NSInteger prerow=-1;
 //从服务器获取新浪互粉好友
 -(void)loadXinDetail{
     dataFlag=3;
+    NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir=[path objectAtIndex:0];
+    NSString *imagePath=[docDir stringByAppendingPathComponent:@"mySinaId.txt"];
+    NSMutableArray *stringmutable=[NSMutableArray arrayWithContentsOfFile:imagePath];
+    NSString *userId=[stringmutable objectAtIndex:0];
     
-    WeiboAccount *weiboShare=[[WeiboAccount alloc] init];
-    weiboShare.accessToken=@"2.00raBjnBF_9IdDee1d5bb9c20tjAKX";
-    weiboShare.userId=@"1650904185";
-    NSString *stringUrl=[NSString stringWithFormat:@"https://api.weibo.com/2/friendships/friends/bilateral.json?uid=%@&access_token=%@",weiboShare.userId,weiboShare.accessToken];
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDirs=[paths objectAtIndex:0];
+    NSString *imagePaths=[docDirs stringByAppendingPathComponent:@"mySinaId.txt"];
+    NSMutableArray *stringmutables=[NSMutableArray arrayWithContentsOfFile:imagePaths];
+    NSString *accessToken=[stringmutables objectAtIndex:0];
+    NSLog(@"输出新浪的id===%@和token===%@",userId,accessToken);
+    
+    NSString *stringUrl=[NSString stringWithFormat:@"https://api.weibo.com/2/friendships/friends/bilateral.json?uid=%@&access_token=%@",userId,accessToken];
     NSLog(@"接口1：：：：%@",stringUrl);
     NSURL* url=[NSURL URLWithString:stringUrl];
     ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
