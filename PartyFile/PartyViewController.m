@@ -206,7 +206,7 @@ int itttt=0;
     self.navigationItem.leftBarButtonItem=segmentBar;
 
     ChoseNum=1;
-    segmentNum=1;
+    segmentNum=0;
     flag=0;
     
     
