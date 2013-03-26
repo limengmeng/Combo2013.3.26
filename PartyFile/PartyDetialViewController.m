@@ -241,21 +241,21 @@
     if ([[party objectForKey:@"P_TYPE"]intValue]==1) {
         friend=[[CheckOneViewController alloc]init];
         friend.spot=4;
-        friend.from_p_id=[party objectForKey:@"P_ID"];
+        friend.from_p_id=self.p_id;
         [self.navigationController pushViewController:friend animated:YES];
         
     }
     else if ([[party objectForKey:@"P_TYPE"]intValue]==2) {
         friend=[[CheckOneViewController alloc]init];
         friend.spot=2;
-        friend.from_p_id=[party objectForKey:@"P_ID"];
+        friend.from_p_id=self.p_id;
         friend.from_c_id=[party objectForKey:@"C_ID"];
         [self.navigationController pushViewController:friend animated:YES];
     }
     else if([[party objectForKey:@"P_TYPE"]intValue]==3){
         friend=[[CheckOneViewController alloc]init];
         friend.spot=2;
-        friend.from_p_id=[party objectForKey:@"P_ID"];
+        friend.from_p_id=self.p_id;
         friend.from_c_id=[party objectForKey:@"C_ID"];
         [self.navigationController pushViewController:friend animated:YES];
     }
