@@ -1223,7 +1223,7 @@ int MessFlag=0;
                     auctionTime.userInteractionEnabled=NO;
                     auctionTime.tag=106;
                     auctionTime.textColor=[UIColor redColor];
-                    auctionTime.text=M_dtime;//[NSString stringWithFormat:@"%@",[self.partyId objectForKey:@"P_DTIME"]];
+                    auctionTime.text=P_dtime;//[NSString stringWithFormat:@"%@",[self.partyId objectForKey:@"P_DTIME"]];
                     //[[self.message objectAtIndex:indexPath.section] objectForKey:@"M_DTIME"];
                     auctionTime.font=[UIFont fontWithName:@"Helvetica-Oblique" size:18];
                     [cell.contentView addSubview:auctionTime];
