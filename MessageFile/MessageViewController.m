@@ -387,7 +387,7 @@ int MessFlag=0;
         //***********************************比较发送者以及接受者数据 end**********************************
         
         if([[self.partyId objectForKey:@"P_UUID"] isEqualToNumber:self.uuid]){//如果派对的创建者的id等于uuid
-            if([[self.user objectForKey:@"USER_ID"] isEqualToNumber:self.uuid]){//如果信息接收者的id等于uuid
+            if([[self.user objectForKey:@"USER_ID"] isEqualToNumber:self.uuid]){//如果信息接收者的id等于uuid 别人申请加入我的派对
                 
                 infoViewController* makefriend=[[infoViewController alloc]init];
                 makefriend.hidesBottomBarWhenPushed=YES;
@@ -400,20 +400,16 @@ int MessFlag=0;
                 
             }
             else{//我邀请别人联合创建
-                if ([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"Y"]){
-                    
-                    PartyDetialViewController *party=[[PartyDetialViewController alloc]init];
-                    party.hidesBottomBarWhenPushed=YES;
-                    //[self.navigationController pushViewController:party animated:YES];
-                    party.p_id=[self.partyId objectForKey:@"P_ID"];
-                    party.title=[self.partyId objectForKey:@"P_TITLE"];
-                    MessFlag=1;
-                    [self.navigationController pushViewController:party animated:YES];
-                    
-                }
+                PartyDetialViewController *party=[[PartyDetialViewController alloc]init];
+                party.hidesBottomBarWhenPushed=YES;
+                //[self.navigationController pushViewController:party animated:YES];
+                party.p_id=[self.partyId objectForKey:@"P_ID"];
+                party.title=[self.partyId objectForKey:@"P_TITLE"];
+                MessFlag=1;
+                [self.navigationController pushViewController:party animated:YES];
             }
         }
-        else if ([[self.senderDic objectForKey:@"SENDER_ID"] isEqualToNumber:self.uuid]){//我申请假如别人的派对
+        else if ([[self.senderDic objectForKey:@"SENDER_ID"] isEqualToNumber:self.uuid]){//我申请加入别人的派对
             PartyDetialViewController *party=[[PartyDetialViewController alloc]init];
             //[self.navigationController pushViewController:party animated:YES];
             party.p_id=[self.partyId objectForKey:@"P_ID"];
@@ -422,7 +418,7 @@ int MessFlag=0;
             party.hidesBottomBarWhenPushed=YES;
             [self.navigationController pushViewController:party animated:YES];
         }
-        else{//如果联合创建人的id等于uuid
+        else{//如果联合创建人的id等于uuid  别人邀请你联合创建
             BOOL isdone=NO;
             if (self.creaters.count==0) {
                 isdone=NO;
@@ -433,25 +429,13 @@ int MessFlag=0;
                 }
             }
             if(isdone){
-                if ([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"Y"]){
-                    PartyDetialViewController *party=[[PartyDetialViewController alloc]init];
-                    party.hidesBottomBarWhenPushed=YES;
-                    //[self.navigationController pushViewController:party animated:YES];
-                    party.p_id=[self.partyId objectForKey:@"P_ID"];
-                    party.title=[self.partyId objectForKey:@"P_TITLE"];
-                    MessFlag=1;
-                    [self.navigationController pushViewController:party animated:YES];
-                }
-                else{
-                    infoViewController* makefriend=[[infoViewController alloc]init];
-                    makefriend.hidesBottomBarWhenPushed=YES;
-                    makefriend.flag=10;
-                    makefriend.user_id=[self.senderDic objectForKey:@"SENDER_ID"];
-                    NSLog(@"makefriend:user_id::::%@",makefriend.user_id);
-                    MessFlag=1;
-                    [self.navigationController pushViewController:makefriend animated:YES];
-                    
-                }
+                PartyDetialViewController *party=[[PartyDetialViewController alloc]init];
+                party.hidesBottomBarWhenPushed=YES;
+                //[self.navigationController pushViewController:party animated:YES];
+                party.p_id=[self.partyId objectForKey:@"P_ID"];
+                party.title=[self.partyId objectForKey:@"P_TITLE"];
+                MessFlag=1;
+                [self.navigationController pushViewController:party animated:YES];
             }
         }
     }
