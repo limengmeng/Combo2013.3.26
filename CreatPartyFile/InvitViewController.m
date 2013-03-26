@@ -160,27 +160,21 @@
 //*****************************textViewdelegate*****************************
 -(void)textViewDidChange:(UITextView *)textView
 {
-    if (textView.tag==100) {
-        self.examineText =  textView.text;
-        if (textView.text.length == 0) {
-            if(temp==1)
-                uilabel.text = @"碰头地点？";
-            else if(temp==2)
-                uilabel.text=@"申请理由...";
-        }else{
-            uilabel.text = @"";
-        }
+    self.examineText =  textView.text;
+    if (textView.text.length == 0) {
+        if(temp==1)
+            uilabel.text = @"碰头地点？";
+        else if(temp==2)
+            uilabel.text=@"申请理由...";
+    }else{
+        uilabel.text = @"";
     }
+    
     NSString *num=[NSString stringWithFormat:@"%d",40-[self.examineText length]];
     UILabel *numLabel=(UILabel *)[self.view viewWithTag:101];
     numLabel.text=num;
 }
 
--(void)textViewDidEndEditing:(UITextView *)textView{
-    if(textView.tag==100){
-        self.examineText=textView.text;
-    };
-}
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if (range.location>=40)
@@ -198,7 +192,7 @@
 -(void)sendAction{
     NSLog(@"send======%@",self.from_p_id);
     NSLog(@"申请理由========%@",self.examineText);
-    if (self.examineText==nil) {
+    if (self.examineText==nil||[self.examineText isEqualToString:@""]) {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"不填写任何申请理由？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"发送", nil];
         [alert show];
     }
@@ -237,7 +231,7 @@
 -(void)rightAction{
     NSLog(@"确定");
     
-    if (self.examineText==nil||self.phone==nil) {
+    if (self.examineText==nil||self.phone==nil||[self.examineText isEqualToString:@""]||[self.phone isEqualToString:@""]) {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"请填写完整信息" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
         [alert show];
     }
@@ -358,10 +352,6 @@
                        NSLog(@"self.examineText=======%@",self.examineText);
                        NSLog(@"self.phone=======%@",self.phone);
                        NSLog(@"stringFriId====%@",stringFriId);
-<<<<<<< HEAD
-                       NSLog(@"sinaFriId====%@",sinaFriId);
-=======
->>>>>>> 郭——新浪互粉
                        //rrequest.delegate=self;
                        [rrequest startSynchronous];
                        dispatch_async(dispatch_get_main_queue(), ^{
