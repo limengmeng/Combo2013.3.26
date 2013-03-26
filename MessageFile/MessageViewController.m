@@ -791,6 +791,7 @@ int MessFlag=0;
                     button.backgroundColor=[UIColor clearColor];
                     button.tag=104;
                     [button setImage:[UIImage imageNamed:@"messageCheck"] forState:UIControlStateNormal];
+                    [button addTarget:self action:@selector(requestButton:event:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.contentView addSubview:button];
 
                     
@@ -1183,6 +1184,7 @@ int MessFlag=0;
                     button.backgroundColor=[UIColor clearColor];
                     button.tag=104;
                     [button setImage:[UIImage imageNamed:@"messageCheck"] forState:UIControlStateNormal];
+                    [button addTarget:self action:@selector(ButtonClick:event:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.contentView addSubview:button];
                     
                     UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 60, 14)];
