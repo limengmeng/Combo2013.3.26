@@ -184,8 +184,8 @@
         {
             [views removeFromSuperview];
         }
-        cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ACT2"]];
-        Acaddr=[[UITextView alloc]initWithFrame:CGRectMake(25, 2,100, 60)];
+        cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"LOC2"]];
+        Acaddr=[[UITextView alloc]initWithFrame:CGRectMake(25, -4,100, 50)];
         Acaddr.font=[UIFont fontWithName:@"Helvetica-Bold" size:14];
         Acaddr.textColor=[UIColor colorWithRed:99.0/255 green:99.0/255 blue:99.0/255 alpha:1];
        
@@ -207,8 +207,8 @@
             [views removeFromSuperview];
         }
         cell.selectionStyle=UITableViewCellEditingStyleNone;
-        cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ACT3"]];
-        UILabel* Acpnum=[[UILabel alloc]initWithFrame:CGRectMake(117, 7, 120, 20)];
+        cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"LOC3"]];
+        UILabel* Acpnum=[[UILabel alloc]initWithFrame:CGRectMake(117, 4, 120, 20)];
         Acpnum.backgroundColor=[UIColor clearColor];
         Acpnum.textColor=[UIColor colorWithRed:99.0/255 green:99.0/255 blue:99.0/255 alpha:1];
         Acpnum.font=[UIFont fontWithName:@"Helvetica-Bold" size:14];
@@ -227,8 +227,8 @@
             [views removeFromSuperview];
         }
         cell.selectionStyle=UITableViewCellEditingStyleNone;
-        cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ACT4"]];
-        Acfnum=[[UILabel alloc]initWithFrame:CGRectMake(117, 5, 120, 20)];
+        cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"LOC4"]];
+        Acfnum=[[UILabel alloc]initWithFrame:CGRectMake(117, 4, 120, 20)];
         Acfnum.backgroundColor=[UIColor clearColor];
         Acfnum.textColor=[UIColor colorWithRed:99.0/255 green:99.0/255 blue:99.0/255 alpha:1];
         Acfnum.font=[UIFont fontWithName:@"Helvetica-Bold" size:14];
@@ -318,12 +318,12 @@
             label.textColor=[UIColor colorWithRed:99.0/255 green:99.0/255 blue:99.0/255 alpha:1];
             [cell.contentView addSubview:label];
             
-            CGRect cellFrame = CGRectMake(32, 0.0, 280, 30);
+            CGRect cellFrame = CGRectMake(32, 10.0, 280, 30);
             label.text=[dict objectForKey:@"C_INFO"];
             CGRect rect = cellFrame;
             label.frame = rect;
             [label sizeToFit];
-            cellFrame.size.height = label.frame.size.height+5;
+            cellFrame.size.height = label.frame.size.height+60;
             [cell setFrame:cellFrame];
             return cell;
         }
@@ -466,19 +466,19 @@
         return 156;
     }
     if (row==1) {
-        return 48;
+        return 56;
     }
     if (row==2) {
-        return 34;
+        return 36;
     }
     if (row==3) {
-        return 75;
+        return 83;
         
     }
     if (row==4)
     {
         
-        return 27;
+        return 26;
     }
     if (row==5) {
         UITableViewCell *cell = [self tableView:tableview cellForRowAtIndexPath:indexPath];

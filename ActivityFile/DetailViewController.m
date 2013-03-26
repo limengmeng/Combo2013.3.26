@@ -329,7 +329,7 @@ static NSString* P_type=@"activity";
             [views removeFromSuperview];
         }
         cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ACT2"]];
-        Acaddr=[[UITextView alloc]initWithFrame:CGRectMake(25, 1,100, 60)];
+        Acaddr=[[UITextView alloc]initWithFrame:CGRectMake(25, 4,100, 56)];
         Acaddr.font=[UIFont fontWithName:@"Helvetica-Bold" size:14];
         Acaddr.textColor=[UIColor colorWithRed:99.0/255 green:99.0/255 blue:99.0/255 alpha:1];
         Acaddr.backgroundColor=[UIColor clearColor];
@@ -352,7 +352,7 @@ static NSString* P_type=@"activity";
         }
         cell.selectionStyle=UITableViewCellEditingStyleNone;
         cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ACT3"]];
-        UILabel* PnumLabel=[[UILabel alloc]initWithFrame:CGRectMake(117, 7, 120, 20)];
+        UILabel* PnumLabel=[[UILabel alloc]initWithFrame:CGRectMake(117, 5, 120, 20)];
         
         PnumLabel.textColor=[UIColor colorWithRed:99.0/255 green:99.0/255 blue:99.0/255 alpha:1];
         PnumLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14];
@@ -460,12 +460,12 @@ static NSString* P_type=@"activity";
         label.textColor=[UIColor colorWithRed:99.0/255 green:99.0/255 blue:99.0/255 alpha:1];
         [cell.contentView addSubview:label];
         
-        CGRect cellFrame = CGRectMake(32, 0.0, 280, 10);
+        CGRect cellFrame = CGRectMake(32, 10.0, 280, 10);
         label.text=[dict objectForKey:@"C_INFO"];
         CGRect rect = cellFrame;
         label.frame = rect;
         [label sizeToFit];
-        cellFrame.size.height = label.frame.size.height+5;
+        cellFrame.size.height = label.frame.size.height+60;
         [cell setFrame:cellFrame];
          return cell;
 
@@ -499,13 +499,13 @@ static NSString* P_type=@"activity";
         return 193;
     }
     if (row==1) {
-        return 48;
+        return 56;
     }
     if (row==2) {
-        return 34;
+        return 36;
     }
     if (row==3) {
-        return 75;
+        return 83;
         
     }
     if (row==4)

@@ -83,9 +83,9 @@
 //    [self.view addSubview:swith];
     
     SimpleSwitch *swith2 =[[SimpleSwitch alloc] initWithFrame:CGRectMake(24, 84, 100, 25)];
-    swith2.titleOn = @"最新";
-    swith2.titleOff = @"附近";
-    swith2.on = YES;
+    swith2.titleOn = @"地点";
+    swith2.titleOff = @"活动";
+    swith2.on = NO;
     swith2.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"onback"]];
     swith2.knobColor = [UIColor colorWithRed:0.341 green:0.983 blue:0.13 alpha:1];
     swith2.fillColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1];
@@ -287,7 +287,7 @@
         UILabel* pnum;
         UILabel* label;
         
-        imageview=[[UIImageView alloc]initWithFrame:CGRectMake(6, -4, 109, 154)];
+        imageview=[[UIImageView alloc]initWithFrame:CGRectMake(7, -5, 109, 154)];
         [cell.contentView addSubview:imageview];
         
         UIImageView* labelpic=[[UIImageView alloc]initWithFrame:CGRectMake(14, -4, 40, 27)];
