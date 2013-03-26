@@ -209,6 +209,7 @@ int MessFlag=0;
     [self.view addSubview:self.tbView];
     self.tbView.backgroundView=nil;
     self.tbView.backgroundColor=[UIColor colorWithRed:226.0/255 green:226.0/255 blue:219.0/255 alpha:1];
+    [self.tbView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     lableTime=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
     
     //=============system数据========================================================
