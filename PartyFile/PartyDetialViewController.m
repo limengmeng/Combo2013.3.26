@@ -62,7 +62,7 @@
     self.tableview=table;
     [self.view addSubview:self.tableview];
     self.tableview.backgroundView=nil;
-    self.tableview.backgroundColor=[UIColor colorWithRed:226.0/255 green:226.0/255 blue:219.0/255 alpha:1];
+    self.tableview.backgroundColor=[UIColor colorWithRed:241.0/255 green:241.0/255 blue:236.0/255 alpha:1];
     self.tableview.delegate=self;
     self.tableview.dataSource=self;
     //======================================
@@ -241,21 +241,21 @@
     if ([[party objectForKey:@"P_TYPE"]intValue]==1) {
         friend=[[CheckOneViewController alloc]init];
         friend.spot=4;
-        friend.from_p_id=self.p_id;
+        friend.from_p_id=[party objectForKey:@"P_ID"];
         [self.navigationController pushViewController:friend animated:YES];
         
     }
     else if ([[party objectForKey:@"P_TYPE"]intValue]==2) {
         friend=[[CheckOneViewController alloc]init];
         friend.spot=2;
-        friend.from_p_id=self.p_id;
+        friend.from_p_id=[party objectForKey:@"P_ID"];
         friend.from_c_id=[party objectForKey:@"C_ID"];
         [self.navigationController pushViewController:friend animated:YES];
     }
     else if([[party objectForKey:@"P_TYPE"]intValue]==3){
         friend=[[CheckOneViewController alloc]init];
         friend.spot=2;
-        friend.from_p_id=self.p_id;
+        friend.from_p_id=[party objectForKey:@"P_ID"];
         friend.from_c_id=[party objectForKey:@"C_ID"];
         [self.navigationController pushViewController:friend animated:YES];
     }
@@ -276,12 +276,14 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 237;
+    return 266;
 }
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    //不需要界面适配
-        return 5.0f;
+
+    return 120;
 }
 //=====================行的间距======================================================
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -358,7 +360,7 @@
         [formatter setDateStyle:NSDateFormatterMediumStyle];
         [formatter setTimeStyle:NSDateFormatterShortStyle];
         [formatter setDateFormat:@"yyyy.MM.dd  HH:mm"];
-        NSInteger time=[[party objectForKey:@"P_TIME"]integerValue];
+        NSInteger time=[[party objectForKey:@"P_STIME"]integerValue];
         NSLog(@"%d",time);
         NSDate* date=[NSDate dateWithTimeIntervalSince1970:time];
         NSLog(@"date:%@",date);
@@ -392,12 +394,12 @@
         [cell.contentView addSubview:labelName];
         
         
-        CGRect cellFrame = CGRectMake(30, 0.0, 265, 30);
+        CGRect cellFrame = CGRectMake(30, 15.0, 265, 60);
         labelName.text=[party objectForKey:@"P_INFO"];
         CGRect rect = cellFrame;
         labelName.frame = rect;
         [labelName sizeToFit];
-        cellFrame.size.height = labelName.frame.size.height+10;
+        cellFrame.size.height = labelName.frame.size.height+75;
         [cell setFrame:cellFrame];
         return cell;
     }
@@ -429,8 +431,8 @@
 //==================头部放置动画效果===============================================
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIImageView *imageviewMidal=[[UIImageView alloc]initWithFrame:CGRectMake(159, 193, 2.5, 44)];
-    UIImageView *PStatusImage=[[UIImageView alloc]initWithFrame:CGRectMake(7, 167, 307, 23)];
+    UIImageView *imageviewMidal=[[UIImageView alloc]initWithFrame:CGRectMake(159, 216, 2.5, 44)];
+    UIImageView *PStatusImage=[[UIImageView alloc]initWithFrame:CGRectMake(7, 170, 307, 23)];
     if ([[[party objectForKey:@"P_STATUS"]substringToIndex:1]isEqualToString:@"Y"]) {
         PStatusImage.image=[UIImage imageNamed:@"PY"];
     }
@@ -448,13 +450,13 @@
     }
     imageviewMidal.image=[UIImage imageNamed:@"fangzhongjian"];
     UIButton* personButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    personButton.frame=CGRectMake(0, 193, 159, 44);
+    personButton.frame=CGRectMake(0, 216, 159, 44);
     
     NSString *stringPerson=[NSString stringWithFormat:@"%d 创建者",self.creatUser.count];
     personButton.titleLabel.text=stringPerson;
     personButton.tag=501;
     UIButton* personButtonUnin=[UIButton buttonWithType:UIButtonTypeCustom];
-    personButtonUnin.frame=CGRectMake(161.5, 193, 160, 44);
+    personButtonUnin.frame=CGRectMake(161.5, 216, 160, 44);
     NSString *stringPersonUnin=[NSString stringWithFormat:@"%d创建者",self.joinUser.count];
     personButtonUnin.titleLabel.text=stringPersonUnin;
     personButtonUnin.tag=502;
@@ -506,7 +508,7 @@
         [personButtonUnin addSubview:lableNumJ];
         
     }
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0,100, 320, 237)];
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0,100, 320, 266)];
     view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"touxiangbeijing"]];
     [view addSubview:FlowView];
     [view addSubview:label];
@@ -517,6 +519,9 @@
     return view;
     
 }
+
+
+
 //=================选择哪个Segment改变图片的位置======================================
 - (void)segmentClick:(UIButton *)btn
 {

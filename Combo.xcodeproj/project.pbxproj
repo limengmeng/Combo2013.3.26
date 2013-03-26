@@ -306,10 +306,6 @@
 		DC86279B1700380C00AF615C /* ModalAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627851700380C00AF615C /* ModalAlert.m */; };
 		DC86279C1700380C00AF615C /* infoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627871700380C00AF615C /* infoViewController.m */; };
 		DC86279D1700380C00AF615C /* infoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627871700380C00AF615C /* infoViewController.m */; };
-		DC8627EC1700402300AF615C /* PartyDetialLastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627E71700402200AF615C /* PartyDetialLastViewController.m */; };
-		DC8627ED1700402300AF615C /* PartyDetialLastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627E71700402200AF615C /* PartyDetialLastViewController.m */; };
-		DC8627EE1700402300AF615C /* PartyDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627E91700402200AF615C /* PartyDetialViewController.m */; };
-		DC8627EF1700402300AF615C /* PartyDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627E91700402200AF615C /* PartyDetialViewController.m */; };
 		DC8627F41700405500AF615C /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627F31700405500AF615C /* SettingViewController.m */; };
 		DC8627F51700405500AF615C /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627F31700405500AF615C /* SettingViewController.m */; };
 		DC8627F8170040A100AF615C /* InvitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627F7170040A100AF615C /* InvitViewController.m */; };
@@ -366,6 +362,14 @@
 		DC86288D17006BAA00AF615C /* WelcomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC86288B17006BAA00AF615C /* WelcomViewController.m */; };
 		DCA24C281701707200BB9F47 /* PartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24C271701707200BB9F47 /* PartyViewController.m */; };
 		DCA24C291701707200BB9F47 /* PartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24C271701707200BB9F47 /* PartyViewController.m */; };
+		DCA24C9D1701A50700BB9F47 /* PartyDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24C9A1701A50700BB9F47 /* PartyDetialViewController.m */; };
+		DCA24C9E1701A50700BB9F47 /* PartyDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24C9A1701A50700BB9F47 /* PartyDetialViewController.m */; };
+		DCA24C9F1701A50700BB9F47 /* PartyDetialLastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24C9C1701A50700BB9F47 /* PartyDetialLastViewController.m */; };
+		DCA24CA01701A50700BB9F47 /* PartyDetialLastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24C9C1701A50700BB9F47 /* PartyDetialLastViewController.m */; };
+		DCA24CA31701A51F00BB9F47 /* touxiangbeijing.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CA11701A51F00BB9F47 /* touxiangbeijing.png */; };
+		DCA24CA41701A51F00BB9F47 /* touxiangbeijing.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CA11701A51F00BB9F47 /* touxiangbeijing.png */; };
+		DCA24CA51701A51F00BB9F47 /* touxiangbeijing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CA21701A51F00BB9F47 /* touxiangbeijing@2x.png */; };
+		DCA24CA61701A51F00BB9F47 /* touxiangbeijing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CA21701A51F00BB9F47 /* touxiangbeijing@2x.png */; };
 		DCA4544516FBF6EA00AC8FCC /* ACT1.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4543116FBF6EA00AC8FCC /* ACT1.png */; };
 		DCA4544616FBF6EA00AC8FCC /* ACT1.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4543116FBF6EA00AC8FCC /* ACT1.png */; };
 		DCA4544716FBF6EA00AC8FCC /* ACT1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4543216FBF6EA00AC8FCC /* ACT1@2x.png */; };
@@ -506,10 +510,6 @@
 		DCA4553916FC114500AC8FCC /* party0.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4553616FC114500AC8FCC /* party0.png */; };
 		DCA4553A16FC114500AC8FCC /* party0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4553716FC114500AC8FCC /* party0@2x.png */; };
 		DCA4553B16FC114500AC8FCC /* party0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4553716FC114500AC8FCC /* party0@2x.png */; };
-		DCA4554616FC2D6600AC8FCC /* touxiangbeijing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4554416FC2D6600AC8FCC /* touxiangbeijing@2x.png */; };
-		DCA4554716FC2D6600AC8FCC /* touxiangbeijing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4554416FC2D6600AC8FCC /* touxiangbeijing@2x.png */; };
-		DCA4554816FC2D6600AC8FCC /* touxiangbeijing.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4554516FC2D6600AC8FCC /* touxiangbeijing.png */; };
-		DCA4554916FC2D6600AC8FCC /* touxiangbeijing.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4554516FC2D6600AC8FCC /* touxiangbeijing.png */; };
 		DCA4554E16FC31C200AC8FCC /* activityBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4554C16FC31C200AC8FCC /* activityBack@2x.png */; };
 		DCA4554F16FC31C200AC8FCC /* activityBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4554C16FC31C200AC8FCC /* activityBack@2x.png */; };
 		DCA4555016FC31C200AC8FCC /* activityBack.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4554D16FC31C200AC8FCC /* activityBack.png */; };
@@ -1094,10 +1094,6 @@
 		DC8627851700380C00AF615C /* ModalAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalAlert.m; sourceTree = "<group>"; };
 		DC8627861700380C00AF615C /* infoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = infoViewController.h; sourceTree = "<group>"; };
 		DC8627871700380C00AF615C /* infoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = infoViewController.m; sourceTree = "<group>"; };
-		DC8627E61700402200AF615C /* PartyDetialLastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyDetialLastViewController.h; sourceTree = "<group>"; };
-		DC8627E71700402200AF615C /* PartyDetialLastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyDetialLastViewController.m; sourceTree = "<group>"; };
-		DC8627E81700402200AF615C /* PartyDetialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyDetialViewController.h; sourceTree = "<group>"; };
-		DC8627E91700402200AF615C /* PartyDetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyDetialViewController.m; sourceTree = "<group>"; };
 		DC8627F21700405500AF615C /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		DC8627F31700405500AF615C /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		DC8627F6170040A100AF615C /* InvitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitViewController.h; sourceTree = "<group>"; };
@@ -1136,6 +1132,12 @@
 		DC86288B17006BAA00AF615C /* WelcomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomViewController.m; sourceTree = "<group>"; };
 		DCA24C261701707200BB9F47 /* PartyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyViewController.h; sourceTree = "<group>"; };
 		DCA24C271701707200BB9F47 /* PartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyViewController.m; sourceTree = "<group>"; };
+		DCA24C991701A50700BB9F47 /* PartyDetialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyDetialViewController.h; sourceTree = "<group>"; };
+		DCA24C9A1701A50700BB9F47 /* PartyDetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyDetialViewController.m; sourceTree = "<group>"; };
+		DCA24C9B1701A50700BB9F47 /* PartyDetialLastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyDetialLastViewController.h; sourceTree = "<group>"; };
+		DCA24C9C1701A50700BB9F47 /* PartyDetialLastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyDetialLastViewController.m; sourceTree = "<group>"; };
+		DCA24CA11701A51F00BB9F47 /* touxiangbeijing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touxiangbeijing.png; sourceTree = "<group>"; };
+		DCA24CA21701A51F00BB9F47 /* touxiangbeijing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "touxiangbeijing@2x.png"; sourceTree = "<group>"; };
 		DCA4543116FBF6EA00AC8FCC /* ACT1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ACT1.png; sourceTree = "<group>"; };
 		DCA4543216FBF6EA00AC8FCC /* ACT1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ACT1@2x.png"; sourceTree = "<group>"; };
 		DCA4543316FBF6EA00AC8FCC /* ACT2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ACT2.png; sourceTree = "<group>"; };
@@ -1206,8 +1208,6 @@
 		DCA454ED16FC083E00AC8FCC /* PY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PY@2x.png"; sourceTree = "<group>"; };
 		DCA4553616FC114500AC8FCC /* party0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = party0.png; sourceTree = "<group>"; };
 		DCA4553716FC114500AC8FCC /* party0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "party0@2x.png"; sourceTree = "<group>"; };
-		DCA4554416FC2D6600AC8FCC /* touxiangbeijing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "touxiangbeijing@2x.png"; sourceTree = "<group>"; };
-		DCA4554516FC2D6600AC8FCC /* touxiangbeijing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touxiangbeijing.png; sourceTree = "<group>"; };
 		DCA4554C16FC31C200AC8FCC /* activityBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activityBack@2x.png"; sourceTree = "<group>"; };
 		DCA4554D16FC31C200AC8FCC /* activityBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activityBack.png; sourceTree = "<group>"; };
 		DCA4556616FC5CD500AC8FCC /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
@@ -1466,8 +1466,8 @@
 		9D08589016FAAC9D00A36ED5 /* PartyDetailImage */ = {
 			isa = PBXGroup;
 			children = (
-				DCA4554416FC2D6600AC8FCC /* touxiangbeijing@2x.png */,
-				DCA4554516FC2D6600AC8FCC /* touxiangbeijing.png */,
+				DCA24CA11701A51F00BB9F47 /* touxiangbeijing.png */,
+				DCA24CA21701A51F00BB9F47 /* touxiangbeijing@2x.png */,
 				DCA454CA16FC083E00AC8FCC /* CButton.png */,
 				DCA454CB16FC083E00AC8FCC /* CButton@2x.png */,
 				DCA454CC16FC083E00AC8FCC /* Creaters.png */,
@@ -1677,10 +1677,10 @@
 				DCA24C261701707200BB9F47 /* PartyViewController.h */,
 				DCA24C271701707200BB9F47 /* PartyViewController.m */,
 				9D08589016FAAC9D00A36ED5 /* PartyDetailImage */,
-				DC8627E81700402200AF615C /* PartyDetialViewController.h */,
-				DC8627E91700402200AF615C /* PartyDetialViewController.m */,
-				DC8627E61700402200AF615C /* PartyDetialLastViewController.h */,
-				DC8627E71700402200AF615C /* PartyDetialLastViewController.m */,
+				DCA24C991701A50700BB9F47 /* PartyDetialViewController.h */,
+				DCA24C9A1701A50700BB9F47 /* PartyDetialViewController.m */,
+				DCA24C9B1701A50700BB9F47 /* PartyDetialLastViewController.h */,
+				DCA24C9C1701A50700BB9F47 /* PartyDetialLastViewController.m */,
 				9DFD457B16F8637500C3CAF7 /* PagedFlowView.h */,
 				9DFD457C16F8637500C3CAF7 /* PagedFlowView.m */,
 				9DFD457516F8636800C3CAF7 /* MyAnnotation.h */,
@@ -2433,8 +2433,6 @@
 				DCA4553416FC083E00AC8FCC /* PY@2x.png in Resources */,
 				DCA4553816FC114500AC8FCC /* party0.png in Resources */,
 				DCA4553A16FC114500AC8FCC /* party0@2x.png in Resources */,
-				DCA4554616FC2D6600AC8FCC /* touxiangbeijing@2x.png in Resources */,
-				DCA4554816FC2D6600AC8FCC /* touxiangbeijing.png in Resources */,
 				DCA4554E16FC31C200AC8FCC /* activityBack@2x.png in Resources */,
 				DCA4555016FC31C200AC8FCC /* activityBack.png in Resources */,
 				DCA4556716FC5CD500AC8FCC /* city.plist in Resources */,
@@ -2629,6 +2627,8 @@
 				DC86287517005ACA00AF615C /* home_tab_selected.png in Resources */,
 				DC86287717005ACA00AF615C /* home_tab_selected@2x.png in Resources */,
 				DC86287B1700612800AF615C /* mmmmm.png in Resources */,
+				DCA24CA31701A51F00BB9F47 /* touxiangbeijing.png in Resources */,
+				DCA24CA51701A51F00BB9F47 /* touxiangbeijing@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2773,8 +2773,6 @@
 				DCA4553516FC083E00AC8FCC /* PY@2x.png in Resources */,
 				DCA4553916FC114500AC8FCC /* party0.png in Resources */,
 				DCA4553B16FC114500AC8FCC /* party0@2x.png in Resources */,
-				DCA4554716FC2D6600AC8FCC /* touxiangbeijing@2x.png in Resources */,
-				DCA4554916FC2D6600AC8FCC /* touxiangbeijing.png in Resources */,
 				DCA4554F16FC31C200AC8FCC /* activityBack@2x.png in Resources */,
 				DCA4555116FC31C200AC8FCC /* activityBack.png in Resources */,
 				DCA4556816FC5CD500AC8FCC /* city.plist in Resources */,
@@ -2969,6 +2967,8 @@
 				DC86287617005ACA00AF615C /* home_tab_selected.png in Resources */,
 				DC86287817005ACA00AF615C /* home_tab_selected@2x.png in Resources */,
 				DC86287C1700612800AF615C /* mmmmm.png in Resources */,
+				DCA24CA41701A51F00BB9F47 /* touxiangbeijing.png in Resources */,
+				DCA24CA61701A51F00BB9F47 /* touxiangbeijing@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3064,8 +3064,6 @@
 				DC8627941700380C00AF615C /* CreatBeforeViewController.m in Sources */,
 				DC86279A1700380C00AF615C /* ModalAlert.m in Sources */,
 				DC86279C1700380C00AF615C /* infoViewController.m in Sources */,
-				DC8627EC1700402300AF615C /* PartyDetialLastViewController.m in Sources */,
-				DC8627EE1700402300AF615C /* PartyDetialViewController.m in Sources */,
 				DC8627F41700405500AF615C /* SettingViewController.m in Sources */,
 				DC8627F8170040A100AF615C /* InvitViewController.m in Sources */,
 				DC8628051700410300AF615C /* RESwitch.m in Sources */,
@@ -3076,6 +3074,8 @@
 				DC8628251700413200AF615C /* ActiveViewController.m in Sources */,
 				DC86288C17006BAA00AF615C /* WelcomViewController.m in Sources */,
 				DCA24C281701707200BB9F47 /* PartyViewController.m in Sources */,
+				DCA24C9D1701A50700BB9F47 /* PartyDetialViewController.m in Sources */,
+				DCA24C9F1701A50700BB9F47 /* PartyDetialLastViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3149,8 +3149,6 @@
 				DC8627951700380C00AF615C /* CreatBeforeViewController.m in Sources */,
 				DC86279B1700380C00AF615C /* ModalAlert.m in Sources */,
 				DC86279D1700380C00AF615C /* infoViewController.m in Sources */,
-				DC8627ED1700402300AF615C /* PartyDetialLastViewController.m in Sources */,
-				DC8627EF1700402300AF615C /* PartyDetialViewController.m in Sources */,
 				DC8627F51700405500AF615C /* SettingViewController.m in Sources */,
 				DC8627F9170040A100AF615C /* InvitViewController.m in Sources */,
 				DC8628061700410300AF615C /* RESwitch.m in Sources */,
@@ -3161,6 +3159,8 @@
 				DC8628261700413200AF615C /* ActiveViewController.m in Sources */,
 				DC86288D17006BAA00AF615C /* WelcomViewController.m in Sources */,
 				DCA24C291701707200BB9F47 /* PartyViewController.m in Sources */,
+				DCA24C9E1701A50700BB9F47 /* PartyDetialViewController.m in Sources */,
+				DCA24CA01701A50700BB9F47 /* PartyDetialLastViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
