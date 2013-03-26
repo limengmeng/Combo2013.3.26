@@ -23,33 +23,8 @@ int itttt=0;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
-        itennum=0;
         self.title=@"活动";
-        Allparty=[UIButton buttonWithType:UIButtonTypeCustom];
-        Allparty.frame=CGRectMake(0, 0, 103, 23);
-        [Allparty setImage:[UIImage imageNamed:@"quanbu1"] forState:UIControlStateNormal];
-        [Allparty setImage:[UIImage imageNamed:@"quanbu2"] forState:UIControlStateSelected];
-        [Allparty setSelected:YES];
-        
-        
-        ReliableParty=[UIButton buttonWithType:UIButtonTypeCustom];
-        ReliableParty.frame=CGRectMake(103, 0, 114, 23);
-        [ReliableParty setImage:[UIImage imageNamed:@"kaopu1"] forState:UIControlStateNormal];
-        [ReliableParty setImage:[UIImage imageNamed:@"kaopu2"] forState:UIControlStateSelected];
-        [ReliableParty setSelected:NO];
-        
-        
-        MyParty=[UIButton buttonWithType:UIButtonTypeCustom];
-        MyParty.frame=CGRectMake(217, 0, 103, 23);
-        [MyParty setImage:[UIImage imageNamed:@"wode1"] forState:UIControlStateNormal];
-        [MyParty setImage:[UIImage imageNamed:@"wode2"] forState:UIControlStateSelected];
-        [MyParty setSelected:NO];
-       
-        [Allparty addTarget:self action:@selector(allButtonPressed) forControlEvents:UIControlEventTouchDown];
-        [ReliableParty addTarget:self action:@selector(realiButtonPressed) forControlEvents:UIControlEventTouchDown];
-        [MyParty addTarget:self action:@selector(myButtonPressed) forControlEvents:UIControlEventTouchDown];
-        self.tabBarController.view.backgroundColor=[UIColor clearColor];
+               self.tabBarController.view.backgroundColor=[UIColor clearColor];
     }
     return self;
 }
@@ -219,9 +194,9 @@ int itttt=0;
     [self.view addSubview:swith];
     
     SimpleSwitch *swith2 =[[SimpleSwitch alloc] initWithFrame:CGRectMake(24, 84, 100, 25)];
-    swith2.titleOn = @"最新";
-    swith2.titleOff = @"附近";
-    swith2.on = YES;
+    swith2.titleOn = @"附近";
+    swith2.titleOff = @"最新";
+    swith2.on = NO;
     swith2.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"onback"]];
     swith2.knobColor = [UIColor colorWithRed:0.341 green:0.983 blue:0.13 alpha:1];
     swith2.fillColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1];
@@ -242,13 +217,43 @@ int itttt=0;
     creatButton.frame=CGRectMake(0.0, 0.0, 50, 31);
     [creatButton addTarget:self action:@selector(CreateNewAct) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:creatButton];
-    UITableView* table=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, mainscreenhight-23) style:UITableViewStyleGrouped];
+    UITableView* table=[[UITableView alloc]initWithFrame:CGRectMake(0, 32, 320, mainscreenhight-32) style:UITableViewStyleGrouped];
     self.tableViewParty=table;
     [self.view addSubview:self.tableViewParty];
     tableViewParty.backgroundView=nil;
     tableViewParty.backgroundColor=[UIColor colorWithRed:226.0/255 green:226.0/255 blue:219.0/255 alpha:1];
     self.tableViewParty.delegate=self;
     self.tableViewParty.dataSource=self;
+    
+    Allparty=[UIButton buttonWithType:UIButtonTypeCustom];
+    Allparty.frame=CGRectMake(0, 0, 105, 32);
+    [Allparty setImage:[UIImage imageNamed:@"quanbu1"] forState:UIControlStateNormal];
+    [Allparty setImage:[UIImage imageNamed:@"quanbu2"] forState:UIControlStateSelected];
+    [Allparty setSelected:YES];
+    
+    
+    ReliableParty=[UIButton buttonWithType:UIButtonTypeCustom];
+    ReliableParty.frame=CGRectMake(103, 0, 115, 32);
+    [ReliableParty setImage:[UIImage imageNamed:@"kaopu1"] forState:UIControlStateNormal];
+    [ReliableParty setImage:[UIImage imageNamed:@"kaopu2"] forState:UIControlStateSelected];
+    [ReliableParty setSelected:NO];
+    
+    
+    MyParty=[UIButton buttonWithType:UIButtonTypeCustom];
+    MyParty.frame=CGRectMake(217, 0, 105, 32);
+    [MyParty setImage:[UIImage imageNamed:@"wode1"] forState:UIControlStateNormal];
+    [MyParty setImage:[UIImage imageNamed:@"wode2"] forState:UIControlStateSelected];
+    [MyParty setSelected:NO];
+    
+    [self.view addSubview:Allparty];
+    [self.view addSubview:ReliableParty];
+    [self.view addSubview:MyParty];
+    [Allparty addTarget:self action:@selector(allButtonPressed) forControlEvents:UIControlEventTouchDown];
+    [ReliableParty addTarget:self action:@selector(realiButtonPressed) forControlEvents:UIControlEventTouchDown];
+    [MyParty addTarget:self action:@selector(myButtonPressed) forControlEvents:UIControlEventTouchDown];
+
+    PreY=0.0;
+    
     
     _slimeView=[[SRRefreshView alloc] init];
     _slimeView.delegate=self;
@@ -268,6 +273,8 @@ int itttt=0;
     
     
 }
+
+
 -(void)valueChanged:(id)sender
 {
     NSLog(@"switch state: %d",((SimpleSwitch*)sender).on);
@@ -280,7 +287,7 @@ int itttt=0;
         if (ChoseNum==1) {
             NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
             NSString* strURL=globalURL(str);
-            NSLog(@"全部派对，按照附近距离排序：%@",strURL);
+            NSLog(@"全部派对，按照最新排序：%@",strURL);
             NSURL* url=[NSURL URLWithString:strURL];
             ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
             request.delegate = self;
@@ -295,7 +302,7 @@ int itttt=0;
             if (ChoseNum==2) {
                 NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
                 NSString* strURL=globalURL(str);
-                NSLog(@"靠谱派对，距离排序:%@",strURL);
+                NSLog(@"靠谱派对，最新排序:%@",strURL);
                 NSURL* url=[NSURL URLWithString:strURL];
                 ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
                 request.delegate = self;
@@ -310,7 +317,7 @@ int itttt=0;
             {
                 NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
                 NSString* strURL=globalURL(str);
-                NSLog(@"我的派对，距离排序:%@",strURL);
+                NSLog(@"我的派对，最新排序:%@",strURL);
                 NSURL* url=[NSURL URLWithString:strURL];
                 ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
                 request.delegate = self;
@@ -332,7 +339,7 @@ int itttt=0;
         {
             NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
             NSString* strURL=globalURL(str);
-            NSLog(@"全部派对,按照最新时间排序:%@",strURL);
+            NSLog(@"全部派对,按照距离排序:%@",strURL);
             NSURL* url=[NSURL URLWithString:strURL];
             ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
             request.delegate = self;
@@ -346,7 +353,7 @@ int itttt=0;
             if (ChoseNum==2) {
                 NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
                 NSString* strURL=globalURL(str);
-                NSLog(@"靠谱派对，时间排序:%@",strURL);
+                NSLog(@"靠谱派对，距离排序:%@",strURL);
                 NSURL* url=[NSURL URLWithString:strURL];
                 ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
                 request.delegate = self;
@@ -362,7 +369,7 @@ int itttt=0;
                 if (ChoseNum==3) {
                     NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
                     NSString* strURL=globalURL(str);
-                    NSLog(@"我的派对，时间排序:%@",strURL);
+                    NSLog(@"我的派对，距离排序:%@",strURL);
                     NSURL* url=[NSURL URLWithString:strURL];
                     ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
                     request.delegate = self;
@@ -405,26 +412,8 @@ int itttt=0;
 }
 -(void)requestDidFailed:(ASIHTTPRequest *)request
 {
-    NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDir=[path objectAtIndex:0];
-    //NSFileManager *fm=[NSFileManager defaultManager];
-    NSString *imagePath=[docDir stringByAppendingPathComponent:@"dataFile.txt"];
-    NSMutableArray *stringmutable=[NSMutableArray arrayWithContentsOfFile:imagePath];
-    NSData *data=[stringmutable objectAtIndex:0];
-    NSError* error;
-    NSDictionary* bizDic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-    
-    NSLog(@"111111111111111111111111111111%@",bizDic);
-    NSArray* array=[bizDic objectForKey:@"partys"];
-    
-    total=[[bizDic objectForKey:@"total"]intValue];
-    NSLog(@"本次返回的数量:%d",total);
-    if (flag==0) {
-        [sumArray removeAllObjects];
-    }
-    [sumArray addObjectsFromArray:array];
-    [self.tableViewParty reloadData];
-    
+    UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"警告" message:@"因为服务器或网络原因获取数据失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
@@ -856,42 +845,29 @@ int itttt=0;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_slimeView scrollViewDidScroll];
-    NSLog(@"固定的y值为：=====%f========%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-    //self.view.frame=CGRectMake(0, scrollView.contentOffset.y, 320, 460);
-    //Allparty.frame=CGRectMake(0, itennum-scrollView.contentOffset.y, 103, 23);
-    
-    [self.view addSubview:Allparty];
-    [self.view addSubview:ReliableParty];
-    [self.view addSubview:MyParty];
-    
-    if (itennum>scrollView.contentOffset.y) {
-        Allparty.frame=CGRectMake(0, itttt, 103, 23);
-        ReliableParty.frame=CGRectMake(103, itttt, 114, 23);
-        MyParty.frame=CGRectMake(217, itttt, 103, 23);
-        itttt++;
+    //NSLog(@"固定的y值为：=====%f========%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
+  
+    if (PreY>scrollView.contentOffset.y) {
+        
+        if (Allparty.frame.origin.y<0)
+        {
+            [Allparty setFrame:CGRectMake(0, Allparty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 105, 32)];
+        
+        }
+        PreY=scrollView.contentOffset.y;
     }
-    if (itennum<scrollView.contentOffset.y) {
-        Allparty.frame=CGRectMake(0, itttt, 103, 23);
-        ReliableParty.frame=CGRectMake(103, itttt, 114, 23);
-        MyParty.frame=CGRectMake(217, itttt, 103, 23);
-        itttt--;
+    else
+    {
+        if (Allparty.frame.origin.y>-32)
+        {
+            [Allparty setFrame:CGRectMake(0, Allparty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 105, 32)];
+            
+        }
+        PreY=scrollView.contentOffset.y;
     }
-    if (itttt>=23) {
-        itttt=23;
-    }
-    if (itttt<=-23) {
-        itttt=-23;
-    }
-    //itennum++;
-    NSLog(@"他们y值为：===%f",itennum-scrollView.contentOffset.y);
-    NSLog(@"他们y为：===%f",self.tableViewParty.contentOffset.y);
-    NSLog(@"新的高度差为：===%f",self.tableViewParty.contentSize.height);
-//    if ((itennum-scrollView.contentOffset.y)>-25&&(itennum-scrollView.contentOffset.y)<8) {
-//        Allparty.frame=CGRectMake(0, itennum-scrollView.contentOffset.y, 103, 23);
-//    }
-    //[self.view addSubview:tableViewParty];
-    
-    if ((self.tableViewParty.contentOffset.y+mainscreenhight-self.tableViewParty.contentSize.height>0)&&(self.tableViewParty.contentSize.height>0)) {
+//
+    if ((self.tableViewParty.contentOffset.y+mainscreenhight-self.tableViewParty.contentSize.height>0)&&(self.tableViewParty.contentSize.height>0))
+    {
         if (isLoading==NO) {
             [self PartyClickMore];
             isLoading=YES;
@@ -900,45 +876,7 @@ int itttt=0;
 
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    [_slimeView scrollViewDidEndDraging];
-    NSLog(@"tingtingting固定停止的y值=====%f========%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-    itennum=scrollView.contentOffset.y;
-    if (itttt>=23) {
-        itttt=23;
-    }
-    if (itttt<=-23) {
-        itttt=-23;
-    }
-    if (scrollView.contentOffset.y==0) {
-        itennum=0;
-    }
-}
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView;
-{
-    NSLog(@"scrollViewWillBeginDecelerating");
-     NSLog(@"222222222停止的y值=====%f========%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-    if (itttt>=23) {
-        itttt=23;
-    }
-    if (itttt<=-23) {
-        itttt=-23;
-    }
-    //itennum=scrollView.contentOffset.y;
-}
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
-{
-    NSLog(@"scrollViewWillBeginDragging");
-     NSLog(@"33333333333停止的y值=====%f========%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-    if (itttt>=23) {
-        itttt=23;
-    }
-    if (itttt<=-23) {
-        itttt=-23;
-    }
-    //itennum=scrollView.contentOffset.y;
-}
+
 #pragma mark - slimeRefresh delegate
 
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView

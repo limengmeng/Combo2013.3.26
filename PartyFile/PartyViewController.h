@@ -20,6 +20,8 @@
 
 @interface PartyViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,SRRefreshDelegate,CLLocationManagerDelegate>
 {
+    
+    float PreY;
     BOOL isLoading;
     UIButton* Allparty;
     UIButton* ReliableParty;
@@ -39,7 +41,7 @@
     PartyDetialViewController *partyDetialViewController;
     CreatPartyViewController *creatPartyViewController;
     MapViewController *mapControl;
-    int itennum;
+    
 }
 @property float lat,lng;
 @property (nonatomic,retain) NSString *userUUid;

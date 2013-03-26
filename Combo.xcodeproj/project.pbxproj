@@ -310,8 +310,6 @@
 		DC8627ED1700402300AF615C /* PartyDetialLastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627E71700402200AF615C /* PartyDetialLastViewController.m */; };
 		DC8627EE1700402300AF615C /* PartyDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627E91700402200AF615C /* PartyDetialViewController.m */; };
 		DC8627EF1700402300AF615C /* PartyDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627E91700402200AF615C /* PartyDetialViewController.m */; };
-		DC8627F01700402300AF615C /* PartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627EB1700402200AF615C /* PartyViewController.m */; };
-		DC8627F11700402300AF615C /* PartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627EB1700402200AF615C /* PartyViewController.m */; };
 		DC8627F41700405500AF615C /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627F31700405500AF615C /* SettingViewController.m */; };
 		DC8627F51700405500AF615C /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627F31700405500AF615C /* SettingViewController.m */; };
 		DC8627F8170040A100AF615C /* InvitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8627F7170040A100AF615C /* InvitViewController.m */; };
@@ -366,6 +364,8 @@
 		DC86287C1700612800AF615C /* mmmmm.png in Resources */ = {isa = PBXBuildFile; fileRef = DC86287A1700612800AF615C /* mmmmm.png */; };
 		DC86288C17006BAA00AF615C /* WelcomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC86288B17006BAA00AF615C /* WelcomViewController.m */; };
 		DC86288D17006BAA00AF615C /* WelcomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC86288B17006BAA00AF615C /* WelcomViewController.m */; };
+		DCA24C281701707200BB9F47 /* PartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24C271701707200BB9F47 /* PartyViewController.m */; };
+		DCA24C291701707200BB9F47 /* PartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24C271701707200BB9F47 /* PartyViewController.m */; };
 		DCA4544516FBF6EA00AC8FCC /* ACT1.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4543116FBF6EA00AC8FCC /* ACT1.png */; };
 		DCA4544616FBF6EA00AC8FCC /* ACT1.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4543116FBF6EA00AC8FCC /* ACT1.png */; };
 		DCA4544716FBF6EA00AC8FCC /* ACT1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4543216FBF6EA00AC8FCC /* ACT1@2x.png */; };
@@ -1098,8 +1098,6 @@
 		DC8627E71700402200AF615C /* PartyDetialLastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyDetialLastViewController.m; sourceTree = "<group>"; };
 		DC8627E81700402200AF615C /* PartyDetialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyDetialViewController.h; sourceTree = "<group>"; };
 		DC8627E91700402200AF615C /* PartyDetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyDetialViewController.m; sourceTree = "<group>"; };
-		DC8627EA1700402200AF615C /* PartyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyViewController.h; sourceTree = "<group>"; };
-		DC8627EB1700402200AF615C /* PartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyViewController.m; sourceTree = "<group>"; };
 		DC8627F21700405500AF615C /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		DC8627F31700405500AF615C /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		DC8627F6170040A100AF615C /* InvitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitViewController.h; sourceTree = "<group>"; };
@@ -1136,6 +1134,8 @@
 		DC86287A1700612800AF615C /* mmmmm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mmmmm.png; sourceTree = "<group>"; };
 		DC86288A17006BAA00AF615C /* WelcomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomViewController.h; sourceTree = "<group>"; };
 		DC86288B17006BAA00AF615C /* WelcomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomViewController.m; sourceTree = "<group>"; };
+		DCA24C261701707200BB9F47 /* PartyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyViewController.h; sourceTree = "<group>"; };
+		DCA24C271701707200BB9F47 /* PartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyViewController.m; sourceTree = "<group>"; };
 		DCA4543116FBF6EA00AC8FCC /* ACT1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ACT1.png; sourceTree = "<group>"; };
 		DCA4543216FBF6EA00AC8FCC /* ACT1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ACT1@2x.png"; sourceTree = "<group>"; };
 		DCA4543316FBF6EA00AC8FCC /* ACT2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ACT2.png; sourceTree = "<group>"; };
@@ -1674,8 +1674,8 @@
 			isa = PBXGroup;
 			children = (
 				DCA6111316FA95570094F65B /* partyImage */,
-				DC8627EA1700402200AF615C /* PartyViewController.h */,
-				DC8627EB1700402200AF615C /* PartyViewController.m */,
+				DCA24C261701707200BB9F47 /* PartyViewController.h */,
+				DCA24C271701707200BB9F47 /* PartyViewController.m */,
 				9D08589016FAAC9D00A36ED5 /* PartyDetailImage */,
 				DC8627E81700402200AF615C /* PartyDetialViewController.h */,
 				DC8627E91700402200AF615C /* PartyDetialViewController.m */,
@@ -3066,7 +3066,6 @@
 				DC86279C1700380C00AF615C /* infoViewController.m in Sources */,
 				DC8627EC1700402300AF615C /* PartyDetialLastViewController.m in Sources */,
 				DC8627EE1700402300AF615C /* PartyDetialViewController.m in Sources */,
-				DC8627F01700402300AF615C /* PartyViewController.m in Sources */,
 				DC8627F41700405500AF615C /* SettingViewController.m in Sources */,
 				DC8627F8170040A100AF615C /* InvitViewController.m in Sources */,
 				DC8628051700410300AF615C /* RESwitch.m in Sources */,
@@ -3076,6 +3075,7 @@
 				DC8628211700411000AF615C /* SimpleSwitch.m in Sources */,
 				DC8628251700413200AF615C /* ActiveViewController.m in Sources */,
 				DC86288C17006BAA00AF615C /* WelcomViewController.m in Sources */,
+				DCA24C281701707200BB9F47 /* PartyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3151,7 +3151,6 @@
 				DC86279D1700380C00AF615C /* infoViewController.m in Sources */,
 				DC8627ED1700402300AF615C /* PartyDetialLastViewController.m in Sources */,
 				DC8627EF1700402300AF615C /* PartyDetialViewController.m in Sources */,
-				DC8627F11700402300AF615C /* PartyViewController.m in Sources */,
 				DC8627F51700405500AF615C /* SettingViewController.m in Sources */,
 				DC8627F9170040A100AF615C /* InvitViewController.m in Sources */,
 				DC8628061700410300AF615C /* RESwitch.m in Sources */,
@@ -3161,6 +3160,7 @@
 				DC8628221700411000AF615C /* SimpleSwitch.m in Sources */,
 				DC8628261700413200AF615C /* ActiveViewController.m in Sources */,
 				DC86288D17006BAA00AF615C /* WelcomViewController.m in Sources */,
+				DCA24C291701707200BB9F47 /* PartyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
