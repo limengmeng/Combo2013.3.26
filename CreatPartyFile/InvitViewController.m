@@ -282,23 +282,33 @@
 //    NSLog(@"111111111111%@",stringnameShare);
 //    [params setObject:stringnameShare forKey:@"status"];
 //    [request postToPath:postPath params:params];
-    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDirs=[paths objectAtIndex:0];
-    NSString *imagePaths=[docDirs stringByAppendingPathComponent:@"mySinaId.txt"];
-    NSMutableArray *stringmutables=[NSMutableArray arrayWithContentsOfFile:imagePaths];
-    NSString *accessToken=[stringmutables objectAtIndex:0];
-    NSLog(@"输出新浪的token===%@",accessToken);
+    NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir=[path objectAtIndex:0];
+    //NSFileManager *fm=[NSFileManager defaultManager];
+    NSString *imagePath=[docDir stringByAppendingPathComponent:@"mySinaShare.txt"];
+    NSMutableArray *stringmutable=[NSMutableArray arrayWithContentsOfFile:imagePath];
+    NSString *shareSina=[stringmutable objectAtIndex:0];
+    NSLog(@"wwwwwwwwwwwwwwwwwwww%@",shareSina);
+    if ([shareSina isEqualToString:@"YES"]) {
+        NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *docDirs=[paths objectAtIndex:0];
+        NSString *imagePaths=[docDirs stringByAppendingPathComponent:@"mySinaId.txt"];
+        NSMutableArray *stringmutables=[NSMutableArray arrayWithContentsOfFile:imagePaths];
+        NSString *accessToken=[stringmutables objectAtIndex:0];
+        NSLog(@"输出新浪的token===%@",accessToken);
+        
+        NSString *stringUrl=@"https://api.weibo.com/2/statuses/update.json";
+        NSLog(@"接口1：：：：%@",stringUrl);
+        NSURL* url=[NSURL URLWithString:stringUrl];
+        ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
+        [rrequest setPostValue:stringnameShare forKey: @"status"];
+        [rrequest setPostValue:accessToken forKey: @"access_token"];
+        [rrequest setDelegate:self];
+        [rrequest startAsynchronous];
+        [self sendCreatDate];
 
-    NSString *stringUrl=@"https://api.weibo.com/2/statuses/update.json";
-    NSLog(@"接口1：：：：%@",stringUrl);
-    NSURL* url=[NSURL URLWithString:stringUrl];
-    ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
-    [rrequest setPostValue:stringnameShare forKey: @"status"];
-    [rrequest setPostValue:accessToken forKey: @"access_token"];
-    [rrequest setDelegate:self];
-    [rrequest startAsynchronous];
-    [self sendCreatDate];
-}
+    }
+    }
 - (void)request:(WeiboRequest *)request didFailWithError:(NSError *)error {
     NSLog(@"Failed to post: %@", error);
     

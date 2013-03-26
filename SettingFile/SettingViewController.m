@@ -51,6 +51,14 @@
 {
     
     [super viewDidLoad];
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //NSLog(@"Get document path: %@",[paths objectAtIndex:0]);
+    NSString *fileName=[[paths objectAtIndex:0] stringByAppendingPathComponent:@"mySinaShare.txt"];
+    NSString *content=@"YES";
+    //NSLog(@"wosds%@",content);
+    NSMutableArray *uuidMutablearray=[NSMutableArray arrayWithObject:content];
+    //NSLog(@"sadafdasfas%@",uuidMutablearray);
+    [uuidMutablearray writeToFile:fileName atomically:YES];
     switchView = [[RESwitch alloc] initWithFrame:CGRectMake(220, 10, 76, 28)];
     //========新浪登陆初始化=================
     tableV=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, mainscreenhight-44-44) style:UITableViewStyleGrouped];
@@ -259,7 +267,7 @@
             switchView.layer.borderWidth = 2;
             switchView.layer.masksToBounds = YES;
             [switchView addTarget:self action:@selector(switchViewChanged:) forControlEvents:UIControlEventValueChanged];
-            switchView.on = NO;
+            switchView.on = YES;
             [cell.contentView addSubview:switchView];
         }
         if(indexPath.row==1){
@@ -445,7 +453,7 @@
         NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         //NSLog(@"Get document path: %@",[paths objectAtIndex:0]);
         NSString *fileName=[[paths objectAtIndex:0] stringByAppendingPathComponent:@"mySinaShare.txt"];
-        NSString *content=@"YES";
+        NSString *content=@"NO";
         //NSLog(@"wosds%@",content);
         NSMutableArray *uuidMutablearray=[NSMutableArray arrayWithObject:content];
         //NSLog(@"sadafdasfas%@",uuidMutablearray);
@@ -456,7 +464,7 @@
         NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         //NSLog(@"Get document path: %@",[paths objectAtIndex:0]);
         NSString *fileName=[[paths objectAtIndex:0] stringByAppendingPathComponent:@"mySinaShare.txt"];
-        NSString *content=@"NO";
+        NSString *content=@"YES";
         //NSLog(@"wosds%@",content);
         NSMutableArray *uuidMutablearray=[NSMutableArray arrayWithObject:content];
         //NSLog(@"sadafdasfas%@",uuidMutablearray);
