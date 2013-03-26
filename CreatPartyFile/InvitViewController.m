@@ -292,7 +292,7 @@
     if ([shareSina isEqualToString:@"YES"]) {
         NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *docDirs=[paths objectAtIndex:0];
-        NSString *imagePaths=[docDirs stringByAppendingPathComponent:@"mySinaId.txt"];
+        NSString *imagePaths=[docDirs stringByAppendingPathComponent:@"mySinaAccesstoken.txt"];
         NSMutableArray *stringmutables=[NSMutableArray arrayWithContentsOfFile:imagePaths];
         NSString *accessToken=[stringmutables objectAtIndex:0];
         NSLog(@"输出新浪的token===%@",accessToken);
