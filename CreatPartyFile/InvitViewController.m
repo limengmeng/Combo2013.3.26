@@ -53,6 +53,13 @@
 {
     
     stringFriId=[[NSMutableString alloc]init];
+    for (int i=0; i<[self.friendId count]; i++) {
+        if(i==0)
+            [stringFriId appendFormat:@"%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
+        else
+            [stringFriId appendFormat:@",%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
+    }
+
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
@@ -316,23 +323,6 @@
                        NSURL* url=[NSURL URLWithString:strURL];
                        ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
                        
-                       NSLog(@"self.sinaArray=====%@",self.sinaArray);
-                       
-                       for (int i=0; i<[self.friendId count]; i++) {
-                           if(i==0)
-                               [stringFriId appendFormat:@"%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
-                           else
-                               [stringFriId appendFormat:@",%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
-                       }
-                       NSMutableString *sinaFriId=[[NSMutableString alloc]init];
-                       
-                       for (int i=0; i<[sinaArray count]; i++) {
-                           if(i==0)
-                               [sinaFriId appendFormat:@"%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"id"]];
-                           else
-                               [sinaFriId appendFormat:@",%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"id"]];
-                       }
-                       
                        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
                        self.from_time=[formatter stringFromDate:self.time];
@@ -368,7 +358,10 @@
                        NSLog(@"self.examineText=======%@",self.examineText);
                        NSLog(@"self.phone=======%@",self.phone);
                        NSLog(@"stringFriId====%@",stringFriId);
+<<<<<<< HEAD
                        NSLog(@"sinaFriId====%@",sinaFriId);
+=======
+>>>>>>> 郭——新浪互粉
                        //rrequest.delegate=self;
                        [rrequest startSynchronous];
                        dispatch_async(dispatch_get_main_queue(), ^{
