@@ -97,6 +97,7 @@
     //密码栏
     password =[[UITextField alloc]initWithFrame:CGRectMake(58, 100, 299, 42)];
     password.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
+    password.secureTextEntry=YES;
     password.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
     password.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     password.backgroundColor=[UIColor clearColor];
