@@ -16,6 +16,8 @@
 			<array>
 				<string>4COMBORetinaIphone114x114.png</string>
 				<string>4COMBORetinaIphone57x57.png</string>
+				<string>Icon@2x.png</string>
+				<string>Icon.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>

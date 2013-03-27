@@ -11,6 +11,7 @@
 #import "ModalAlert.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
+#import "PartyDetialLastViewController.h"
 
 @interface InvitViewController ()
 
@@ -328,6 +329,9 @@
                            NSLog(@"%@",response);
                            NSError* error;
                            if (response!=nil) {
+                               PartyDetialLastViewController *partyDetail=[[PartyDetialLastViewController  alloc]init];
+                               partyDetail.partyTemp=1;
+                               [self.navigationController pushViewController:partyDetail animated:YES];
                                
                                NSDictionary* bizDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
                                NSLog(@"%@",bizDic);
@@ -379,8 +383,6 @@
                            }
                        });
                    });
-    
-   [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 //******************************上传派对详细信息 end************************************

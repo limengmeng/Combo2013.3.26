@@ -42,7 +42,10 @@
     UIButton *join;
     NSNumber *numberUUID;
     int numFlogLogout;
+    
+    int partyTemp;
 }
+@property int partyTemp;
 @property(nonatomic,strong)PagedFlowView * FlowView;//滑动效果
 @property (nonatomic,retain) NSString *userUUid;
 @property (nonatomic,retain) NSString *p_id;

@@ -24,6 +24,7 @@
 @synthesize joinUser;
 @synthesize creatUser;
 @synthesize FlowView;
+@synthesize partyTemp;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
