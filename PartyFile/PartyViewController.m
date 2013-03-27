@@ -219,7 +219,7 @@ int itttt=0;
     creatButton.frame=CGRectMake(0.0, 0.0, 50, 31);
     [creatButton addTarget:self action:@selector(CreateNewAct) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:creatButton];
-    UITableView* table=[[UITableView alloc]initWithFrame:CGRectMake(0, 32, 320, mainscreenhight-32) style:UITableViewStyleGrouped];
+    UITableView* table=[[UITableView alloc]initWithFrame:mainscreen style:UITableViewStyleGrouped];
     self.tableViewParty=table;
     [self.view addSubview:self.tableViewParty];
     tableViewParty.backgroundView=nil;
@@ -480,6 +480,9 @@ int itttt=0;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (section==0) {
+        return 40;
+    }
     return 7;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -631,7 +634,7 @@ int itttt=0;
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
-    [formatter setDateFormat:@"yyyy,MM,dd  HH:mm"];
+    [formatter setDateFormat:@"yyyy.MM.dd  HH:mm"];
     NSInteger time=[[dict objectForKey:@"P_STIME"]integerValue];
     NSLog(@"%d",time);
     NSDate* date=[NSDate dateWithTimeIntervalSince1970:time];
