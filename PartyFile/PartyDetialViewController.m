@@ -49,6 +49,19 @@
     UIBarButtonItem* goback=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
     self.navigationItem.leftBarButtonItem=goback;
     [self getUUidForthis];
+    //==================请求数据========================================
+    NSString* str=[NSString stringWithFormat:@"mac/party/IF00105?p_id=%@&&uuid=%@",p_id,userUUid];
+    NSString *stringP=globalURL(str);
+    NSLog(@"shuchuwangzhi::::::::::::::::%@",stringP);
+    NSURL* url=[NSURL URLWithString:stringP];
+    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+    [request setDelegate:self];
+    request.shouldAttemptPersistentConnection = NO;
+    [request setValidatesSecureCertificate:NO];
+    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+    [request setDidFailSelector:@selector(requestDidFailed:)];
+    [request startAsynchronous];
+    [tableview reloadData];
 }
 - (void)viewDidLoad
 {
@@ -68,19 +81,7 @@
     //======================================
     stringA=[[NSMutableString alloc]initWithCapacity:100];
     
-    //==================请求数据========================================
-    NSString* str=[NSString stringWithFormat:@"mac/party/IF00105?p_id=%@&&uuid=%@",p_id,userUUid];
-    NSString *stringP=globalURL(str);
-    NSLog(@"shuchuwangzhi::::::::::::::::%@",stringP);
-    NSURL* url=[NSURL URLWithString:stringP];
-    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-    [request setDelegate:self];
-    request.shouldAttemptPersistentConnection = NO;
-    [request setValidatesSecureCertificate:NO];
-    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-    [request setDidFailSelector:@selector(requestDidFailed:)];
-    [request startAsynchronous];
-    //==============================
+        //==============================
     label = [[UILabel alloc] initWithFrame:CGRectMake(70,100,180,100)];
     label.numberOfLines =0;
     label.backgroundColor = [UIColor clearColor];
@@ -122,44 +123,47 @@
         self.joinUser=[party objectForKey:@"participants"];
         NSDictionary* userdict=[self.creatUser objectAtIndex:0];
         label.text=[userdict objectForKey:@"USER_NICK"];
+        NSString *stringPartyStatues=[party objectForKey:@"P_STATUS"];
         NSString *stringInStatues=[party objectForKey:@"IN_STATUS"];
         NSString *stringTakeStatues=[party objectForKey:@"take_status"];
         UIButton *buttonJoin=[UIButton buttonWithType:UIButtonTypeCustom];
-        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
-            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-            [buttonJoin addTarget:self action:@selector(supplyParty) forControlEvents:UIControlEventTouchUpInside];//申请加入派对
+        if ([[stringPartyStatues substringToIndex:1] isEqualToString:@"Y"]) {
+            if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
+                [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                [buttonJoin addTarget:self action:@selector(supplyParty) forControlEvents:UIControlEventTouchUpInside];//申请加入派对
+                
+            }
+            if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
+                [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                [buttonJoin addTarget:self action:@selector(agreeJoinParty) forControlEvents:UIControlEventTouchUpInside];//同意联合创建
+            }
+            if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]){
+                [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
+                [buttonJoin addTarget:self action:@selector(noOutParty) forControlEvents:UIControlEventTouchUpInside];//联合创建人推出不能退
+            }
+            if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
+                [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
+                [buttonJoin addTarget:self action:@selector(outParty) forControlEvents:UIControlEventTouchUpInside];//不去了
+            }
+            if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]){
+                [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//不去了
+            }
+            buttonJoin.frame=CGRectMake(0,mainscreenhight-107, 160, 44);
+            [self.view addSubview:buttonJoin];
             
+            
+            UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(158, mainscreenhight-100, 2, 30)];
+            imageView.image=[UIImage imageNamed:@"CutOffRule.png"];
+            
+            [self.view addSubview:imageView];
+            //==========邀请按钮===============================
+            UIButton *inviteButton =[UIButton buttonWithType:UIButtonTypeCustom];
+            [inviteButton setImage:[UIImage imageNamed:@"Pinvite"] forState:UIControlStateNormal];
+            [inviteButton addTarget:self action:@selector(showFriendView:) forControlEvents:UIControlEventTouchUpInside];
+            [inviteButton setFrame:CGRectMake(160,mainscreenhight-107, 160, 44)];
+            [self.view addSubview:inviteButton];
         }
-        if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
-            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-            [buttonJoin addTarget:self action:@selector(agreeJoinParty) forControlEvents:UIControlEventTouchUpInside];//同意联合创建
-        }
-        if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]){
-            [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
-            [buttonJoin addTarget:self action:@selector(noOutParty) forControlEvents:UIControlEventTouchUpInside];//联合创建人推出不能退
-        }
-        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
-            [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
-            [buttonJoin addTarget:self action:@selector(outParty) forControlEvents:UIControlEventTouchUpInside];//不去了
-        }
-        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]){
-            [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
-            [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//不去了
-        }
-        buttonJoin.frame=CGRectMake(0,mainscreenhight-107, 160, 44);
-        [self.view addSubview:buttonJoin];
-
-        
-        UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(158, mainscreenhight-100, 2, 30)];
-        imageView.image=[UIImage imageNamed:@"CutOffRule.png"];
-        
-        [self.view addSubview:imageView];
-        //==========邀请按钮===============================
-        UIButton *inviteButton =[UIButton buttonWithType:UIButtonTypeCustom];
-        [inviteButton setImage:[UIImage imageNamed:@"Pinvite"] forState:UIControlStateNormal];
-        [inviteButton addTarget:self action:@selector(showFriendView:) forControlEvents:UIControlEventTouchUpInside];
-        [inviteButton setFrame:CGRectMake(160,mainscreenhight-107, 160, 44)];
-        [self.view addSubview:inviteButton];
         
         FlowView = [[PagedFlowView alloc] initWithFrame:CGRectMake(0,0,320,140)];
         FlowView.delegate = self;
