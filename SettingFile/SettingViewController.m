@@ -25,7 +25,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title=@"设置";
+        //self.title=@"设置";
         UIImage *selectedImage = [UIImage imageNamed:@"shezhizi@2x.png"];
         UIImage *unselectedImage = [UIImage imageNamed:@"shezhi@2x.png"];
         

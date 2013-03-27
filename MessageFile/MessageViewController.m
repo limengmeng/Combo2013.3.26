@@ -41,7 +41,7 @@ int MessFlag=0;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title=@"消息";
+        //self.title=@"消息";
         choiceNumber=0;
         [self getUUidForthis];
         //************************添加三个button

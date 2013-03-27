@@ -403,7 +403,7 @@
         mapViewController=[[MyMapViewController alloc] init];
         //[mapViewController initData:self.party];
         //转换出现问题，待解决
-        
+        mapViewController.hidesBottomBarWhenPushed=YES;
         float lat=[[self.party objectForKey:@"LAT"]floatValue];
         float lng=[[self.party objectForKey:@"LNG"]floatValue];
         NSLog(@"2++++++%f %f",lat,lng);
