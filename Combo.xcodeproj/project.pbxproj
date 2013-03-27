@@ -426,18 +426,6 @@
 		DCA24CEF1701AE3000BB9F47 /* ACT7.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CCE1701AE3000BB9F47 /* ACT7.png */; };
 		DCA24CF01701AE3000BB9F47 /* ACT7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CCF1701AE3000BB9F47 /* ACT7@2x.png */; };
 		DCA24CF11701AE3000BB9F47 /* ACT7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CCF1701AE3000BB9F47 /* ACT7@2x.png */; };
-		DCA24CF21701AE3000BB9F47 /* LOCJOIN.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD01701AE3000BB9F47 /* LOCJOIN.png */; };
-		DCA24CF31701AE3000BB9F47 /* LOCJOIN.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD01701AE3000BB9F47 /* LOCJOIN.png */; };
-		DCA24CF41701AE3000BB9F47 /* LOCJOIN@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD11701AE3000BB9F47 /* LOCJOIN@2x.png */; };
-		DCA24CF51701AE3000BB9F47 /* LOCJOIN@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD11701AE3000BB9F47 /* LOCJOIN@2x.png */; };
-		DCA24CF61701AE3000BB9F47 /* LOCmake.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD21701AE3000BB9F47 /* LOCmake.png */; };
-		DCA24CF71701AE3000BB9F47 /* LOCmake.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD21701AE3000BB9F47 /* LOCmake.png */; };
-		DCA24CF81701AE3000BB9F47 /* LOCmake@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD31701AE3000BB9F47 /* LOCmake@2x.png */; };
-		DCA24CF91701AE3000BB9F47 /* LOCmake@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD31701AE3000BB9F47 /* LOCmake@2x.png */; };
-		DCA24CFA1701AE3000BB9F47 /* LOCOUT.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD41701AE3000BB9F47 /* LOCOUT.png */; };
-		DCA24CFB1701AE3000BB9F47 /* LOCOUT.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD41701AE3000BB9F47 /* LOCOUT.png */; };
-		DCA24CFC1701AE3000BB9F47 /* LOCOUT2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD51701AE3000BB9F47 /* LOCOUT2x.png */; };
-		DCA24CFD1701AE3000BB9F47 /* LOCOUT2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA24CD51701AE3000BB9F47 /* LOCOUT2x.png */; };
 		DCA24D001701AE4200BB9F47 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24CFF1701AE4200BB9F47 /* DetailViewController.m */; };
 		DCA24D011701AE4200BB9F47 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24CFF1701AE4200BB9F47 /* DetailViewController.m */; };
 		DCA24D041701AE5400BB9F47 /* ActiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA24D031701AE5400BB9F47 /* ActiveViewController.m */; };
@@ -558,6 +546,18 @@
 		DCA4555116FC31C200AC8FCC /* activityBack.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4554D16FC31C200AC8FCC /* activityBack.png */; };
 		DCA4556716FC5CD500AC8FCC /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCA4556616FC5CD500AC8FCC /* city.plist */; };
 		DCA4556816FC5CD500AC8FCC /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCA4556616FC5CD500AC8FCC /* city.plist */; };
+		DCA4F02D17029953000A0D18 /* LOCOUT.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02717029953000A0D18 /* LOCOUT.png */; };
+		DCA4F02E17029953000A0D18 /* LOCOUT.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02717029953000A0D18 /* LOCOUT.png */; };
+		DCA4F02F17029953000A0D18 /* LOCOUT@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02817029953000A0D18 /* LOCOUT@2x.png */; };
+		DCA4F03017029953000A0D18 /* LOCOUT@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02817029953000A0D18 /* LOCOUT@2x.png */; };
+		DCA4F03117029953000A0D18 /* LOCJOIN.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02917029953000A0D18 /* LOCJOIN.png */; };
+		DCA4F03217029953000A0D18 /* LOCJOIN.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02917029953000A0D18 /* LOCJOIN.png */; };
+		DCA4F03317029953000A0D18 /* LOCJOIN@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02A17029953000A0D18 /* LOCJOIN@2x.png */; };
+		DCA4F03417029953000A0D18 /* LOCJOIN@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02A17029953000A0D18 /* LOCJOIN@2x.png */; };
+		DCA4F03517029953000A0D18 /* LOCmake.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02B17029953000A0D18 /* LOCmake.png */; };
+		DCA4F03617029953000A0D18 /* LOCmake.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02B17029953000A0D18 /* LOCmake.png */; };
+		DCA4F03717029953000A0D18 /* LOCmake@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02C17029953000A0D18 /* LOCmake@2x.png */; };
+		DCA4F03817029953000A0D18 /* LOCmake@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA4F02C17029953000A0D18 /* LOCmake@2x.png */; };
 		DCA6112C16FA959F0094F65B /* PartyMale.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA6111516FA959F0094F65B /* PartyMale.png */; };
 		DCA6112D16FA959F0094F65B /* PartyMale.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA6111516FA959F0094F65B /* PartyMale.png */; };
 		DCA6112E16FA959F0094F65B /* PartyMale@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCA6111616FA959F0094F65B /* PartyMale@2x.png */; };
@@ -1205,12 +1205,6 @@
 		DCA24CCD1701AE3000BB9F47 /* ACT6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ACT6@2x.png"; sourceTree = "<group>"; };
 		DCA24CCE1701AE3000BB9F47 /* ACT7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ACT7.png; sourceTree = "<group>"; };
 		DCA24CCF1701AE3000BB9F47 /* ACT7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ACT7@2x.png"; sourceTree = "<group>"; };
-		DCA24CD01701AE3000BB9F47 /* LOCJOIN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOCJOIN.png; sourceTree = "<group>"; };
-		DCA24CD11701AE3000BB9F47 /* LOCJOIN@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOCJOIN@2x.png"; sourceTree = "<group>"; };
-		DCA24CD21701AE3000BB9F47 /* LOCmake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOCmake.png; sourceTree = "<group>"; };
-		DCA24CD31701AE3000BB9F47 /* LOCmake@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOCmake@2x.png"; sourceTree = "<group>"; };
-		DCA24CD41701AE3000BB9F47 /* LOCOUT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOCOUT.png; sourceTree = "<group>"; };
-		DCA24CD51701AE3000BB9F47 /* LOCOUT2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOCOUT2x.png; sourceTree = "<group>"; };
 		DCA24CFE1701AE4200BB9F47 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		DCA24CFF1701AE4200BB9F47 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		DCA24D021701AE5400BB9F47 /* ActiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveViewController.h; sourceTree = "<group>"; };
@@ -1274,6 +1268,12 @@
 		DCA4554C16FC31C200AC8FCC /* activityBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activityBack@2x.png"; sourceTree = "<group>"; };
 		DCA4554D16FC31C200AC8FCC /* activityBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activityBack.png; sourceTree = "<group>"; };
 		DCA4556616FC5CD500AC8FCC /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
+		DCA4F02717029953000A0D18 /* LOCOUT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOCOUT.png; sourceTree = "<group>"; };
+		DCA4F02817029953000A0D18 /* LOCOUT@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOCOUT@2x.png"; sourceTree = "<group>"; };
+		DCA4F02917029953000A0D18 /* LOCJOIN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOCJOIN.png; sourceTree = "<group>"; };
+		DCA4F02A17029953000A0D18 /* LOCJOIN@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOCJOIN@2x.png"; sourceTree = "<group>"; };
+		DCA4F02B17029953000A0D18 /* LOCmake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOCmake.png; sourceTree = "<group>"; };
+		DCA4F02C17029953000A0D18 /* LOCmake@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LOCmake@2x.png"; sourceTree = "<group>"; };
 		DCA6111516FA959F0094F65B /* PartyMale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PartyMale.png; sourceTree = "<group>"; };
 		DCA6111616FA959F0094F65B /* PartyMale@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PartyMale@2x.png"; sourceTree = "<group>"; };
 		DCA6111716FA959F0094F65B /* Partyfemale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Partyfemale.png; sourceTree = "<group>"; };
@@ -2165,12 +2165,12 @@
 				DCA24CCD1701AE3000BB9F47 /* ACT6@2x.png */,
 				DCA24CCE1701AE3000BB9F47 /* ACT7.png */,
 				DCA24CCF1701AE3000BB9F47 /* ACT7@2x.png */,
-				DCA24CD01701AE3000BB9F47 /* LOCJOIN.png */,
-				DCA24CD11701AE3000BB9F47 /* LOCJOIN@2x.png */,
-				DCA24CD21701AE3000BB9F47 /* LOCmake.png */,
-				DCA24CD31701AE3000BB9F47 /* LOCmake@2x.png */,
-				DCA24CD41701AE3000BB9F47 /* LOCOUT.png */,
-				DCA24CD51701AE3000BB9F47 /* LOCOUT2x.png */,
+				DCA4F02717029953000A0D18 /* LOCOUT.png */,
+				DCA4F02817029953000A0D18 /* LOCOUT@2x.png */,
+				DCA4F02917029953000A0D18 /* LOCJOIN.png */,
+				DCA4F02A17029953000A0D18 /* LOCJOIN@2x.png */,
+				DCA4F02B17029953000A0D18 /* LOCmake.png */,
+				DCA4F02C17029953000A0D18 /* LOCmake@2x.png */,
 			);
 			path = ActivityDetailImage;
 			sourceTree = "<group>";
@@ -2696,12 +2696,6 @@
 				DCA24CEC1701AE3000BB9F47 /* ACT6@2x.png in Resources */,
 				DCA24CEE1701AE3000BB9F47 /* ACT7.png in Resources */,
 				DCA24CF01701AE3000BB9F47 /* ACT7@2x.png in Resources */,
-				DCA24CF21701AE3000BB9F47 /* LOCJOIN.png in Resources */,
-				DCA24CF41701AE3000BB9F47 /* LOCJOIN@2x.png in Resources */,
-				DCA24CF61701AE3000BB9F47 /* LOCmake.png in Resources */,
-				DCA24CF81701AE3000BB9F47 /* LOCmake@2x.png in Resources */,
-				DCA24CFA1701AE3000BB9F47 /* LOCOUT.png in Resources */,
-				DCA24CFC1701AE3000BB9F47 /* LOCOUT2x.png in Resources */,
 				DCA24D141701AE6900BB9F47 /* LOC1.png in Resources */,
 				DCA24D161701AE6900BB9F47 /* LOC1@2x.png in Resources */,
 				DCA24D181701AE6900BB9F47 /* LOC2.png in Resources */,
@@ -2742,6 +2736,12 @@
 				9DA901BE1702820800D1AD45 /* anniu@2x.png in Resources */,
 				9DA901C01702820800D1AD45 /* backgrey.png in Resources */,
 				9DA901C21702820800D1AD45 /* backgrey@2x.png in Resources */,
+				DCA4F02D17029953000A0D18 /* LOCOUT.png in Resources */,
+				DCA4F02F17029953000A0D18 /* LOCOUT@2x.png in Resources */,
+				DCA4F03117029953000A0D18 /* LOCJOIN.png in Resources */,
+				DCA4F03317029953000A0D18 /* LOCJOIN@2x.png in Resources */,
+				DCA4F03517029953000A0D18 /* LOCmake.png in Resources */,
+				DCA4F03717029953000A0D18 /* LOCmake@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3057,12 +3057,6 @@
 				DCA24CED1701AE3000BB9F47 /* ACT6@2x.png in Resources */,
 				DCA24CEF1701AE3000BB9F47 /* ACT7.png in Resources */,
 				DCA24CF11701AE3000BB9F47 /* ACT7@2x.png in Resources */,
-				DCA24CF31701AE3000BB9F47 /* LOCJOIN.png in Resources */,
-				DCA24CF51701AE3000BB9F47 /* LOCJOIN@2x.png in Resources */,
-				DCA24CF71701AE3000BB9F47 /* LOCmake.png in Resources */,
-				DCA24CF91701AE3000BB9F47 /* LOCmake@2x.png in Resources */,
-				DCA24CFB1701AE3000BB9F47 /* LOCOUT.png in Resources */,
-				DCA24CFD1701AE3000BB9F47 /* LOCOUT2x.png in Resources */,
 				DCA24D151701AE6900BB9F47 /* LOC1.png in Resources */,
 				DCA24D171701AE6900BB9F47 /* LOC1@2x.png in Resources */,
 				DCA24D191701AE6900BB9F47 /* LOC2.png in Resources */,
@@ -3103,6 +3097,12 @@
 				9DA901BF1702820800D1AD45 /* anniu@2x.png in Resources */,
 				9DA901C11702820800D1AD45 /* backgrey.png in Resources */,
 				9DA901C31702820800D1AD45 /* backgrey@2x.png in Resources */,
+				DCA4F02E17029953000A0D18 /* LOCOUT.png in Resources */,
+				DCA4F03017029953000A0D18 /* LOCOUT@2x.png in Resources */,
+				DCA4F03217029953000A0D18 /* LOCJOIN.png in Resources */,
+				DCA4F03417029953000A0D18 /* LOCJOIN@2x.png in Resources */,
+				DCA4F03617029953000A0D18 /* LOCmake.png in Resources */,
+				DCA4F03817029953000A0D18 /* LOCmake@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

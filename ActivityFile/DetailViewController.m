@@ -113,7 +113,7 @@ static NSString* P_type=@"activity";
     
     joinParty = [UIButton buttonWithType:UIButtonTypeCustom];
     [joinParty setImage:[UIImage imageNamed:@"LOCJOIN"] forState:UIControlStateNormal];
-    [joinParty setFrame:CGRectMake(0,mainscreenhight-105, 160, 44)];
+    [joinParty setFrame:CGRectMake(0,mainscreenhight-109, 160, 46)];
     [joinParty addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
 
     [self.view addSubview:joinParty];
@@ -121,7 +121,7 @@ static NSString* P_type=@"activity";
     UIButton *join = [UIButton buttonWithType:UIButtonTypeCustom];
     [join setImage:[UIImage imageNamed:@"LOCmake"] forState:UIControlStateNormal];
     [join addTarget:self action:@selector(buttonClickTwo:) forControlEvents:UIControlEventTouchUpInside];
-    [join setFrame:CGRectMake(160,mainscreenhight-105, 160, 44)];
+    [join setFrame:CGRectMake(160,mainscreenhight-109, 160, 46)];
     [self.view addSubview:join];
 
 	// Do any additional setup after loading the view.

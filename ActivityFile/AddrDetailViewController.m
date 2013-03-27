@@ -65,7 +65,7 @@
     joinParty = [UIButton buttonWithType:UIButtonTypeCustom];
     [joinParty setImage:[UIImage imageNamed:@"LOCOUT"] forState:UIControlStateNormal];
     [joinParty addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [joinParty setFrame:CGRectMake(0,mainscreenhight-100, 160, 44)];
+    [joinParty setFrame:CGRectMake(0,mainscreenhight-109, 160, 46)];
     [self.view addSubview:joinParty];
     
     
@@ -73,7 +73,7 @@
     UIButton *join = [UIButton buttonWithType:UIButtonTypeCustom];
     [join setImage:[UIImage imageNamed:@"LOCmake"] forState:UIControlStateNormal];
     [join addTarget:self action:@selector(buttonClickTwo:) forControlEvents:UIControlEventTouchUpInside];
-    [join setFrame:CGRectMake(160,mainscreenhight-100, 160, 44)];
+    [join setFrame:CGRectMake(160,mainscreenhight-109, 160, 46)];
     [self.view addSubview:join];
     NSString* str=[NSString stringWithFormat:@"mac/party/IF00005?uuid=%@&&c_id=%@",userUUid,self.C_id];
     NSString *stringUrl=globalURL(str);
