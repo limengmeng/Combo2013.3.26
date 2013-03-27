@@ -161,12 +161,34 @@ int itttt=0;
 {
     [self getUUidForthis];
     [super viewWillAppear:animated];
+    //========附近和最新=========================
+    buttonNear=[UIButton buttonWithType:UIButtonTypeCustom];
+    buttonNear.frame=CGRectMake(8, 27, 46, 30);
+    buttonNear.titleLabel.text=@"最新";
+    buttonNear.tag=201;
+    [buttonNear setBackgroundImage:[UIImage imageNamed:@"thenew"] forState:UIControlStateNormal];
+    [buttonNear setBackgroundImage:[UIImage imageNamed:@"thenewai"] forState:UIControlStateSelected];
+    [buttonNear addTarget:self action:@selector(mesActionbutt:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonNear setSelected:YES];
+    buttonNew=[UIButton buttonWithType:UIButtonTypeCustom];
+    buttonNew.frame=CGRectMake(54, 27, 46, 30);
+    buttonNew.titleLabel.text=@"附近";
+    buttonNew.tag=202;
+    [buttonNew setBackgroundImage:[UIImage imageNamed:@"nearby"] forState:UIControlStateNormal];
+    [buttonNew setBackgroundImage:[UIImage imageNamed:@"nearbyai"] forState:UIControlStateSelected];
+    [buttonNew addTarget:self action:@selector(mesActionbutton:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonNew setSelected:NO];
+    [self.tabBarController.view addSubview:buttonNew];
+    [self.tabBarController.view addSubview:buttonNear];
+
     
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
     
     [super viewDidDisappear:animated];
+    [buttonNew removeFromSuperview];
+    [buttonNear removeFromSuperview];
     
 }
 - (void)viewDidLoad
@@ -262,16 +284,27 @@ int itttt=0;
     [self requestDate];
     //==========================
 }
+-(void)mesActionbutton:(UIButton *)btn
+{
+    [buttonNear setSelected:NO];
+    [buttonNew setSelected:YES];
+    NSLog(@"11111111");
+}
+-(void)mesActionbutt:(UIButton *)btn
+{
+    [buttonNear setSelected:YES];
+    [buttonNew setSelected:NO];
+    NSLog(@"2222222");
+
+}
+
 //=============经纬度代理方法=========================================
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     //    log.text=[NSString stringWithFormat:@"%g",newLocation.coordinate.longitude];
     //    lat.text=[NSString stringWithFormat:@"%g",newLocation.coordinate.latitude];
     lng=newLocation.coordinate.longitude;
     lat=newLocation.coordinate.latitude;
-    NSLog(@"获取你的经纬度：：：：：：：：经度:%g      纬度:%g",lng,lat);
-    
-    
-    
+    NSLog(@"获取你的经纬度：：：：：：：：经度:%g      纬度:%g",lng,lat);  
 }
 
 

@@ -81,15 +81,15 @@
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizerDidChange:)];
         [_backgroundView addGestureRecognizer:tapGestureRecognizer];
         
-        _onLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 3, 20, 10)];
-        _onLabel.text = NSLocalizedString(@"ON", @"ON");
-        _onLabel.backgroundColor = [UIColor clearColor];
-        [_backgroundView addSubview:_onLabel];
+        //_onLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 3, 20, 10)];
+        //_onLabel.text = NSLocalizedString(@"ON", @"ON");
+        //_onLabel.backgroundColor = [UIColor clearColor];
+        //[_backgroundView addSubview:_onLabel];
         
-        _offLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 3, 20, 10)];
-        _offLabel.text = NSLocalizedString(@"OFF", @"OFF");
-        _offLabel.backgroundColor = [UIColor clearColor];
-        [_backgroundView addSubview:_offLabel];
+        //_offLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 3, 20, 10)];
+        //_offLabel.text = NSLocalizedString(@"OFF", @"OFF");
+        //_offLabel.backgroundColor = [UIColor clearColor];
+        //[_backgroundView addSubview:_offLabel];
     }
     return self;
 }

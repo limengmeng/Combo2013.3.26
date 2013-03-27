@@ -122,46 +122,44 @@
         self.joinUser=[party objectForKey:@"participants"];
         NSDictionary* userdict=[self.creatUser objectAtIndex:0];
         label.text=[userdict objectForKey:@"USER_NICK"];
-        NSString *stringButton=[[party objectForKey:@"P_STATUS"]substringToIndex:1];
-        if ([stringButton isEqualToString:@"Y"]||[stringButton isEqualToString:@"W"]) {
-            UIButton *jionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            NSString *stringStatus=[party objectForKey:@"take_status"];
-            if (![[stringStatus substringToIndex:1] isEqualToString:@"Y"]) {
-                UIButton *buttonGoParty=[UIButton buttonWithType:UIButtonTypeCustom];
-                [buttonGoParty setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-                buttonGoParty.titleLabel.text=@"加入派对";
-                if ([stringButton isEqualToString:@"W"]) {
-                    [buttonGoParty addTarget:self action:@selector(buttonNojoinWaite) forControlEvents:UIControlEventTouchUpInside];
-                }
-                else{
-                    [buttonGoParty addTarget:self action:@selector(ButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-                }
-                [buttonGoParty setFrame:CGRectMake(0,mainscreenhight-107, 160, 44)];
-                [self.view addSubview:buttonGoParty];
-            }
-            else
-            {
-                [jionButton setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
-                jionButton.titleLabel.text=@"我不去了";
-                [jionButton addTarget:self action:@selector(buttonNojoin:) forControlEvents:UIControlEventTouchUpInside];
-                [jionButton setFrame:CGRectMake(0,mainscreenhight-107, 160, 44)];
-                [self.view addSubview:jionButton];
-                
-                
-            }
-            
-            UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(158, mainscreenhight-100, 2, 30)];
-            imageView.image=[UIImage imageNamed:@"CutOffRule.png"];
-            
-            [self.view addSubview:imageView];
-            //==========邀请按钮===============================
-            UIButton *inviteButton =[UIButton buttonWithType:UIButtonTypeCustom];
-            [inviteButton setImage:[UIImage imageNamed:@"Pinvite"] forState:UIControlStateNormal];
-            [inviteButton addTarget:self action:@selector(showFriendView:) forControlEvents:UIControlEventTouchUpInside];
-            [inviteButton setFrame:CGRectMake(160,mainscreenhight-107, 160, 44)];
-            [self.view addSubview:inviteButton];
+        NSString *stringInStatues=[party objectForKey:@"IN_STATUS"];
+        NSString *stringTakeStatues=[party objectForKey:@"take_status"];
+        UIButton *buttonJoin=[UIButton buttonWithType:UIButtonTypeCustom];
+        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
+            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+            [buttonJoin addTarget:self action:@selector(supplyParty) forControlEvents:UIControlEventTouchUpInside];//申请加入派对
             
         }
+        if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
+            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+            [buttonJoin addTarget:self action:@selector(agreeJoinParty) forControlEvents:UIControlEventTouchUpInside];//同意联合创建
+        }
+        if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]){
+            [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
+            [buttonJoin addTarget:self action:@selector(noOutParty) forControlEvents:UIControlEventTouchUpInside];//联合创建人推出不能退
+        }
+        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
+            [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
+            [buttonJoin addTarget:self action:@selector(outParty) forControlEvents:UIControlEventTouchUpInside];//不去了
+        }
+        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]){
+            [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
+            [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//不去了
+        }
+        buttonJoin.frame=CGRectMake(0,mainscreenhight-107, 160, 44);
+        [self.view addSubview:buttonJoin];
+
+        
+        UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(158, mainscreenhight-100, 2, 30)];
+        imageView.image=[UIImage imageNamed:@"CutOffRule.png"];
+        
+        [self.view addSubview:imageView];
+        //==========邀请按钮===============================
+        UIButton *inviteButton =[UIButton buttonWithType:UIButtonTypeCustom];
+        [inviteButton setImage:[UIImage imageNamed:@"Pinvite"] forState:UIControlStateNormal];
+        [inviteButton addTarget:self action:@selector(showFriendView:) forControlEvents:UIControlEventTouchUpInside];
+        [inviteButton setFrame:CGRectMake(160,mainscreenhight-107, 160, 44)];
+        [self.view addSubview:inviteButton];
         
         FlowView = [[PagedFlowView alloc] initWithFrame:CGRectMake(0,0,320,140)];
         FlowView.delegate = self;
@@ -171,68 +169,51 @@
         [tableview reloadData];
     }
 }
--(void)buttonNojoinWaite
+-(void)supplyParty
+{
+    NSLog(@"申请加入派对");
+    invit=[[InvitViewController alloc]init];
+    invit.temp=2;
+    invit.from_p_id=self.p_id;
+    NSLog(@"输出pid%@",invit.from_p_id);
+    [self.navigationController pushViewController:invit animated:YES];
+}
+-(void)agreeJoinParty
+{
+    NSLog(@"同意创建派对");
+    numFlogLogout=1;
+    NSString* str=@"mac/party/IF00053";
+    NSString* strURL=globalURL(str);
+    NSURL* url=[NSURL URLWithString:strURL];
+    ASIFormDataRequest *request =  [ASIFormDataRequest  requestWithURL:url];
+    [request setPostValue:self.userUUid forKey: @"uuid"];
+    [request setPostValue:self.p_id forKey:@"p_id"];
+    [request startSynchronous];
+}
+-(void)noOutParty
+{
+    NSLog(@"联合创建人不能退出派对");
+    UIAlertView *soundAlert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你是联合创建人，不能退出活动" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [soundAlert show];
+}
+-(void)outParty
+{
+    NSLog(@"非联合创建人退出派对");
+    numFlogLogout=1;
+    NSString* str=@"mac/party/IF00041";
+    NSString* strURL=globalURL(str);
+    NSURL *url=[NSURL URLWithString:strURL];
+    ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
+    [rrequest setPostValue:self.userUUid forKey: @"uuid"];
+    [rrequest setPostValue:self.p_id forKey: @"p_id"];
+    [rrequest setDelegate:self];
+    [rrequest startAsynchronous];
+}
+
+-(void)weaitJoinParty
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"正在等待创建者同意" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alert show];
-}
--(void)buttonNojoin:(UIButton *)btn
-{
-    NSString *stringPid=[party objectForKey:@"P_ID"];
-    for (NSDictionary *dicJion in [party objectForKey:@"creaters"])
-    {
-        if ([[dicJion objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID]) {
-            UIAlertView *soundAlert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你是联合创建人，不能退出活动" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [soundAlert show];
-        }
-    }
-    
-    for ( NSDictionary *dicParty in [party objectForKey:@"participants"])
-    {
-        numFlogLogout=1;
-        NSLog(@"qqqqqqqqqqqqqqqqqqq%@",[dicParty objectForKey:@"USER_ID"]);
-        NSLog(@"wwwwwwwwwwwwwwwwwww%@",self.userUUid);
-        if ([[dicParty objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID])
-        {
-            
-            NSString* str=@"mac/party/IF00041";
-            NSString* strURL=globalURL(str);
-            NSURL *url=[NSURL URLWithString:strURL];
-            NSLog(@"pidssssssssssss%@",stringPid);
-            ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
-            [rrequest setPostValue:self.userUUid forKey: @"uuid"];
-            [rrequest setPostValue:stringPid forKey: @"p_id"];
-            [rrequest setDelegate:self];
-            [rrequest startAsynchronous];
-            
-        }
-        
-    }
-}
--(void)ButtonClick:(UIButton *)btn
-{
-    
-    NSString *stringStatus=[party objectForKey:@"IN_STATUS"];
-    if ([[stringStatus substringToIndex:1] isEqualToString:@"Y"]) {
-        NSString* str=@"mac/party/IF00053";
-        NSString* strURL=globalURL(str);
-        NSURL* url=[NSURL URLWithString:strURL];
-        ASIFormDataRequest *request =  [ASIFormDataRequest  requestWithURL:url];
-        [request setPostValue:self.userUUid forKey: @"uuid"];
-        [request setPostValue:self.p_id forKey:@"p_id"];
-        //[request setDelegate:self];
-        [request startSynchronous];
-    }
-    else
-    {
-        //btn.selected=!btn.selected;
-        invit=[[InvitViewController alloc]init];
-        invit.temp=2;
-        invit.from_p_id=self.p_id;
-        NSLog(@"输出pid%@",invit.from_p_id);
-        [self.navigationController pushViewController:invit animated:YES];
-    }
-    
 }
 -(void)showFriendView:(UIButton *)btF
 {
@@ -241,21 +222,21 @@
     if ([[party objectForKey:@"P_TYPE"]intValue]==1) {
         friend=[[CheckOneViewController alloc]init];
         friend.spot=4;
-        friend.from_p_id=[party objectForKey:@"P_ID"];
+        friend.from_p_id=self.p_id;
         [self.navigationController pushViewController:friend animated:YES];
         
     }
     else if ([[party objectForKey:@"P_TYPE"]intValue]==2) {
         friend=[[CheckOneViewController alloc]init];
         friend.spot=2;
-        friend.from_p_id=[party objectForKey:@"P_ID"];
+        friend.from_p_id=self.p_id;
         friend.from_c_id=[party objectForKey:@"C_ID"];
         [self.navigationController pushViewController:friend animated:YES];
     }
     else if([[party objectForKey:@"P_TYPE"]intValue]==3){
         friend=[[CheckOneViewController alloc]init];
         friend.spot=2;
-        friend.from_p_id=[party objectForKey:@"P_ID"];
+        friend.from_p_id=self.p_id;
         friend.from_c_id=[party objectForKey:@"C_ID"];
         [self.navigationController pushViewController:friend animated:YES];
     }

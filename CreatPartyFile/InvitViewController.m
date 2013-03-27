@@ -53,13 +53,6 @@
 {
     
     stringFriId=[[NSMutableString alloc]init];
-    for (int i=0; i<[self.friendId count]; i++) {
-        if(i==0)
-            [stringFriId appendFormat:@"%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
-        else
-            [stringFriId appendFormat:@",%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
-    }
-
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
@@ -160,21 +153,27 @@
 //*****************************textViewdelegate*****************************
 -(void)textViewDidChange:(UITextView *)textView
 {
-    self.examineText =  textView.text;
-    if (textView.text.length == 0) {
-        if(temp==1)
-            uilabel.text = @"碰头地点？";
-        else if(temp==2)
-            uilabel.text=@"申请理由...";
-    }else{
-        uilabel.text = @"";
+    if (textView.tag==100) {
+        self.examineText =  textView.text;
+        if (textView.text.length == 0) {
+            if(temp==1)
+                uilabel.text = @"碰头地点？";
+            else if(temp==2)
+                uilabel.text=@"申请理由...";
+        }else{
+            uilabel.text = @"";
+        }
     }
-    
     NSString *num=[NSString stringWithFormat:@"%d",40-[self.examineText length]];
     UILabel *numLabel=(UILabel *)[self.view viewWithTag:101];
     numLabel.text=num;
 }
 
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    if(textView.tag==100){
+        self.examineText=textView.text;
+    };
+}
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if (range.location>=40)
@@ -192,7 +191,7 @@
 -(void)sendAction{
     NSLog(@"send======%@",self.from_p_id);
     NSLog(@"申请理由========%@",self.examineText);
-    if (self.examineText==nil||[self.examineText isEqualToString:@""]) {
+    if (self.examineText==nil) {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"不填写任何申请理由？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"发送", nil];
         [alert show];
     }
@@ -231,7 +230,7 @@
 -(void)rightAction{
     NSLog(@"确定");
     
-    if (self.examineText==nil||self.phone==nil||[self.examineText isEqualToString:@""]||[self.phone isEqualToString:@""]) {
+    if (self.examineText==nil||self.phone==nil) {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"请填写完整信息" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
         [alert show];
     }
@@ -240,7 +239,6 @@
 }
 
 -(void)sendData{
-    NSString *stringnameShare=@"我的新浪微博";
     
     for (int i=0; i<[sinaArray count]; i++) {
         sinaTemp=i;
@@ -250,8 +248,6 @@
         NSString *sex=[[self.sinaArray objectAtIndex:i] objectForKey:@"gender"];
         NSString *location=[[self.sinaArray objectAtIndex:i] objectForKey:@"location"];
         NSString *age=@"0";
-        NSString *tempString=[NSString stringWithFormat:@"@%@",nick];
-        stringnameShare=[stringnameShare stringByAppendingString:tempString];
         NSLog(@"suid==%@,nick==%@,pic=%@,sex=%@,location==%@",suid,nick,pic,sex,location);
         
         NSString* strSina=@"mac/user/IF00106";
@@ -269,43 +265,7 @@
         [rrequest setDelegate:self];
         [rrequest startSynchronous];
     }
-    NSLog(@"friendid 数组%@",friendId);
-    for (int i=0; i<[self.friendId count]; i++) {
-        
-        NSString *tempString=[NSString stringWithFormat:@"@%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_NICK"]];
-        stringnameShare=[stringnameShare stringByAppendingString:tempString];
-        
-    }
-    //    WeiboRequest *request = [[WeiboRequest alloc] initWithDelegate:self];
-    //    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    //    NSString *postPath =@"statuses/update.json";
-    //    //
-    //    NSLog(@"111111111111%@",stringnameShare);
-    //    [params setObject:stringnameShare forKey:@"status"];
-    //    [request postToPath:postPath params:params];
-    NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDir=[path objectAtIndex:0];
-    //NSFileManager *fm=[NSFileManager defaultManager];
-    NSString *imagePath=[docDir stringByAppendingPathComponent:@"mySinaShare.txt"];
-    NSMutableArray *stringmutable=[NSMutableArray arrayWithContentsOfFile:imagePath];
-    NSString *shareSina=[stringmutable objectAtIndex:0];
-    NSLog(@"wwwwwwwwwwwwwwwwwwww%@",shareSina);
-    if ([shareSina isEqualToString:@"YES"]) {
-        NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *docDirs=[paths objectAtIndex:0];
-        NSString *imagePaths=[docDirs stringByAppendingPathComponent:@"mySinaAccesstoken.txt"];
-        NSMutableArray *stringmutables=[NSMutableArray arrayWithContentsOfFile:imagePaths];
-        NSString *accessToken=[stringmutables objectAtIndex:0];
-        NSLog(@"输出新浪的token===%@",accessToken);
-        NSString *stringUrl=@"https://api.weibo.com/2/statuses/update.json";
-        NSLog(@"接口1：：：：%@",stringUrl);
-        NSURL* url=[NSURL URLWithString:stringUrl];
-        ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
-        [rrequest setPostValue:stringnameShare forKey: @"status"];
-        [rrequest setPostValue:accessToken forKey: @"access_token"];
-        [rrequest setDelegate:self];
-        [rrequest startAsynchronous];
-    }
+
     [self sendCreatDate];
 }
 -(void)sendCreatDate{
@@ -316,6 +276,23 @@
                        NSString* strURL=globalURL(str);
                        NSURL* url=[NSURL URLWithString:strURL];
                        ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
+                       
+                       NSLog(@"self.sinaArray=====%@",self.sinaArray);
+                       
+                       for (int i=0; i<[self.friendId count]; i++) {
+                           if(i==0)
+                               [stringFriId appendFormat:@"%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
+                           else
+                               [stringFriId appendFormat:@",%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
+                       }
+                       NSMutableString *sinaFriId=[[NSMutableString alloc]init];
+                       
+                       for (int i=0; i<[sinaArray count]; i++) {
+                           if(i==0)
+                               [sinaFriId appendFormat:@"%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"id"]];
+                           else
+                               [sinaFriId appendFormat:@",%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"id"]];
+                       }
                        
                        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -352,6 +329,7 @@
                        NSLog(@"self.examineText=======%@",self.examineText);
                        NSLog(@"self.phone=======%@",self.phone);
                        NSLog(@"stringFriId====%@",stringFriId);
+                       NSLog(@"sinaFriId====%@",sinaFriId);
                        //rrequest.delegate=self;
                        [rrequest startSynchronous];
                        dispatch_async(dispatch_get_main_queue(), ^{

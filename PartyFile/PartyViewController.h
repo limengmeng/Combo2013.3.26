@@ -41,6 +41,8 @@
     PartyDetialViewController *partyDetialViewController;
     CreatPartyViewController *creatPartyViewController;
     MapViewController *mapControl;
+    UIButton *buttonNew;
+    UIButton *buttonNear;
     
 }
 @property float lat,lng;

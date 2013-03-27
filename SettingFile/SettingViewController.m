@@ -249,22 +249,16 @@
         }
         else if(indexPath.row==2){
             
-            [switchView setBackgroundImage:[UIImage imageNamed:@"Switch_Background"]];
-            [switchView setKnobImage:[UIImage imageNamed:@"Switch_Knob"]];
+            [switchView setBackgroundImage:[UIImage imageNamed:@"backgrey"]];
+            [switchView setKnobImage:[UIImage imageNamed:@"anniu"]];
             [switchView setOverlayImage:nil];
             [switchView setHighlightedKnobImage:nil];
-            [switchView setCornerRadius:0];
+            [switchView setCornerRadius:4];
             [switchView setKnobOffset:CGSizeMake(0, 0)];
-            [switchView setTextShadowOffset:CGSizeMake(0, 0)];
-            [switchView setFont:[UIFont boldSystemFontOfSize:14]];
-            [switchView setTextOffset:CGSizeMake(0, 2) forLabel:RESwitchLabelOn];
-            [switchView setTextOffset:CGSizeMake(3, 2) forLabel:RESwitchLabelOff];
-            [switchView setTextColor:[UIColor blackColor] forLabel:RESwitchLabelOn];
-            //[switchView setTextColor:[UIColor colorWithRed:143/255.0 green:19/255.0 blue:24/255.0 alpha:1] forLabel:RESwitchLabelOff];
             
             switchView.layer.cornerRadius = 4;
-            switchView.layer.borderColor = [UIColor colorWithRed:224/255.0 green:36/255.0 blue:24/255.0 alpha:1].CGColor;
-            switchView.layer.borderWidth = 2;
+            switchView.layer.borderColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:1].CGColor;
+            switchView.layer.borderWidth = 1;
             switchView.layer.masksToBounds = YES;
             [switchView addTarget:self action:@selector(switchViewChanged:) forControlEvents:UIControlEventValueChanged];
             switchView.on = YES;

@@ -18,17 +18,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//    // Override point for customization after application launch.
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
-//    } else {
-//        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
-//    }
-//    self.window.rootViewController = self.viewController;
-//    [self.window makeKeyAndVisible];
-//    return YES;
-    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackOpaque;
     //或者UIStatusBarStyleDefault
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -50,11 +39,13 @@
     [navMessage.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
     [controllers addObject:navMessage];
     
+    
     //partyViewController
     partyViewController=[[PartyViewController alloc] initWithNibName:nil bundle:nil];
     UINavigationController *navParty=[[UINavigationController alloc]initWithRootViewController:self.partyViewController];
     [navParty.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
     [controllers addObject:navParty];
+    
     
     //activeViewController
     activeViewController = [[ActiveViewController alloc] initWithNibName:nil bundle:nil];
@@ -63,14 +54,12 @@
     [navActive.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
     [controllers addObject:navActive];
     
+    
     //forthController
     settingViewController=[[SettingViewController alloc]initWithNibName:nil bundle:nil];
     UINavigationController *navSetting=[[UINavigationController alloc]initWithRootViewController:self.settingViewController];
     [navSetting.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
     
-    UIImage *selectedImage3 = [UIImage imageNamed:@"mmmmm.png"];
-    UIImage *unselectedImage3 = [UIImage imageNamed:@"home_tab_selected"];
-    [settingViewController.tabBarItem setFinishedSelectedImage:selectedImage3 withFinishedUnselectedImage:unselectedImage3];
     
     [controllers addObject:navSetting];
     
@@ -81,33 +70,38 @@
     tbarController.customizableViewControllers=controllers;
     [[tbarController tabBar] setSelectedImageTintColor:[UIColor whiteColor]];
     [[tbarController tabBar] setBackgroundColor:[UIColor whiteColor]];
-    [[tbarController tabBar] setBackgroundImage:[UIImage imageNamed:@"dilan"]];
+    [[tbarController tabBar] setBackgroundImage:[UIImage imageNamed:@"tabbarbackimage.png"]];
     [[tbarController tabBar] selectionIndicatorImage];
     [self.window addSubview:tbarController.view];
-    [[tbarController tabBar] setSelectionIndicatorImage:[UIImage imageNamed:@"touming"]];
+    [[tbarController tabBar] setSelectionIndicatorImage:[UIImage imageNamed:@"zhezao"]];
     [tbarController setSelectedIndex:1];
+    //=============设置照片=================
+    UIImage *selectedImage0 = [UIImage imageNamed:@"messagebalck.png"];
+    UIImage *unselectedImage0 = [UIImage imageNamed:@"messagee.png"];
     
-//    
-//    UIImage *selectedImage0 = [UIImage imageNamed:@"home_tab_default"];
-//    UIImage *unselectedImage0 = [UIImage imageNamed:@"home_tab_selected"];
-//    
-//    UITabBar *tabBar0 = tbarController.tabBar;
-//    UITabBarItem *item0 = [tabBar0.items objectAtIndex:0];
-//    [item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselectedImage0];
-//    UIImage *selectedImage1 = [UIImage imageNamed:@"home_tab_default"];
-//    UIImage *unselectedImage1 = [UIImage imageNamed:@"home_tab_selected"];
-//    UITabBar *tabBar1 = tbarController.tabBar;
-//    UITabBarItem *item1 = [tabBar1.items objectAtIndex:1];
-//    [item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselectedImage1];
-//    UIImage *selectedImage2 = [UIImage imageNamed:@"home_tab_default"];
-//    UIImage *unselectedImage2 = [UIImage imageNamed:@"huodong321@2x.png"];
-//    UITabBar *tabBar2 = tbarController.tabBar;
-//    UITabBarItem *item2 = [tabBar2.items objectAtIndex:2];
-//    [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
-//    
-//    UITabBar *tabBar3 = tbarController.tabBar;
-//    UITabBarItem *item3 = [tabBar3.items objectAtIndex:3];
-//    [item3 setFinishedSelectedImage:selectedImage3 withFinishedUnselectedImage:unselectedImage3];
+    UITabBar *tabBar0 = tbarController.tabBar;
+    UITabBarItem *item0 = [tabBar0.items objectAtIndex:0];
+    [item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselectedImage0];
+    //=============设置照片=================
+    UIImage *selectedImage1 = [UIImage imageNamed:@"partyimage.png"];
+    UIImage *unselectedImage1 = [UIImage imageNamed:@"partyun.png"];
+    UITabBar *tabBar1 = tbarController.tabBar;
+    UITabBarItem *item1 = [tabBar1.items objectAtIndex:1];
+    [item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselectedImage1];
+    //=============设置照片=================
+    UIImage *selectedImage2 = [UIImage imageNamed:@"activeimage.png"];
+    UIImage *unselectedImage2 = [UIImage imageNamed:@"activeimageun.png"];
+    UITabBar *tabBar2 = tbarController.tabBar;
+    UITabBarItem *item2 = [tabBar2.items objectAtIndex:2];
+    [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
+    //
+    //=============设置照片=================
+    UIImage *selectedImage3 = [UIImage imageNamed:@"settingsblack.png"];
+    UIImage *unselectedImage3 = [UIImage imageNamed:@"settingun.png"];
+    [settingViewController.tabBarItem setFinishedSelectedImage:selectedImage3 withFinishedUnselectedImage:unselectedImage3];
+    UITabBar *tabBar3 = tbarController.tabBar;
+    UITabBarItem *item3 = [tabBar3.items objectAtIndex:3];
+    [item3 setFinishedSelectedImage:selectedImage3 withFinishedUnselectedImage:unselectedImage3];
     
     NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docDir=[path objectAtIndex:0];
@@ -121,19 +115,18 @@
     }
     [self.window makeKeyAndVisible];
     
-//    /** 注册推送通知功能, */
-//    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
-//    
-//    //判断程序是不是由推送服务完成的
-//    if (launchOptions) {
-//        NSDictionary* pushNotificationKey = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-//        if (pushNotificationKey) {
-//            [self alertNotice:@"" withMSG:@"这是通过推送窗口启动的程序，你可以在这里处理推送内容" cancleButtonTitle:@"知道了" otherButtonTitle:nil];
-//        }
-//    }
+    //    /** 注册推送通知功能, */
+    //    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+    //
+    //    //判断程序是不是由推送服务完成的
+    //    if (launchOptions) {
+    //        NSDictionary* pushNotificationKey = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    //        if (pushNotificationKey) {
+    //            [self alertNotice:@"" withMSG:@"这是通过推送窗口启动的程序，你可以在这里处理推送内容" cancleButtonTitle:@"知道了" otherButtonTitle:nil];
+    //        }
+    //    }
     
     return YES;
-
 }
 - (void)reachabilityChanged:(NSNotification *)note {
     Reachability* curReach = [note object];
