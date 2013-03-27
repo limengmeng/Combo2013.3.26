@@ -329,12 +329,13 @@
                            NSLog(@"%@",response);
                            NSError* error;
                            if (response!=nil) {
-                               PartyDetialLastViewController *partyDetail=[[PartyDetialLastViewController  alloc]init];
-                               partyDetail.partyTemp=1;
-                               [self.navigationController pushViewController:partyDetail animated:YES];
-                               
                                NSDictionary* bizDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
                                NSLog(@"%@",bizDic);
+                               NSString *stringPid=[bizDic objectForKey:@"p_id"];
+                               PartyDetialLastViewController *partyDetail=[[PartyDetialLastViewController  alloc]init];
+                               partyDetail.partyTemp=1;
+                               partyDetail.p_id=stringPid;
+                               [self.navigationController pushViewController:partyDetail animated:YES];
                                NSString *stringnameShare=@"我的新浪微博";
                                
                                for (int i=0; i<[sinaArray count]; i++) {

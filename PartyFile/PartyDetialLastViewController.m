@@ -31,6 +31,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        partyTemp=0;
     }
     return self;
 }
@@ -258,13 +259,16 @@
     self.navigationController.navigationBar.titleTextAttributes = dict;
     //==========================================================
     self.navigationItem.hidesBackButton=YES;
-    UIButton* backbutton=[UIButton  buttonWithType:UIButtonTypeCustom];
-    backbutton.frame=CGRectMake(0.0, 0.0, 40, 35);
-    [backbutton setImage:[UIImage imageNamed:@"partyback"] forState:UIControlStateNormal];
-    [backbutton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchDown];
-    
-    UIBarButtonItem* goback=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
-    self.navigationItem.leftBarButtonItem=goback;
+    if (partyTemp==0) {
+        UIButton* backbutton=[UIButton  buttonWithType:UIButtonTypeCustom];
+        backbutton.frame=CGRectMake(0.0, 0.0, 40, 35);
+        [backbutton setImage:[UIImage imageNamed:@"partyback"] forState:UIControlStateNormal];
+        [backbutton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchDown];
+        
+        UIBarButtonItem* goback=[[UIBarButtonItem alloc]initWithCustomView:backbutton];
+        self.navigationItem.leftBarButtonItem=goback;
+    }
+
     UIButton* homeButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [homeButton setImage:[UIImage imageNamed:@"homeReturn"] forState:UIControlStateNormal];
     homeButton.frame=CGRectMake(0.0, 0.0, 44, 35);
