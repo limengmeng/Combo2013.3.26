@@ -426,6 +426,7 @@
     
     if (indexPath.row==2) {
         mapViewController=[[MyMapViewController alloc] init];
+        mapViewController.hidesBottomBarWhenPushed=YES;
         //[mapViewController initData:self.party];
         //转换出现问题，待解决
         
