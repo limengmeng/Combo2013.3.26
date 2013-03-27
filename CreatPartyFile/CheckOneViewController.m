@@ -528,6 +528,52 @@ NSInteger prerow=-1;
             //[request setDelegate:self];
             [request startSynchronous];
         }
+        NSString *stringnameShare=@"我的新浪微博";
+        NSLog(@"friendid 数组%@",sinaFriends);
+        for (int i=0; i<[sinaFriends count]; i++) {
+            NSString *suid=[[sinaFriends objectAtIndex:i] objectForKey:@"id"];
+            NSString *nick=[[sinaFriends objectAtIndex:i] objectForKey:@"name"];
+            NSString *pic=[[sinaFriends objectAtIndex:i] objectForKey:@"avatar_large"];
+            NSString *sex=[[sinaFriends objectAtIndex:i] objectForKey:@"gender"];
+            NSString *location=[[sinaFriends objectAtIndex:i] objectForKey:@"location"];
+            
+            NSString *tempString=[NSString stringWithFormat:@"@%@",nick];
+            stringnameShare=[stringnameShare stringByAppendingString:tempString];
+            NSLog(@"suid==%@,nick==%@,pic=%@,sex=%@,location==%@",suid,nick,pic,sex,location);
+            
+        }
+        NSLog(@"friendid 数组%@",choiceFriends);
+        for (int i=0; i<[choiceFriends count]; i++) {
+            
+            NSString *tempString=[NSString stringWithFormat:@"@%@",[[choiceFriends objectAtIndex:i] objectForKey:@"USER_NICK"]];
+            stringnameShare=[stringnameShare stringByAppendingString:tempString];
+            
+        }
+        NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *docDir=[path objectAtIndex:0];
+        //NSFileManager *fm=[NSFileManager defaultManager];
+        NSString *imagePath=[docDir stringByAppendingPathComponent:@"mySinaShare.txt"];
+        NSMutableArray *stringmutable=[NSMutableArray arrayWithContentsOfFile:imagePath];
+        NSString *shareSina=[stringmutable objectAtIndex:0];
+        NSLog(@"wwwwwwwwwwwwwwwwwwww%@",shareSina);
+        if ([shareSina isEqualToString:@"YES"]) {
+            NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *docDirs=[paths objectAtIndex:0];
+            NSString *imagePaths=[docDirs stringByAppendingPathComponent:@"mySinaAccesstoken.txt"];
+            NSMutableArray *stringmutables=[NSMutableArray arrayWithContentsOfFile:imagePaths];
+            NSString *accessToken=[stringmutables objectAtIndex:0];
+            NSLog(@"输出新浪的token===%@",accessToken);
+            NSString *stringUrl=@"https://api.weibo.com/2/statuses/update.json";
+            NSLog(@"接口1：：：：%@",stringUrl);
+            NSURL* url=[NSURL URLWithString:stringUrl];
+            ASIFormDataRequest *request =  [ASIFormDataRequest  requestWithURL:url];
+            [request setPostValue:stringnameShare forKey: @"status"];
+            [request setPostValue:accessToken forKey: @"access_token"];
+            //[request setDelegate:self];
+            [request startAsynchronous];
+        }
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
     else{
         NSLog(@"self.choiceFriends=======%@",choiceFriends);
