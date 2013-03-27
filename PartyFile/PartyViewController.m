@@ -236,7 +236,7 @@ int itttt=0;
     //=====================创建=========================================================
     UIButton* creatButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [creatButton setImage:[UIImage imageNamed:@"make"] forState:UIControlStateNormal];
-    creatButton.frame=CGRectMake(0.0, 0.0, 50, 31);
+    creatButton.frame=CGRectMake(0.0, 0.0, 44, 35);
     [creatButton addTarget:self action:@selector(CreateNewAct) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:creatButton];
     UITableView* table=[[UITableView alloc]initWithFrame:CGRectMake(0, 32, 320, mainscreenhight-32) style:UITableViewStyleGrouped];
