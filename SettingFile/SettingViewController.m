@@ -25,13 +25,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        //self.title=@"设置";
-        UIImage *selectedImage = [UIImage imageNamed:@"shezhizi@2x.png"];
-        UIImage *unselectedImage = [UIImage imageNamed:@"shezhi@2x.png"];
-        
-        UITabBar *tabBar = self.tabBarController.tabBar;
-        UITabBarItem *item1 = [tabBar.items objectAtIndex:3];
-        [item1 setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedImage];
         sinaFlag=1;
     }
     return self;

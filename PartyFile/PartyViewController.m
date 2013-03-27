@@ -24,7 +24,6 @@ int itttt=0;
     if (self) {
         // Custom initialization
         //self.title=@"活动";
-        self.tabBarController.view.backgroundColor=[UIColor clearColor];
     }
     return self;
 }
