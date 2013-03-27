@@ -27,7 +27,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title=@"事件";
+        //self.title=@"事件";
     }
     return self;
 }
@@ -46,12 +46,34 @@
 {
     [self getUUidForthis];
     [super viewWillAppear:animated];
+    //========附近和最新=========================
+    buttonNear=[UIButton buttonWithType:UIButtonTypeCustom];
+    buttonNear.frame=CGRectMake(8, 27, 46, 30);
+    buttonNear.titleLabel.text=@"活动";
+    buttonNear.tag=201;
+    [buttonNear setBackgroundImage:[UIImage imageNamed:@"activity"] forState:UIControlStateNormal];
+    [buttonNear setBackgroundImage:[UIImage imageNamed:@"activityai"] forState:UIControlStateSelected];
+    [buttonNear addTarget:self action:@selector(mesActionbutt:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonNear setSelected:YES];
+    buttonNew=[UIButton buttonWithType:UIButtonTypeCustom];
+    buttonNew.frame=CGRectMake(54, 27, 46, 30);
+    buttonNew.titleLabel.text=@"地点";
+    buttonNew.tag=202;
+    [buttonNew setBackgroundImage:[UIImage imageNamed:@"locale"] forState:UIControlStateNormal];
+    [buttonNew setBackgroundImage:[UIImage imageNamed:@"localeai"] forState:UIControlStateSelected];
+    [buttonNew addTarget:self action:@selector(mesActionbutton:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonNew setSelected:NO];
+    [self.tabBarController.view addSubview:buttonNew];
+    [self.tabBarController.view addSubview:buttonNear];
+    
     
 }
 
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [buttonNew removeFromSuperview];
+    [buttonNear removeFromSuperview];
 }
 
 
@@ -78,23 +100,8 @@
     
     
     
-    //===================活动和地点选择按钮==============================================
-//    SimpleSwitch *swith =[[SimpleSwitch alloc] initWithFrame:CGRectMake(24, 34, 14, 25)];
-//    [self.view addSubview:swith];
-    
-    SimpleSwitch *swith2 =[[SimpleSwitch alloc] initWithFrame:CGRectMake(24, 84, 100, 25)];
-    swith2.titleOn = @"地点";
-    swith2.titleOff = @"活动";
-    swith2.on = NO;
-    swith2.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"onback"]];
-    swith2.knobColor = [UIColor colorWithRed:0.341 green:0.983 blue:0.13 alpha:1];
-    swith2.fillColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1];
-    [swith2 addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
-    //[self.view addSubview:swith2];
     segment=0;
     flag=0;
-    UIBarButtonItem *segmentBar=[[UIBarButtonItem alloc] initWithCustomView:swith2];
-    self.navigationItem.leftBarButtonItem=segmentBar;
     
     acview=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     acview.frame=CGRectMake(150, mainscreenhight/2.0, 20, 20);
@@ -114,7 +121,7 @@
     [request setDidFailSelector:@selector(requestDidFailed:)];
     [request startAsynchronous];
     
-   
+    
     
     //==========================刷新===============================
     _slimeView=[[SRRefreshView alloc] init];
@@ -122,51 +129,74 @@
     _slimeView.upInset=20;
     [tableview addSubview:_slimeView];
 }
+-(void)mesActionbutton:(UIButton *)btn
+{
+    //=====地点====================
+    [buttonNear setSelected:NO];
+    [buttonNew setSelected:YES];
+    NSLog(@"11111111");
+    [[ASIHTTPRequest sharedQueue] cancelAllOperations];
+    //中断之前的网络请求
+    flag=0;
+    segment=1;
+    flag=0;
+    [self.tableview reloadData];
+    NSString* str=[NSString stringWithFormat:@"mac/party/IF00029?uuid=%@&&from=1&&to=5",userUUid];
+    NSString *stringUrl=globalURL(str);
+    NSLog(@"获取热门地点列表,接口29:%@",stringUrl);
+    NSURL* url=[NSURL URLWithString:stringUrl];
+    
+    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+    request.delegate = self;
+    request.shouldAttemptPersistentConnection = NO;
+    [request setValidatesSecureCertificate:NO];
+    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+    [request setDidFailSelector:@selector(requestDidFailed:)];
+    [request startAsynchronous];
+    
+}
+-(void)mesActionbutt:(UIButton *)btn
+{
+    //======活动====================
+    [buttonNear setSelected:YES];
+    [buttonNew setSelected:NO];
+    [[ASIHTTPRequest sharedQueue] cancelAllOperations];
+    //中断之前的网络请求
+    flag=0;
+    segment=0;
+    [self.tableview reloadData];
+    flag=0;
+    //接口IF00028
+    NSString* str=[NSString stringWithFormat:@"mac/party/IF00028?uuid=%@&&from=1&&to=5",userUUid];
+    NSString *stringUrl=globalURL(str);
+    NSLog(@"获取活动列表,接口28:%@",stringUrl);
+    NSURL* url=[NSURL URLWithString:stringUrl];
+    
+    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+    request.delegate = self;
+    request.shouldAttemptPersistentConnection = NO;
+    [request setValidatesSecureCertificate:NO];
+    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+    [request setDidFailSelector:@selector(requestDidFailed:)];
+    [request startAsynchronous];
+    
+    
+}
+
 -(void)valueChanged:(id)sender
 {
     NSLog(@"switch state: %d",((SimpleSwitch*)sender).on);
     [[ASIHTTPRequest sharedQueue] cancelAllOperations];
-        //中断之前的网络请求
+    //中断之前的网络请求
     flag=0;
     self.tableview.contentOffset=CGPointMake(0.0, 0.0);
     if (((SimpleSwitch*)sender).on==1) {
-        segment=1;
-        flag=0;
-        [self.tableview reloadData];
-        NSString* str=[NSString stringWithFormat:@"mac/party/IF00029?uuid=%@&&from=1&&to=5",userUUid];
-        NSString *stringUrl=globalURL(str);
-        NSLog(@"获取热门地点列表,接口29:%@",stringUrl);
-        NSURL* url=[NSURL URLWithString:stringUrl];
-
-        ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-        request.delegate = self;
-        request.shouldAttemptPersistentConnection = NO;
-        [request setValidatesSecureCertificate:NO];
-        [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-        [request setDidFailSelector:@selector(requestDidFailed:)];
-        [request startAsynchronous];
-
-    }
-    if (((SimpleSwitch*)sender).on==0) {
-        segment=0;
-        [self.tableview reloadData];
-        flag=0;
-        //接口IF00028
-        NSString* str=[NSString stringWithFormat:@"mac/party/IF00028?uuid=%@&&from=1&&to=5",userUUid];
-        NSString *stringUrl=globalURL(str);
-        NSLog(@"获取活动列表,接口28:%@",stringUrl);
-        NSURL* url=[NSURL URLWithString:stringUrl];
-
-        ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-        request.delegate = self;
-        request.shouldAttemptPersistentConnection = NO;
-        [request setValidatesSecureCertificate:NO];
-        [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-        [request setDidFailSelector:@selector(requestDidFailed:)];
-        [request startAsynchronous];
         
     }
-
+    if (((SimpleSwitch*)sender).on==0) {
+        
+    }
+    
 }
 -(void)requestDidFailed:(ASIHTTPRequest *)request
 {
@@ -231,7 +261,7 @@
 //        NSString *stringUrl=globalURL(str);
 //        NSLog(@"获取热门地点列表,接口29:%@",stringUrl);
 //        NSURL* url=[NSURL URLWithString:stringUrl];
-//        
+//
 //        ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
 //        request.delegate = self;
 //        request.shouldAttemptPersistentConnection = NO;
@@ -239,7 +269,7 @@
 //        [request setDefaultResponseEncoding:NSUTF8StringEncoding];
 //        [request setDidFailSelector:@selector(requestDidFailed:)];
 //        [request startAsynchronous];
-//        
+//
 //    }
 //    if (segmentedControl.selectedIndex==0) {
 //        segment=0;
@@ -250,7 +280,7 @@
 //        NSString *stringUrl=globalURL(str);
 //        NSLog(@"获取活动列表,接口28:%@",stringUrl);
 //        NSURL* url=[NSURL URLWithString:stringUrl];
-//        
+//
 //        ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
 //        request.delegate = self;
 //        request.shouldAttemptPersistentConnection = NO;
@@ -258,7 +288,7 @@
 //        [request setDefaultResponseEncoding:NSUTF8StringEncoding];
 //        [request setDidFailSelector:@selector(requestDidFailed:)];
 //        [request startAsynchronous];
-//        
+//
 //    }
 //}
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -287,7 +317,7 @@
         UILabel* pnum;
         UILabel* label;
         
-        imageview=[[UIImageView alloc]initWithFrame:CGRectMake(7, -5, 109, 154)];
+        imageview=[[UIImageView alloc]initWithFrame:CGRectMake(6, -4, 109, 154)];
         [cell.contentView addSubview:imageview];
         
         UIImageView* labelpic=[[UIImageView alloc]initWithFrame:CGRectMake(14, -4, 40, 27)];
@@ -300,7 +330,7 @@
         label.font=[UIFont systemFontOfSize:10.0];
         label.textColor=[UIColor whiteColor];
         [cell.contentView addSubview:label];
-       
+        
         
         fnum=[[UILabel alloc]initWithFrame:CGRectMake(187, 139, 50, 21)];
         fnum.backgroundColor=[UIColor clearColor];
@@ -330,7 +360,7 @@
         time.multipleTouchEnabled=NO;
         time.userInteractionEnabled=NO;
         [cell.contentView addSubview:time];
-       
+        
         host=[[UILabel alloc]initWithFrame:CGRectMake(142, 51, 80, 21)];
         host.backgroundColor=[UIColor clearColor];
         host.textColor=[UIColor colorWithRed:99.0/255 green:99.0/255 blue:99.0/255 alpha:1];
@@ -411,14 +441,14 @@
         [cell.contentView addSubview:partynum];
         
         imageview=[[UIImageView alloc]initWithFrame:CGRectMake(2,23, 296, 143)];
-         NSURL* url=[NSURL URLWithString:[dict objectForKey:@"C_PIC"]];
+        NSURL* url=[NSURL URLWithString:[dict objectForKey:@"C_PIC"]];
         [imageview setImageWithURL: url refreshCache:NO placeholderImage:[UIImage imageNamed:@"didian"]];
         [cell.contentView addSubview:imageview];
-       
+        
         UIImageView* shadeImage=[[UIImageView alloc]initWithFrame:CGRectMake(2, 23, 296, 143)];
         shadeImage.image=[UIImage imageNamed:@"didianzao"];
         [cell.contentView addSubview:shadeImage];
-       
+        
         title=[[UILabel alloc]initWithFrame:CGRectMake(10, -2, 222, 25)];
         title.backgroundColor=[UIColor clearColor];
         title.textColor=[UIColor colorWithRed:83.0/255 green:83.0/255 blue:83.0/255 alpha:1];
@@ -438,7 +468,7 @@
         [cell.contentView addSubview:label];
         
         
-               
+        
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         return cell;
         
@@ -602,11 +632,11 @@
     if ((self.tableview.contentOffset.y+mainscreenhight-self.tableview.contentSize.height>0)&&(self.tableview.contentSize.height>0)) {
         if (segment==0) {
             if (isLoading==NO) {
-            //NSLog(@"scrollView.contentOffset.y-mainscreenhight-scrollView.bounds.size.height>0加载更多");
-            [self ACTclickmore];
-            isLoading=YES;   
-           }
-
+                //NSLog(@"scrollView.contentOffset.y-mainscreenhight-scrollView.bounds.size.height>0加载更多");
+                [self ACTclickmore];
+                isLoading=YES;
+            }
+            
         }
         else
         {
@@ -615,7 +645,7 @@
                 [self ADDRclickmore];
                 isLoading=YES;
             }
-
+            
         }
         
     }

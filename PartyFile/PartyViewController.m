@@ -23,8 +23,8 @@ int itttt=0;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title=@"活动";
-               self.tabBarController.view.backgroundColor=[UIColor clearColor];
+        //self.title=@"活动";
+        self.tabBarController.view.backgroundColor=[UIColor clearColor];
     }
     return self;
 }
@@ -40,7 +40,7 @@ int itttt=0;
     [ReliableParty setSelected:NO];
     [MyParty setSelected:NO];
     if (segmentNum==0) {
-        NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+        NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
         NSString* strURL=globalURL(str);
         NSLog(@"全部派对，按照附近距离排序：%@",strURL);
         NSURL* url=[NSURL URLWithString:strURL];
@@ -54,7 +54,7 @@ int itttt=0;
     }
     else
     {
-        NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+        NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=2&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
         NSString* strURL=globalURL(str);
         NSLog(@"全部派对,按照最新时间排序:%@",strURL);
         NSURL* url=[NSURL URLWithString:strURL];
@@ -80,7 +80,7 @@ int itttt=0;
     [MyParty setSelected:NO];
     
     if (segmentNum==0) {
-        NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+        NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
         NSString* strURL=globalURL(str);
         NSLog(@"靠谱派对，距离排序:%@",strURL);
         NSURL* url=[NSURL URLWithString:strURL];
@@ -94,7 +94,7 @@ int itttt=0;
     }
     else
     {
-        NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+        NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
         NSString* strURL=globalURL(str);
         NSLog(@"靠谱派对，时间排序:%@",strURL);
         NSURL* url=[NSURL URLWithString:strURL];
@@ -119,7 +119,7 @@ int itttt=0;
     [ReliableParty setSelected:NO];
     [MyParty setSelected:YES];
     if (segmentNum==0) {
-        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
         NSString* strURL=globalURL(str);
         NSLog(@"我的派对，距离排序:%@",strURL);
         NSURL* url=[NSURL URLWithString:strURL];
@@ -133,7 +133,7 @@ int itttt=0;
     }
     else
     {
-        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
         NSString* strURL=globalURL(str);
         NSLog(@"我的派对，时间排序:%@",strURL);
         NSURL* url=[NSURL URLWithString:strURL];
@@ -180,7 +180,6 @@ int itttt=0;
     [buttonNew setSelected:NO];
     [self.tabBarController.view addSubview:buttonNew];
     [self.tabBarController.view addSubview:buttonNear];
-
     
 }
 -(void)viewDidDisappear:(BOOL)animated
@@ -211,32 +210,13 @@ int itttt=0;
     sumArray =[[NSMutableArray alloc]init];
     // Do any additional setup after loading the view from its nib.
     sumArray=[[NSMutableArray alloc]init];
-    
-    SimpleSwitch *swith =[[SimpleSwitch alloc] initWithFrame:CGRectMake(24, 34, 14, 25)];
-    [self.view addSubview:swith];
-    
-    SimpleSwitch *swith2 =[[SimpleSwitch alloc] initWithFrame:CGRectMake(24, 84, 100, 25)];
-    swith2.titleOn = @"附近";
-    swith2.titleOff = @"最新";
-    swith2.on = NO;
-    swith2.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"onback"]];
-    swith2.knobColor = [UIColor colorWithRed:0.341 green:0.983 blue:0.13 alpha:1];
-    swith2.fillColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1];
-    [swith2 addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
-    //[self.view addSubview:swith2];
-    segmentBar=[[UIBarButtonItem alloc] initWithCustomView:swith2];
-    self.navigationItem.leftBarButtonItem=segmentBar;
-
     ChoseNum=1;
     segmentNum=0;
     flag=0;
-    
-    
-    
     //=====================创建=========================================================
     UIButton* creatButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [creatButton setImage:[UIImage imageNamed:@"make"] forState:UIControlStateNormal];
-    creatButton.frame=CGRectMake(0.0, 0.0, 44, 35);
+    creatButton.frame=CGRectMake(0.0, 0.0, 50, 31);
     [creatButton addTarget:self action:@selector(CreateNewAct) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:creatButton];
     UITableView* table=[[UITableView alloc]initWithFrame:CGRectMake(0, 32, 320, mainscreenhight-32) style:UITableViewStyleGrouped];
@@ -273,104 +253,30 @@ int itttt=0;
     [Allparty addTarget:self action:@selector(allButtonPressed) forControlEvents:UIControlEventTouchDown];
     [ReliableParty addTarget:self action:@selector(realiButtonPressed) forControlEvents:UIControlEventTouchDown];
     [MyParty addTarget:self action:@selector(myButtonPressed) forControlEvents:UIControlEventTouchDown];
-
+    
     PreY=0.0;
     
-    
+    //========下拉刷新=============================
     _slimeView=[[SRRefreshView alloc] init];
     _slimeView.delegate=self;
     _slimeView.upInset=10;
     [tableViewParty addSubview:_slimeView];
-    [self requestDate];
+    
     //==========================
+    
 }
 -(void)mesActionbutton:(UIButton *)btn
 {
-    [buttonNear setSelected:NO];
-    [buttonNew setSelected:YES];
-    NSLog(@"11111111");
-}
--(void)mesActionbutt:(UIButton *)btn
-{
-    [buttonNear setSelected:YES];
-    [buttonNew setSelected:NO];
-    NSLog(@"2222222");
-
-}
-
-//=============经纬度代理方法=========================================
--(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
-    //    log.text=[NSString stringWithFormat:@"%g",newLocation.coordinate.longitude];
-    //    lat.text=[NSString stringWithFormat:@"%g",newLocation.coordinate.latitude];
-    lng=newLocation.coordinate.longitude;
-    lat=newLocation.coordinate.latitude;
-    NSLog(@"获取你的经纬度：：：：：：：：经度:%g      纬度:%g",lng,lat);  
-}
-
-
--(void)valueChanged:(id)sender
-{
-    NSLog(@"switch state: %d",((SimpleSwitch*)sender).on);
-    flag=0;
-    
-    if (((SimpleSwitch*)sender).on==0) {
-        segmentNum=0;
-        [self.tableViewParty reloadData];
-        self.tableViewParty.contentOffset=CGPointMake(0.0, 0.0);
-        if (ChoseNum==1) {
-            NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
-            NSString* strURL=globalURL(str);
-            NSLog(@"全部派对，按照最新排序：%@",strURL);
-            NSURL* url=[NSURL URLWithString:strURL];
-            ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-            request.delegate = self;
-            request.shouldAttemptPersistentConnection = NO;
-            [request setValidatesSecureCertificate:NO];
-            [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-            [request setDidFailSelector:@selector(requestDidFailed:)];
-            [request startAsynchronous];
-        }
-        else
-        {
-            if (ChoseNum==2) {
-                NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
-                NSString* strURL=globalURL(str);
-                NSLog(@"靠谱派对，最新排序:%@",strURL);
-                NSURL* url=[NSURL URLWithString:strURL];
-                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-                request.delegate = self;
-                request.shouldAttemptPersistentConnection = NO;
-                [request setValidatesSecureCertificate:NO];
-                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-                [request setDidFailSelector:@selector(requestDidFailed:)];
-                [request startAsynchronous];
-                
-            }
-            else
-            {
-                NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
-                NSString* strURL=globalURL(str);
-                NSLog(@"我的派对，最新排序:%@",strURL);
-                NSURL* url=[NSURL URLWithString:strURL];
-                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-                request.delegate = self;
-                request.shouldAttemptPersistentConnection = NO;
-                [request setValidatesSecureCertificate:NO];
-                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-                [request setDidFailSelector:@selector(requestDidFailed:)];
-                [request startAsynchronous];
-                
-            }
-        }
-    }
-    if (((SimpleSwitch*)sender).on==1) {
+    //=====附近========================
+    NSLog(@"wwwwwwwwwwwwwww%f,%f",self.lat,self.lng);
+    if (self.lat!=0||self.lng!=0) {
         self.tableViewParty.contentOffset=CGPointMake(0.0, 0.0);
         segmentNum=1;
         [self.tableViewParty reloadData];
         flag=0;
         if(ChoseNum==1)
         {
-            NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+            NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=2&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
             NSString* strURL=globalURL(str);
             NSLog(@"全部派对,按照距离排序:%@",strURL);
             NSURL* url=[NSURL URLWithString:strURL];
@@ -384,7 +290,7 @@ int itttt=0;
         }
         else
             if (ChoseNum==2) {
-                NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
                 NSString* strURL=globalURL(str);
                 NSLog(@"靠谱派对，距离排序:%@",strURL);
                 NSURL* url=[NSURL URLWithString:strURL];
@@ -400,7 +306,7 @@ int itttt=0;
             else
             {
                 if (ChoseNum==3) {
-                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
                     NSString* strURL=globalURL(str);
                     NSLog(@"我的派对，距离排序:%@",strURL);
                     NSURL* url=[NSURL URLWithString:strURL];
@@ -413,13 +319,84 @@ int itttt=0;
                     [request startAsynchronous];
                 }
             }
+        
     }
-
+    [buttonNear setSelected:NO];
+    [buttonNew setSelected:YES];
+    NSLog(@"11111111");
 }
+-(void)mesActionbutt:(UIButton *)btn
+{
+    //======最新========================
+    [buttonNear setSelected:YES];
+    [buttonNew setSelected:NO];
+    NSLog(@"2222222");
+    if (self.lng!=0||self.lat!=0) {
+        segmentNum=0;
+        [self.tableViewParty reloadData];
+        self.tableViewParty.contentOffset=CGPointMake(0.0, 0.0);
+        if (ChoseNum==1) {
+            NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
+            NSString* strURL=globalURL(str);
+            NSLog(@"全部派对，按照最新排序：%@",strURL);
+            NSURL* url=[NSURL URLWithString:strURL];
+            ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+            request.delegate = self;
+            request.shouldAttemptPersistentConnection = NO;
+            [request setValidatesSecureCertificate:NO];
+            [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+            [request setDidFailSelector:@selector(requestDidFailed:)];
+            [request startAsynchronous];
+        }
+        else
+        {
+            if (ChoseNum==2) {
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
+                NSString* strURL=globalURL(str);
+                NSLog(@"靠谱派对，最新排序:%@",strURL);
+                NSURL* url=[NSURL URLWithString:strURL];
+                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                request.delegate = self;
+                request.shouldAttemptPersistentConnection = NO;
+                [request setValidatesSecureCertificate:NO];
+                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                [request setDidFailSelector:@selector(requestDidFailed:)];
+                [request startAsynchronous];
+                
+            }
+            else
+            {
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
+                NSString* strURL=globalURL(str);
+                NSLog(@"我的派对，最新排序:%@",strURL);
+                NSURL* url=[NSURL URLWithString:strURL];
+                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                request.delegate = self;
+                request.shouldAttemptPersistentConnection = NO;
+                [request setValidatesSecureCertificate:NO];
+                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                [request setDidFailSelector:@selector(requestDidFailed:)];
+                [request startAsynchronous];
+                
+            }
+        }
+    }
+}
+
+//=============经纬度代理方法=========================================
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    //    log.text=[NSString stringWithFormat:@"%g",newLocation.coordinate.longitude];
+    //    lat.text=[NSString stringWithFormat:@"%g",newLocation.coordinate.latitude];
+    lng=newLocation.coordinate.longitude;
+    lat=newLocation.coordinate.latitude;
+    NSLog(@"获取你的经纬度：：：：：：：：经度:%g      纬度:%g",lng,lat);
+    [self requestDate];
+}
+
 //===========多线程==============================================
 -(void)requestDate
 {
-    NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+    NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
     NSString *stringUrl=globalURL(str);
     NSLog(@"接口1：：：：%@",stringUrl);
     NSURL* url=[NSURL URLWithString:stringUrl];
@@ -483,6 +460,7 @@ int itttt=0;
 {
     NSLog(@"跳到地图");
     mapControl=[[MapViewController alloc]init];
+    mapControl.hidesBottomBarWhenPushed=YES;
     mapControl.title=@"创建派对地点";
     mapControl.type=@"1";
     mapControl.map_Temp=1;
@@ -570,10 +548,10 @@ int itttt=0;
     [cell.contentView addSubview:timeImage];
     
     [cell.contentView addSubview:imagePICView0];
-   
+    
     [cell.contentView addSubview:imagePICView4];
     [cell.contentView addSubview:imagePICView5];
-
+    
     lable1=[[UILabel alloc]initWithFrame:CGRectMake(30, 71, 190, 27)];
     lable1.textColor=[UIColor colorWithRed:99.0/255 green:99.0/255 blue:99.0/255 alpha:1];
     lable1.font=[UIFont systemFontOfSize:12];
@@ -636,14 +614,14 @@ int itttt=0;
         }
         else
         {
-
+            
             cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"partylabelyellow"]];
             
-
+            
         }
     }
     lable7.text=[dict objectForKey:@"P_TITLE"];
-   
+    
     
     NSString* str1=[NSString stringWithFormat:@"%@",[dict objectForKey:@"P_DISTANCE"]];
     int lengthstr=str1.length;
@@ -682,7 +660,6 @@ int itttt=0;
     if ([[[user objectForKey:@"USER_SEX"]substringToIndex:1] isEqualToString:@"F"]) {
         imagePICView5.image=[UIImage imageNamed:@"Partyfemale"];
     }
-    NSMutableArray *mutableArray=[[NSMutableArray alloc]init];
     //===============联合创建人名字和照片======================================
     NSDictionary * mutableArrayDic=[dict objectForKey:@"Users"];
     NSMutableString *stringNameAll=[[NSMutableString alloc]init];
@@ -753,7 +730,7 @@ int itttt=0;
         if (segmentNum==0) {
             //加载更多,附近
             if (ChoseNum==1) {
-                NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=%f&&lng=%f&&from=%d",userUUid,self.lat,self.lng,self.sumArray.count+1];
                 NSString* strURL=globalURL(str);
                 NSLog(@"全部派对，按照附近距离排序：%@",strURL);
                 NSURL* url=[NSURL URLWithString:strURL];
@@ -769,7 +746,7 @@ int itttt=0;
             else
             {
                 if (ChoseNum==2) {
-                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=%f&&lng=%f&&from=%d",userUUid,self.lat,self.lng,self.sumArray.count+1];
                     NSString* strURL=globalURL(str);
                     NSLog(@"靠谱派对，距离排序:%@",strURL);
                     NSURL* url=[NSURL URLWithString:strURL];
@@ -784,7 +761,7 @@ int itttt=0;
                 }
                 else
                     if (ChoseNum==3) {
-                        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=%f&&lng=%f&&from=%d",userUUid,self.lat,self.lng,self.sumArray.count+1];
                         NSString* strURL=globalURL(str);
                         NSLog(@"我的派对，距离排序:%@",strURL);
                         NSURL* url=[NSURL URLWithString:strURL];
@@ -804,7 +781,7 @@ int itttt=0;
             
             //加载更多,附近
             if (ChoseNum==1) {
-                NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=2&&lat=%f&&lng=%f&&from=%d",userUUid,self.lat,self.lng,self.sumArray.count+1];
                 NSString* strURL=globalURL(str);
                 NSLog(@"全部派对，按照附近距离排序：%@",strURL);
                 NSURL* url=[NSURL URLWithString:strURL];
@@ -820,7 +797,7 @@ int itttt=0;
             else
             {
                 if (ChoseNum==2) {
-                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=%f&&lng=%f&&from=%d",userUUid,self.lat,self.lng,self.sumArray.count+1];
                     NSString* strURL=globalURL(str);
                     NSLog(@"靠谱派对，距离排序:%@",strURL);
                     NSURL* url=[NSURL URLWithString:strURL];
@@ -835,7 +812,7 @@ int itttt=0;
                 }
                 else
                     if (ChoseNum==3) {
-                        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=%f&&lng=%f&&from=%d",userUUid,self.lat,self.lng,self.sumArray.count+1];
                         NSString* strURL=globalURL(str);
                         NSLog(@"我的派对，距离排序:%@",strURL);
                         NSURL* url=[NSURL URLWithString:strURL];
@@ -914,7 +891,7 @@ int itttt=0;
             isLoading=YES;
         }
     }
-
+    
 }
 
 
@@ -924,29 +901,14 @@ int itttt=0;
 {
     flag=0;
     //====================获取数据================================
-    if (segmentNum==0) {
-        //加载更多,附近
-        if (ChoseNum==1) {
-            //
-            NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
-            NSString* strURL=globalURL(str);
-            NSLog(@"全部派对，按照附近距离排序：%@",strURL);
-            NSURL* url=[NSURL URLWithString:strURL];
-            ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-            request.delegate = self;
-            request.shouldAttemptPersistentConnection = NO;
-            [request setValidatesSecureCertificate:NO];
-            [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-            [request setDidFailSelector:@selector(requestDidFailed:)];
-            [request startAsynchronous];
-            
-        }
-        else
-        {
-            if (ChoseNum==2) {
-                NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+    if (self.lng!=0||self.lat!=0) {
+        if (segmentNum==0) {
+            //加载更多,附近
+            if (ChoseNum==1) {
+                //
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
                 NSString* strURL=globalURL(str);
-                NSLog(@"靠谱派对，距离排序:%@",strURL);
+                NSLog(@"全部派对，按照附近距离排序：%@",strURL);
                 NSURL* url=[NSURL URLWithString:strURL];
                 ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
                 request.delegate = self;
@@ -958,10 +920,11 @@ int itttt=0;
                 
             }
             else
-                if (ChoseNum==3) {
-                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+            {
+                if (ChoseNum==2) {
+                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
                     NSString* strURL=globalURL(str);
-                    NSLog(@"我的派对，距离排序:%@",strURL);
+                    NSLog(@"靠谱派对，距离排序:%@",strURL);
                     NSURL* url=[NSURL URLWithString:strURL];
                     ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
                     request.delegate = self;
@@ -970,64 +933,90 @@ int itttt=0;
                     [request setDefaultResponseEncoding:NSUTF8StringEncoding];
                     [request setDidFailSelector:@selector(requestDidFailed:)];
                     [request startAsynchronous];
+                    
                 }
+                else
+                    if (ChoseNum==3) {
+                        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
+                        NSString* strURL=globalURL(str);
+                        NSLog(@"我的派对，距离排序:%@",strURL);
+                        NSURL* url=[NSURL URLWithString:strURL];
+                        ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                        request.delegate = self;
+                        request.shouldAttemptPersistentConnection = NO;
+                        [request setValidatesSecureCertificate:NO];
+                        [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                        [request setDidFailSelector:@selector(requestDidFailed:)];
+                        [request startAsynchronous];
+                    }
+            }
+        }
+        else
+        {
+            //加载更多，所有
+            
+            //加载更多,附近
+            if (ChoseNum==1) {
+                //
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
+                NSString* strURL=globalURL(str);
+                NSLog(@"全部派对，按照附近距离排序：%@",strURL);
+                NSURL* url=[NSURL URLWithString:strURL];
+                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                request.delegate = self;
+                request.shouldAttemptPersistentConnection = NO;
+                [request setValidatesSecureCertificate:NO];
+                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                [request setDidFailSelector:@selector(requestDidFailed:)];
+                [request startAsynchronous];
+                
+            }
+            else
+            {
+                if (ChoseNum==2) {
+                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
+                    NSString* strURL=globalURL(str);
+                    NSLog(@"靠谱派对，距离排序:%@",strURL);
+                    NSURL* url=[NSURL URLWithString:strURL];
+                    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                    request.delegate = self;
+                    request.shouldAttemptPersistentConnection = NO;
+                    [request setValidatesSecureCertificate:NO];
+                    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                    [request setDidFailSelector:@selector(requestDidFailed:)];
+                    [request startAsynchronous];
+                    
+                }
+                else
+                    if (ChoseNum==3) {
+                        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=%f&&lng=%f",userUUid,self.lat,self.lng];
+                        NSString* strURL=globalURL(str);
+                        NSLog(@"我的派对，距离排序:%@",strURL);
+                        NSURL* url=[NSURL URLWithString:strURL];
+                        ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                        request.delegate = self;
+                        request.shouldAttemptPersistentConnection = NO;
+                        [request setValidatesSecureCertificate:NO];
+                        [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                        [request setDidFailSelector:@selector(requestDidFailed:)];
+                        [request startAsynchronous];
+                    }
+            }
         }
     }
     else
     {
-        //加载更多，所有
-        
-        //加载更多,附近
-        if (ChoseNum==1) {
-            //
-            NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
-            NSString* strURL=globalURL(str);
-            NSLog(@"全部派对，按照附近距离排序：%@",strURL);
-            NSURL* url=[NSURL URLWithString:strURL];
-            ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-            request.delegate = self;
-            request.shouldAttemptPersistentConnection = NO;
-            [request setValidatesSecureCertificate:NO];
-            [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-            [request setDidFailSelector:@selector(requestDidFailed:)];
-            [request startAsynchronous];
-            
-        }
-        else
-        {
-            if (ChoseNum==2) {
-                NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
-                NSString* strURL=globalURL(str);
-                NSLog(@"靠谱派对，距离排序:%@",strURL);
-                NSURL* url=[NSURL URLWithString:strURL];
-                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-                request.delegate = self;
-                request.shouldAttemptPersistentConnection = NO;
-                [request setValidatesSecureCertificate:NO];
-                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-                [request setDidFailSelector:@selector(requestDidFailed:)];
-                [request startAsynchronous];
-                
-            }
-            else
-                if (ChoseNum==3) {
-                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
-                    NSString* strURL=globalURL(str);
-                    NSLog(@"我的派对，距离排序:%@",strURL);
-                    NSURL* url=[NSURL URLWithString:strURL];
-                    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-                    request.delegate = self;
-                    request.shouldAttemptPersistentConnection = NO;
-                    [request setValidatesSecureCertificate:NO];
-                    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-                    [request setDidFailSelector:@selector(requestDidFailed:)];
-                    [request startAsynchronous];
-                }
-        }
+        UILabel *lableAlert=[[UILabel alloc]initWithFrame:CGRectMake(50, 100, 240, 100)];
+        lableAlert.text=@"请开启位置服务";
+        [self.tableViewParty addSubview:lableAlert];
     }
     [_slimeView performSelector:@selector(endRefresh)
                      withObject:nil afterDelay:3
                         inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [_slimeView scrollViewDidEndDraging];
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

@@ -28,6 +28,8 @@
     int total;//本次接口返回的数量
     AddrDetailViewController* addrdetail;
     DetailViewController* detail;
+    UIButton *buttonNew;
+    UIButton *buttonNear;
 }
 @property (strong,nonatomic) NSMutableArray* addrarray;
 @property (strong,nonatomic) NSMutableArray* actsumarray;
