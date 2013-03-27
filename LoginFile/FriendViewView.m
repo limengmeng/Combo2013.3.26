@@ -158,9 +158,13 @@
     citylabel=[[UILabel alloc]initWithFrame:CGRectMake(100, 25, 40, 30)];
     citylabel.font=[UIFont systemFontOfSize:13];
     citylabel.textColor=[UIColor lightGrayColor];
+    citylabel.backgroundColor=[UIColor clearColor];
+
     locallabel=[[UILabel alloc]initWithFrame:CGRectMake(140, 25, 40, 30)];
     locallabel.font=[UIFont systemFontOfSize:13];
     locallabel.textColor=[UIColor lightGrayColor];
+    locallabel.backgroundColor=[UIColor clearColor];
+
     if (([[dict objectForKey:@"USER_CITY"] isEqualToString:@"(null)"])||([[dict objectForKey:@"USERE_LOCAL"] isEqualToString:@"(null)"])) {
         citylabel.text=@"";
         locallabel.text=@"";

@@ -651,6 +651,8 @@ int MessFlag=0;
             [views removeFromSuperview];
         }
         
+        cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"MSSBG"]];
+        
         //***************************************显示头像*********************************************
         
         //***********************************比较发送者以及接受者数据**********************************
@@ -726,7 +728,7 @@ int MessFlag=0;
         imview.frame=CGRectMake(0, 142, 320, 30);
         imview.backgroundColor=[UIColor clearColor];
         [cell.contentView addSubview:imview];
-
+        
         
         UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(200, 125, 100, 12)];
         timeLabel1.text=M_stime;
@@ -739,7 +741,7 @@ int MessFlag=0;
         if([[self.partyId objectForKey:@"P_UUID"] isEqualToNumber:self.uuid]){//如果派对的创建者的id等于uuid
             if([[self.user objectForKey:@"USER_ID"] isEqualToNumber:self.uuid]){//如果信息接收者的id等于uuid
                 //XX申请加入我的派对
-                UIImageView *imgView2=[[UIImageView alloc]initWithFrame:CGRectMake(10, 16, 41, 41)];
+                UIImageView *imgView2=[[UIImageView alloc]initWithFrame:CGRectMake(20, 16, 42, 42)];
                 NSURL* imageurl=[NSURL URLWithString:[self.senderDic objectForKey:@"SENDER_PIC"]];
                 [imgView2 setImageWithURL: imageurl refreshCache:NO placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
                 imgView2.layer.borderColor=[[UIColor whiteColor] CGColor];
@@ -747,48 +749,38 @@ int MessFlag=0;
                 //圆角设置
                 imgView2.layer.cornerRadius = 6;
                 imgView2.layer.masksToBounds = YES;
-                
+                [cell.contentView addSubview:imgView2];
                 //***************************************信息显示*********************************************
-                UILabel *mylabel=[[UILabel alloc]initWithFrame:CGRectMake(85, 16, 138, 15)];
+                UILabel *mylabel=[[UILabel alloc]initWithFrame:CGRectMake(95, 16, 138, 15)];
                 mylabel.text=[self.senderDic objectForKey:@"SENDER_NICK"];
                 mylabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
                 mylabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
                 mylabel.backgroundColor=[UIColor clearColor];
                 [cell.contentView addSubview:mylabel];
                 
-                UIImageView* seximage=[[UIImageView alloc]initWithFrame:CGRectMake(70, 16, 11, 13)];
+                UIImageView* seximage=[[UIImageView alloc]initWithFrame:CGRectMake(80, 16, 11, 13)];
                 NSString* sexstr=[self.senderDic objectForKey:@"SENDER_SEX"];
                 if ([[sexstr substringToIndex:1] isEqualToString:@"M"]) {
-                    seximage.image=[UIImage imageNamed:@"MAssagemale"];
+                    seximage.image=[UIImage imageNamed:@"nan"];
                 }
                 else
                 {
-                    seximage.image=[UIImage imageNamed:@"MAssagefemale"];
+                    seximage.image=[UIImage imageNamed:@"nv"];
                 }
                 [cell.contentView addSubview:seximage];
                 
-                UILabel* wantlabel=[[UILabel alloc]initWithFrame:CGRectMake(67, 40, 233, 15)];
-                NSMutableString *mutableSyting=[[NSMutableString alloc]init];
-                [mutableSyting appendFormat:@"申请加入你的的派对:"];
-                wantlabel.text=mutableSyting;
-                wantlabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
-                //wantlabel.font=[UIFont systemFontOfSize:11];
-                wantlabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
-                wantlabel.backgroundColor=[UIColor clearColor];
-                [cell.contentView addSubview:wantlabel];
-                
-                UILabel* infolabel=[[UILabel alloc]initWithFrame:CGRectMake(68, 57, 232, 15)];
-                infolabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
+                UILabel* infolabel=[[UILabel alloc]initWithFrame:CGRectMake(78, 40, 232, 15)];
+                infolabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
                 //infolabel.font=[UIFont systemFontOfSize:11];
                 infolabel.backgroundColor=[UIColor clearColor];
                 infolabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
                 infolabel.text=[self.partyId objectForKey:@"P_TITLE"];
                 [cell.contentView addSubview:infolabel];
                 
-                UITextView *introView=[[UITextView alloc]initWithFrame:CGRectMake(58, 67, 232, 100)];
+                UITextView *introView=[[UITextView alloc]initWithFrame:CGRectMake(68, 57, 240, 100)];
                 introView.userInteractionEnabled=NO;
                 introView.multipleTouchEnabled=NO;
-                introView.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
+                introView.font=[UIFont fontWithName:@"Helvetica-Bold" size:11.0];
                 introView.backgroundColor=[UIColor clearColor];
                 introView.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
                 if ([[self.message objectAtIndex:indexPath.row] objectForKey:@"M_CONTENT"]) {
@@ -800,71 +792,76 @@ int MessFlag=0;
                 [cell.contentView addSubview:introView];
                 //        //***************************************信息显示 end*********************************************
                 
-                [cell.contentView addSubview:imgView2];
+                UIButton *button1=[UIButton buttonWithType:UIButtonTypeCustom];
+                button1.frame= CGRectMake(268, 8, 40, 42);
+                button1.backgroundColor=[UIColor clearColor];
+                button1.tag=104;
+                [button1 setImage:[UIImage imageNamed:@"shengqin"] forState:UIControlStateNormal];
+                [cell.contentView addSubview:button1];
+                
                 
                 //***************************************决定时间*********************************************
                 
-                               
+                
                 if ([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"W"]) {
                     
                     UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-                    button.frame= CGRectMake(11, 77, 38, 22);
+                    button.frame= CGRectMake(20, 67, 43, 25);
                     button.backgroundColor=[UIColor clearColor];
                     button.tag=104;
-                    [button setImage:[UIImage imageNamed:@"messageCheck"] forState:UIControlStateNormal];
+                    [button setImage:[UIImage imageNamed:@"gougougoug"] forState:UIControlStateNormal];
                     [button addTarget:self action:@selector(requestButton:event:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.contentView addSubview:button];
-
+                    
                     
                     //***************************************决定时间*********************************************
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 60, 14)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
                     timeLabel.text=@"决定时间";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
                     timeLabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
-                    timeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
+                    timeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:11.0];
                     [cell.contentView addSubview:timeLabel];
                     //倒计时
-                    auctionTime=[[UITextField alloc]initWithFrame:CGRectMake(219, 150, 60, 14)];
+                    auctionTime=[[UITextField alloc]initWithFrame:CGRectMake(119, 104, 60, 14)];
                     auctionTime.backgroundColor=[UIColor clearColor];
                     auctionTime.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                     auctionTime.userInteractionEnabled=NO;
                     auctionTime.tag=106;
                     auctionTime.textColor=[UIColor redColor];
-                    auctionTime.text=M_dtime;//[NSString stringWithFormat:@"%@",[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_DTIME"]];
-                    //auctionTime.text=@"00:13";
+                    auctionTime.text=M_dtime;
                     auctionTime.font=[UIFont fontWithName:@"Helvetica-Oblique" size:18];
                     [cell.contentView addSubview:auctionTime];
                     
-                    UILabel *minLabel=[[UILabel alloc]initWithFrame:CGRectMake(270, 152, 40, 14)];
+                    UILabel *minLabel=[[UILabel alloc]initWithFrame:CGRectMake(167, 107, 40, 14)];
                     minLabel.backgroundColor=[UIColor clearColor];
                     minLabel.text=@"mins";
                     minLabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
-                    minLabel.font=[UIFont systemFontOfSize:14];
+                    minLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:11.0];
                     [cell.contentView addSubview:minLabel];
                     
-                    UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(200, 125, 100, 12)];
+                    UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
                     timeLabel1.text=M_stime;//@"2013,3,12  17:35";
                     timeLabel1.backgroundColor=[UIColor clearColor];
                     timeLabel1.tag=105;
                     timeLabel1.textColor=[UIColor lightGrayColor];
                     timeLabel1.font=[UIFont systemFontOfSize:11];
                     [cell.contentView addSubview:timeLabel1];
-
+                    
                     
                 }
                 else if([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"N"]){
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 60, 14)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
                     timeLabel.text=@"已过期";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
                     timeLabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
                     timeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
                     [cell.contentView addSubview:timeLabel];
-
+                    
                 }
                 else if([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"Y"]){
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 60, 14)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
                     timeLabel.text=@"已加入";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
@@ -877,7 +874,7 @@ int MessFlag=0;
             
             else{//如果信息的接收者的id不等于uuid  //我邀请XX联合创建
                 //*********************************
-                UIImageView* imgView1=[[UIImageView alloc]initWithFrame:CGRectMake(10, 16, 41, 41)];
+                UIImageView* imgView1=[[UIImageView alloc]initWithFrame:CGRectMake(20, 16, 42, 42)];
                 NSURL* imageurl=[NSURL URLWithString:[[self.partyId objectForKey:@"p_user_id"] objectForKey:@"USER_PIC"]];
                 [imgView1 setImageWithURL: imageurl refreshCache:NO placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
                 imgView1.layer.borderColor=[[UIColor whiteColor] CGColor];
@@ -885,17 +882,15 @@ int MessFlag=0;
                 //圆角设置
                 imgView1.layer.cornerRadius = 6;
                 imgView1.layer.masksToBounds = YES;
-                //                imgView1.layer.borderWidth=2;
-                //                imgView1.layer.borderColor=[[UIColor lightGrayColor] CGColor];
                 //***************************************信息显示*******************************************
-                UILabel *mylabel=[[UILabel alloc]initWithFrame:CGRectMake(70, 16, 138, 15)];
+                UILabel *mylabel=[[UILabel alloc]initWithFrame:CGRectMake(35, 67, 138, 15)];
                 mylabel.text=@"我";
                 mylabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
                 mylabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
                 mylabel.backgroundColor=[UIColor clearColor];
                 [cell.contentView addSubview:mylabel];
                 
-                UILabel* wantlabel=[[UILabel alloc]initWithFrame:CGRectMake(67, 40, 233, 15)];
+                UILabel* wantlabel=[[UILabel alloc]initWithFrame:CGRectMake(80, 16, 138, 15)];
                 NSMutableString *mutableSyting=[[NSMutableString alloc]init];
                 [mutableSyting appendString:@"邀请"];
                 
@@ -907,10 +902,7 @@ int MessFlag=0;
                         [mutableSyting appendFormat:@",%@",[[creaters objectAtIndex:i] objectForKey:@"CREAT_NICK"]];
                     NSLog(@"mutableSyting=========%@",mutableSyting);
                 }
-                
-                [mutableSyting appendString:@"联合创建:"];
-                //[mutableSyting appendFormat:@"%@",[self.partyId objectForKey:@"P_TITLE"]];
-                wantlabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
+                wantlabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
                 //wantlabel.font=[UIFont systemFontOfSize:11];
                 wantlabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
                 wantlabel.backgroundColor=[UIColor clearColor];
@@ -918,7 +910,7 @@ int MessFlag=0;
                 
                 [cell.contentView addSubview:wantlabel];
                 
-                UILabel* infolabel=[[UILabel alloc]initWithFrame:CGRectMake(68, 57, 232, 15)];
+                UILabel* infolabel=[[UILabel alloc]initWithFrame:CGRectMake(78, 40, 232, 15)];
                 infolabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
                 //infolabel.font=[UIFont systemFontOfSize:11];
                 infolabel.backgroundColor=[UIColor clearColor];
@@ -927,13 +919,13 @@ int MessFlag=0;
                 [cell.contentView addSubview:infolabel];
                 
                 
-                UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(67, 74, 200, 15)];
+                UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(78, 57, 200, 15)];
                 timeLabel.text=[NSString stringWithFormat:@"时间：%@",self.P_time];//[self.partyId objectForKey:@"P_STIME"]];
                 timeLabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
                 timeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
                 timeLabel.backgroundColor=[UIColor clearColor];
                 [cell.contentView addSubview:timeLabel];
-                UILabel *placeLabel=[[UILabel alloc]initWithFrame:CGRectMake(67, 91, 223, 15)];
+                UILabel *placeLabel=[[UILabel alloc]initWithFrame:CGRectMake(78, 74, 223, 15)];
                 placeLabel.text=[NSString stringWithFormat:@"地点：%@",[self.partyId objectForKey:@"P_LOCAL"]];
                 placeLabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
                 placeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
@@ -941,25 +933,33 @@ int MessFlag=0;
                 [cell.contentView addSubview:placeLabel];
                 //***************************************信息显示 end*********************************************
                 
-                UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(200, 125, 100, 12)];
+                UIButton *button1=[UIButton buttonWithType:UIButtonTypeCustom];
+                button1.frame= CGRectMake(268, 8, 40, 42);
+                button1.backgroundColor=[UIColor clearColor];
+                button1.tag=104;
+                [button1 setImage:[UIImage imageNamed:@"chuangjian"] forState:UIControlStateNormal];
+                [cell.contentView addSubview:button1];
+                
+                
+                UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
                 timeLabel1.text=M_stime;
                 timeLabel1.backgroundColor=[UIColor clearColor];
                 timeLabel1.tag=105;
                 timeLabel1.textColor=[UIColor lightGrayColor];
                 timeLabel1.font=[UIFont systemFontOfSize:11];
                 [cell.contentView addSubview:timeLabel1];
-
-            
+                
+                
                 if ([[[self.partyId objectForKey:@"P_STATUS"]substringToIndex:1] isEqualToString:@"W"]) {
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 60, 14)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
                     timeLabel.text=@"等待决定";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
                     timeLabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
-                    timeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
+                    timeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:11.0];
                     [cell.contentView addSubview:timeLabel];
                     //倒计时
-                    auctionTime=[[UITextField alloc]initWithFrame:CGRectMake(219, 150, 60, 14)];
+                    auctionTime=[[UITextField alloc]initWithFrame:CGRectMake(119, 104, 60, 14)];
                     auctionTime.backgroundColor=[UIColor clearColor];
                     auctionTime.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                     auctionTime.userInteractionEnabled=NO;
@@ -970,15 +970,15 @@ int MessFlag=0;
                     auctionTime.font=[UIFont fontWithName:@"Helvetica-Oblique" size:18];
                     [cell.contentView addSubview:auctionTime];
                     
-                    UILabel *minLabel=[[UILabel alloc]initWithFrame:CGRectMake(270, 152, 40, 14)];
+                    UILabel *minLabel=[[UILabel alloc]initWithFrame:CGRectMake(167, 107, 40, 14)];
                     minLabel.backgroundColor=[UIColor clearColor];
                     minLabel.text=@"hrs";
                     minLabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
-                    minLabel.font=[UIFont systemFontOfSize:14];
+                    minLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:11.0];
                     [cell.contentView addSubview:minLabel];
                 }
                 else if([[[self.partyId objectForKey:@"P_STATUS"]substringToIndex:1] isEqualToString:@"N"]){
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 160, 14)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
                     timeLabel.text=@"人数不足已删除";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
@@ -987,7 +987,7 @@ int MessFlag=0;
                     [cell.contentView addSubview:timeLabel];
                 }
                 else if([[[self.partyId objectForKey:@"P_STATUS"]substringToIndex:1] isEqualToString:@"Y"]){
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 60, 14)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
                     timeLabel.text=@"已创建";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
@@ -1004,8 +1004,8 @@ int MessFlag=0;
             
             //我申请加入XX的派对
             
-            UIImageView* imgView1=[[UIImageView alloc]initWithFrame:CGRectMake(217, 0, 52, 48)];
-            imgView1.frame=CGRectMake(10, 16, 41, 41);
+            UIImageView* imgView1=[[UIImageView alloc]initWithFrame:CGRectMake(20, 16, 42, 42)];
+            
             NSURL* imageurl=[NSURL URLWithString:[self.senderDic objectForKey:@"SENDER_PIC"]];
             [imgView1 setImageWithURL: imageurl refreshCache:NO placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
             imgView1.layer.borderColor=[[UIColor whiteColor] CGColor];
@@ -1013,20 +1013,18 @@ int MessFlag=0;
             //圆角设置
             imgView1.layer.cornerRadius = 6;
             imgView1.layer.masksToBounds = YES;
-            //    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showFriendPic)];
-            //    [self.imgView addGestureRecognizer:singleTap];
-            //***************************************信息显示*******************************************
-            //***************************************信息显示*******************************************
-            UILabel *mylabel=[[UILabel alloc]initWithFrame:CGRectMake(70, 16, 138, 15)];
+            
+            UILabel *mylabel=[[UILabel alloc]initWithFrame:CGRectMake(35, 67, 138, 15)];
             mylabel.text=@"我";//[self.senderDic objectForKey:@"SENDER_NICK"];
             mylabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
             mylabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
             mylabel.backgroundColor=[UIColor clearColor];
             [cell.contentView addSubview:mylabel];
-
-            UILabel* wantlabel=[[UILabel alloc]initWithFrame:CGRectMake(67, 35, 233, 15)];         NSMutableString *mutableSyting=[[NSMutableString alloc]init];
-            [mutableSyting appendString:@"申请加入"];
-            [mutableSyting appendFormat:@"%@的派对:",[self.user objectForKey:@"USER_NICK"]];
+            
+            UILabel* wantlabel=[[UILabel alloc]initWithFrame:CGRectMake(80, 16, 138, 15)];
+            NSMutableString *mutableSyting=[[NSMutableString alloc]init];
+            [mutableSyting appendString:@"加入"];
+            [mutableSyting appendFormat:@"%@的:",[self.user objectForKey:@"USER_NICK"]];
             wantlabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
             //wantlabel.font=[UIFont systemFontOfSize:11];
             wantlabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
@@ -1035,18 +1033,18 @@ int MessFlag=0;
             
             [cell.contentView addSubview:wantlabel];
             
-            UILabel* infolabel=[[UILabel alloc]initWithFrame:CGRectMake(68, 52, 232, 15)];
-            infolabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
+            UILabel* infolabel=[[UILabel alloc]initWithFrame:CGRectMake(78, 40, 232, 15)];
+            infolabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
             //infolabel.font=[UIFont systemFontOfSize:11];
             infolabel.backgroundColor=[UIColor clearColor];
             infolabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
             infolabel.text=[self.partyId objectForKey:@"P_TITLE"];
             [cell.contentView addSubview:infolabel];
             
-            UITextView *introView=[[UITextView alloc]initWithFrame:CGRectMake(58, 62, 232, 100)];
+            UITextView *introView=[[UITextView alloc]initWithFrame:CGRectMake(68, 57, 240, 100)];
             introView.userInteractionEnabled=NO;
             introView.multipleTouchEnabled=NO;
-            introView.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
+            introView.font=[UIFont fontWithName:@"Helvetica-Bold" size:11.0];
             //introView.font=[UIFont systemFontOfSize:12];
             introView.backgroundColor=[UIColor clearColor];
             introView.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
@@ -1062,9 +1060,16 @@ int MessFlag=0;
             
             [cell.contentView addSubview:imgView1];
             
+            UIButton *button1=[UIButton buttonWithType:UIButtonTypeCustom];
+            button1.frame= CGRectMake(268, 8, 40, 42);
+            button1.backgroundColor=[UIColor clearColor];
+            button1.tag=104;
+            [button1 setImage:[UIImage imageNamed:@"shengqin"] forState:UIControlStateNormal];
+            [cell.contentView addSubview:button1];
+            
             //***************************************决定时间*********************************************
             
-            UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(200, 125, 100, 12)];
+            UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
             timeLabel1.text=M_stime;
             timeLabel1.backgroundColor=[UIColor clearColor];
             timeLabel1.tag=105;
@@ -1073,26 +1078,26 @@ int MessFlag=0;
             [cell.contentView addSubview:timeLabel1];
             
             if ([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"W"]) {
-                UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 60, 14)];      timeLabel.text=@"等待决定";
+                UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
+                timeLabel.text=@"等待决定";
                 timeLabel.backgroundColor=[UIColor clearColor];
                 timeLabel.tag=105;
                 timeLabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
-                timeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
+                timeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:11.0];
                 [cell.contentView addSubview:timeLabel];
                 
                 //倒计时
-                auctionTime=[[UITextField alloc]initWithFrame:CGRectMake(219, 150, 60, 14)];
+                auctionTime=[[UITextField alloc]initWithFrame:CGRectMake(119, 104, 60, 14)];
                 auctionTime.backgroundColor=[UIColor clearColor];
                 auctionTime.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                 auctionTime.userInteractionEnabled=NO;
                 auctionTime.tag=106;
                 auctionTime.textColor=[UIColor redColor];
-                auctionTime.text=M_dtime;//[NSString stringWithFormat:@"%@",[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_DTIME"]];
-                //[[self.message objectAtIndex:indexPath.section] objectForKey:@"M_DTIME"];
+                auctionTime.text=M_dtime;
                 auctionTime.font=[UIFont fontWithName:@"Helvetica-Oblique" size:18];
                 [cell.contentView addSubview:auctionTime];
                 
-                UILabel *minLabel=[[UILabel alloc]initWithFrame:CGRectMake(270, 152, 40, 14)];
+                UILabel *minLabel=[[UILabel alloc]initWithFrame:CGRectMake(167, 107, 40, 14)];
                 minLabel.backgroundColor=[UIColor clearColor];
                 minLabel.text=@"mins";
                 minLabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
@@ -1101,7 +1106,7 @@ int MessFlag=0;
                 
             }
             else if([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"N"]){
-                UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 60, 14)];
+                UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
                 timeLabel.text=@"已过期";
                 timeLabel.backgroundColor=[UIColor clearColor];
                 timeLabel.tag=105;
@@ -1110,7 +1115,7 @@ int MessFlag=0;
                 [cell.contentView addSubview:timeLabel];
             }
             else if([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"Y"]){
-                UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 60, 14)];
+                UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
                 timeLabel.text=@"已加入";
                 timeLabel.backgroundColor=[UIColor clearColor];
                 timeLabel.tag=105;
@@ -1131,55 +1136,46 @@ int MessFlag=0;
                 }
             }
             if(isdone){
-               
-                UIImageView *imgView2=[[UIImageView alloc]initWithFrame:CGRectMake(10, 16, 41, 41)];
+                
+                UIImageView *imgView2=[[UIImageView alloc]initWithFrame:CGRectMake(20, 16, 42, 42)];
                 NSURL* imageurl=[NSURL URLWithString:[[self.partyId objectForKey:@"p_user_id"] objectForKey:@"USER_PIC"]];
                 [imgView2 setImageWithURL: imageurl refreshCache:NO placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
                 //***************************************信息显示*********************************************
                 
-                UIImageView* seximage=[[UIImageView alloc]initWithFrame:CGRectMake(70, 16, 11, 13)];
+                UIImageView* seximage=[[UIImageView alloc]initWithFrame:CGRectMake(80, 16, 11, 13)];
                 NSString* sexstr=[self.senderDic objectForKey:@"SENDER_SEX"];
                 if ([[sexstr substringToIndex:1] isEqualToString:@"M"]) {
-                    seximage.image=[UIImage imageNamed:@"MAssagemale"];
+                    seximage.image=[UIImage imageNamed:@"nan"];
                 }
                 else
                 {
-                    seximage.image=[UIImage imageNamed:@"MAssagefemale"];
+                    seximage.image=[UIImage imageNamed:@"nv"];
                 }
                 [cell.contentView addSubview:seximage];
                 
-                UILabel *mylabel=[[UILabel alloc]initWithFrame:CGRectMake(85, 16, 138, 15)];              mylabel.text=[[self.partyId objectForKey:@"p_user_id"] objectForKey:@"USER_NICK"];
+                UILabel *mylabel=[[UILabel alloc]initWithFrame:CGRectMake(95, 16, 138, 15)];
+                mylabel.text=[[self.partyId objectForKey:@"p_user_id"] objectForKey:@"USER_NICK"];
                 mylabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
                 mylabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
                 mylabel.backgroundColor=[UIColor clearColor];
                 [cell.contentView addSubview:mylabel];
                 
-                UILabel* wantlabel=[[UILabel alloc]initWithFrame:CGRectMake(67, 40, 233, 15)];
-                NSMutableString *mutableSyting=[[NSMutableString alloc]init];
-                [mutableSyting appendFormat:@"邀请你联合创建"];
-                wantlabel.text=mutableSyting;
-                wantlabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
-                //wantlabel.font=[UIFont systemFontOfSize:11];
-                wantlabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
-                wantlabel.backgroundColor=[UIColor clearColor];
-                [cell.contentView addSubview:wantlabel];
-                
-                UILabel* infolabel=infolabel=[[UILabel alloc]initWithFrame:CGRectMake(68, 57, 232, 15)];
-                infolabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
+                UILabel* infolabel=infolabel=[[UILabel alloc]initWithFrame:CGRectMake(78, 40, 232, 15)];
+                infolabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
                 //infolabel.font=[UIFont systemFontOfSize:11];
                 infolabel.backgroundColor=[UIColor clearColor];
                 infolabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
                 infolabel.text=[self.partyId objectForKey:@"P_TITLE"];
                 [cell.contentView addSubview:infolabel];
                 
-                UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(67, 74, 200, 15)];
+                UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(78, 57, 200, 15)];
                 timeLabel.text=[NSString stringWithFormat:@"时间：%@",self.P_time];//[self.partyId objectForKey:@"P_STIME"]];
                 timeLabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
                 timeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
                 timeLabel.backgroundColor=[UIColor clearColor];
                 [cell.contentView addSubview:timeLabel];
                 
-                UILabel *placeLabel=[[UILabel alloc]initWithFrame:CGRectMake(67, 91, 223, 15)];
+                UILabel *placeLabel=[[UILabel alloc]initWithFrame:CGRectMake(78, 74, 223, 15)];
                 placeLabel.text=[NSString stringWithFormat:@"地点：%@",[self.partyId objectForKey:@"P_LOCAL"]];
                 placeLabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
                 placeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
@@ -1188,43 +1184,48 @@ int MessFlag=0;
                 //***************************************信息显示 end*********************************************
                 [cell.contentView addSubview:imgView2];
                 
-                UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(200, 125, 100, 12)];
+                UIButton *button1=[UIButton buttonWithType:UIButtonTypeCustom];
+                button1.frame= CGRectMake(268, 8, 40, 42);
+                button1.backgroundColor=[UIColor clearColor];
+                button1.tag=104;
+                [button1 setImage:[UIImage imageNamed:@"yaoqing"] forState:UIControlStateNormal];
+                
+                UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
                 timeLabel1.text=M_stime;//@"2013,3,12  17:35";
                 timeLabel1.backgroundColor=[UIColor clearColor];
                 timeLabel1.tag=105;
                 timeLabel1.textColor=[UIColor lightGrayColor];
                 timeLabel1.font=[UIFont systemFontOfSize:11];
                 [cell.contentView addSubview:timeLabel1];
-
+                
                 
                 //***************************************决定时间*********************************************
                 if ([[[self.partyId objectForKey:@"P_STATUS"]substringToIndex:1] isEqualToString:@"W"]) {
                     
                     UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-                    button.frame= CGRectMake(11, 77, 38, 22);
+                    button.frame= CGRectMake(20, 67, 43, 25);
                     button.backgroundColor=[UIColor clearColor];
                     button.tag=104;
-                    [button setImage:[UIImage imageNamed:@"messageCheck"] forState:UIControlStateNormal];
+                    [button setImage:[UIImage imageNamed:@"gougougoug"] forState:UIControlStateNormal];
                     [button addTarget:self action:@selector(ButtonClick:event:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.contentView addSubview:button];
                     
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 60, 14)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
                     timeLabel.text=@"决定时间";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
                     timeLabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
-                    timeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
-
+                    timeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:11.0];
+                    
                     [cell.contentView addSubview:timeLabel];
                     //倒计时
-                    auctionTime=[[UITextField alloc]initWithFrame:CGRectMake(219, 150, 60, 14)];
+                    auctionTime=[[UITextField alloc]initWithFrame:CGRectMake(119, 104, 60, 14)];
                     auctionTime.backgroundColor=[UIColor clearColor];
                     auctionTime.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                     auctionTime.userInteractionEnabled=NO;
                     auctionTime.tag=106;
                     auctionTime.textColor=[UIColor redColor];
-                    auctionTime.text=P_dtime;//[NSString stringWithFormat:@"%@",[self.partyId objectForKey:@"P_DTIME"]];
-                    //[[self.message objectAtIndex:indexPath.section] objectForKey:@"M_DTIME"];
+                    auctionTime.text=P_dtime;
                     auctionTime.font=[UIFont fontWithName:@"Helvetica-Oblique" size:18];
                     [cell.contentView addSubview:auctionTime];
                     
@@ -1232,7 +1233,7 @@ int MessFlag=0;
                     minLabel.backgroundColor=[UIColor clearColor];
                     minLabel.text=@"hrs";
                     minLabel.textColor=[UIColor colorWithRed:89.0/255 green:97.0/255 blue:104.0/255 alpha:1];
-                    auctionTime.font=[UIFont fontWithName:@"Helvetica-Oblique" size:18];
+                    minLabel.font=[UIFont fontWithName:@"Helvetica-Oblique" size:11];
                     [cell.contentView addSubview:minLabel];
                     
                 }
@@ -1261,7 +1262,6 @@ int MessFlag=0;
         cell.selectionStyle=UITableViewCellEditingStyleNone;
         return cell;
     }
-    
     //李萌萌
     if (choiceNumber==2) {
         static NSString *cellSystem=@"systemCell";
@@ -1451,7 +1451,7 @@ int MessFlag=0;
         return 70;
     }
     else if(choiceNumber==1)
-        return 172;
+        return 136;
     return 129;
 }
 
