@@ -120,7 +120,10 @@
             
             UILabel* namelabel=[[UILabel alloc]initWithFrame:CGRectMake(70, 20, 80, 20)];
             namelabel.backgroundColor=[UIColor clearColor];
-            namelabel.text=[self.dict objectForKey:@"USER_NICK"];
+            if ([self.dict objectForKey:@"USER_NICK"]) {
+                namelabel.text=[self.dict objectForKey:@"USER_NICK"];
+            }
+            
             namelabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
             namelabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
             [cell.contentView addSubview:picimage];
@@ -139,6 +142,7 @@
                 agelabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
                 agelabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
                 agelabel.backgroundColor=[UIColor clearColor];
+                
                 NSString* sexstr=[self.dict objectForKey:@"USER_SEX"];
                 NSLog(@"性别:%@",sexstr);
                 if ([[sexstr substringToIndex:1] isEqualToString:@"M"]) {
@@ -160,7 +164,10 @@
                 agelabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
                 agelabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
                 agelabel.backgroundColor=[UIColor clearColor];
-                agelabel.text=[NSString stringWithFormat:@"%@",[dict objectForKey:@"USER_AGE"]];
+                if ([dict objectForKey:@"USER_AGE"]) {
+                    agelabel.text=[NSString stringWithFormat:@"%@",[dict objectForKey:@"USER_AGE"]];
+                }
+                
                 
                 [cell.contentView addSubview:agelabel];
             }
@@ -175,14 +182,16 @@
                 locallabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
                 locallabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
                 locallabel.backgroundColor=[UIColor clearColor];
-                if (([[dict objectForKey:@"USER_CITY"] isEqualToString:@"(null)"])||([[dict objectForKey:@"USERE_LOCAL"] isEqualToString:@"(null)"])) {
-                    locallabel.text=@"";
-                }
-                else
-                {
-                    locallabel.text=[NSString stringWithFormat:@"%@  %@",[dict objectForKey:@"USER_CITY"],[dict objectForKey:@"USER_LOCAL"]];
-                }
                 
+                NSMutableString* localStr=[[NSMutableString alloc]init];
+                
+                if (([dict objectForKey:@"USER_CITY"])&&(![[dict objectForKey:@"USER_CITY"] isEqualToString:@"(null)"])) {
+                    [localStr appendFormat:@"%@ ",[dict objectForKey:@"USER_CITY"]];
+                }
+                if (([dict objectForKey:@"USER_LOCAL"])&&(![[dict objectForKey:@"USER_LOCAL"] isEqualToString:@"(null)"])) {
+                    [localStr appendFormat:@"%@",[dict objectForKey:@"USER_LOCAL"]];
+                }
+                locallabel.text=localStr;
                 [cell.contentView addSubview:locallabel];
             }
         }
@@ -215,7 +224,8 @@
             [cell.contentView addSubview:label];
             
             CGRect cellFrame = CGRectMake(12, 10.0, 280, 30);
-            if([dict objectForKey:@"USER_DES"]) label.text=[dict objectForKey:@"USER_DES"];
+            if([dict objectForKey:@"USER_DES"])
+                label.text=[dict objectForKey:@"USER_DES"];
             else label.text=@"这家伙很懒，什么都没写！";
             CGRect rect = cellFrame;
             label.frame = rect;
