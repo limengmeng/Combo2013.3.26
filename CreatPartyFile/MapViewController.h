@@ -42,7 +42,7 @@
 @property (strong,nonatomic) NSMutableString* city;
 @property (strong,nonatomic) NSMutableString* local;
 
-@property (nonatomic,assign)id<passValueDelegate> delegate;
+@property (nonatomic,strong)id<passValueDelegate> delegate;
 @property (strong,nonatomic) MKMapView* map;
 @property (strong,nonatomic) CLGeocoder* geocoder;
 - (void)longPress:(UIGestureRecognizer*)gestureRecognizer;

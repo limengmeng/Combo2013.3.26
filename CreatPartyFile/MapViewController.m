@@ -22,7 +22,7 @@ int flag=0;
 @synthesize map_Temp;
 @synthesize city;
 @synthesize local;
-
+@synthesize delegate;
 @synthesize map;
 @synthesize geocoder;
 @synthesize type;
