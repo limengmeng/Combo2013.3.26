@@ -62,7 +62,7 @@
     intro.textColor=[UIColor colorWithRed:146.0/255 green:146.0/255 blue:146.0/255 alpha:1];
     intro.backgroundColor=[UIColor clearColor];
     [self.view addSubview:intro];
-
+    
     
     //**********************************账号*****************************************
     UITextField *field1=[[UITextField alloc]initWithFrame:CGRectMake(10, 61, 299, 42)];
@@ -90,33 +90,39 @@
     //**********************************账号 end*****************************************
     
     //**********************************密码*****************************************
-    UITextField *field2=[[UITextField alloc]initWithFrame:CGRectMake(10, 100, 299, 42)];
-    field2.background = [UIImage imageNamed:@"creatkuangC2"];
-    field2.userInteractionEnabled=NO;
-    [self.view addSubview:field2];
-    //密码栏
-    password =[[UITextField alloc]initWithFrame:CGRectMake(58, 100, 299, 42)];
-    password.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
-    password.secureTextEntry=YES;
-    password.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
-    password.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    password.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:password];
+    
+    
+    
+    passWordButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    passWordButton.frame= CGRectMake(10, 100, 299,42);
+    [passWordButton setImage:[UIImage imageNamed:@"xiugaimima.png"] forState:UIControlStateNormal];
+    [passWordButton setImage:[UIImage imageNamed:@"xiugaimima.png"] forState:UIControlStateSelected];
+    
+    [passWordButton addTarget:self action:@selector(action) forControlEvents:UIControlEventTouchUpInside];
+    passWordButton.backgroundColor=[UIColor clearColor];
+    
+    button.titleLabel.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:passWordButton];
     
     UILabel *passName=[[UILabel alloc]initWithFrame:CGRectMake(20, 100, 60, 42)];
+    //passName.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"xiugaimima.png"]];
     passName.text=@"密码";
     passName.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
     passName.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
     passName.backgroundColor=[UIColor clearColor];
     [self.view addSubview:passName];
-
-    passWordButton =[[UIButton alloc]initWithFrame:CGRectMake(10, 100, 299,42)];
-    [passWordButton addTarget:self action:@selector(action) forControlEvents:UIControlEventTouchUpInside];
-    passWordButton.backgroundColor=[UIColor clearColor];
-
-    button.titleLabel.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:passWordButton];
-     //**********************************密码 end*****************************************
+    UITextField *field2=[[UITextField alloc]initWithFrame:CGRectMake(10, 100, 299, 42)];
+    //field2.background = [UIImage imageNamed:@"creatkuangC2"];
+    field2.userInteractionEnabled=NO;
+    [self.view addSubview:field2];
+    //密码栏
+    password =[[UITextField alloc]initWithFrame:CGRectMake(58, 100, 100, 42)];
+    password.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
+    password.secureTextEntry=YES;
+    password.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
+    password.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    //password.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:password];
     
     
     //**********************************按钮操作*****************************************
