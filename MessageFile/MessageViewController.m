@@ -208,8 +208,7 @@ int MessFlag=0;
     self.tbView.delegate=self;
     [self.view addSubview:self.tbView];
     self.tbView.backgroundView=nil;
-    self.tbView.backgroundColor=[UIColor colorWithRed:226.0/255 green:226.0/255 blue:219.0/255 alpha:1];
-    [self.tbView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tbView.backgroundColor=[UIColor colorWithRed:226.0/255 green:226.0/255 blue:219.0/255 alpha:1]; [self.tbView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     lableTime=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
     
     //=============system数据========================================================
@@ -715,28 +714,15 @@ int MessFlag=0;
         
         //************************************派对创建时间 end*****************************************
         
-        UIButton *button1=[UIButton buttonWithType:UIButtonTypeCustom];
-        button1.frame= CGRectMake(267, 0, 53, 53);
-        button1.backgroundColor=[UIColor clearColor];
-        button1.tag=104;
-        [button1 setImage:[UIImage imageNamed:@"SEEMORE"] forState:UIControlStateNormal];
-        
-        //[button1 addTarget:self action:@selector(requestButton:event:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.contentView addSubview:button1];
-        
-        UIImageView *imview=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"messageBack"]];
-        imview.frame=CGRectMake(0, 142, 320, 30);
-        imview.backgroundColor=[UIColor clearColor];
-        [cell.contentView addSubview:imview];
-        
-        
-        UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(200, 125, 100, 12)];
-        timeLabel1.text=M_stime;
+        UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
+        timeLabel1.text=M_stime;//@"2013,3,12  17:35";
         timeLabel1.backgroundColor=[UIColor clearColor];
         timeLabel1.tag=105;
         timeLabel1.textColor=[UIColor lightGrayColor];
         timeLabel1.font=[UIFont systemFontOfSize:11];
         [cell.contentView addSubview:timeLabel1];
+        
+        
         
         if([[self.partyId objectForKey:@"P_UUID"] isEqualToNumber:self.uuid]){//如果派对的创建者的id等于uuid
             if([[self.user objectForKey:@"USER_ID"] isEqualToNumber:self.uuid]){//如果信息接收者的id等于uuid
@@ -840,15 +826,6 @@ int MessFlag=0;
                     minLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:11.0];
                     [cell.contentView addSubview:minLabel];
                     
-                    UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
-                    timeLabel1.text=M_stime;//@"2013,3,12  17:35";
-                    timeLabel1.backgroundColor=[UIColor clearColor];
-                    timeLabel1.tag=105;
-                    timeLabel1.textColor=[UIColor lightGrayColor];
-                    timeLabel1.font=[UIFont systemFontOfSize:11];
-                    [cell.contentView addSubview:timeLabel1];
-                    
-                    
                 }
                 else if([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"N"]){
                     UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
@@ -939,16 +916,6 @@ int MessFlag=0;
                 button1.tag=104;
                 [button1 setImage:[UIImage imageNamed:@"chuangjian"] forState:UIControlStateNormal];
                 [cell.contentView addSubview:button1];
-                
-                
-                UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
-                timeLabel1.text=M_stime;
-                timeLabel1.backgroundColor=[UIColor clearColor];
-                timeLabel1.tag=105;
-                timeLabel1.textColor=[UIColor lightGrayColor];
-                timeLabel1.font=[UIFont systemFontOfSize:11];
-                [cell.contentView addSubview:timeLabel1];
-                
                 
                 if ([[[self.partyId objectForKey:@"P_STATUS"]substringToIndex:1] isEqualToString:@"W"]) {
                     UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
@@ -1069,14 +1036,6 @@ int MessFlag=0;
             
             //***************************************决定时间*********************************************
             
-            UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
-            timeLabel1.text=M_stime;
-            timeLabel1.backgroundColor=[UIColor clearColor];
-            timeLabel1.tag=105;
-            timeLabel1.textColor=[UIColor lightGrayColor];
-            timeLabel1.font=[UIFont systemFontOfSize:11];
-            [cell.contentView addSubview:timeLabel1];
-            
             if ([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"W"]) {
                 UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
                 timeLabel.text=@"等待决定";
@@ -1189,15 +1148,7 @@ int MessFlag=0;
                 button1.backgroundColor=[UIColor clearColor];
                 button1.tag=104;
                 [button1 setImage:[UIImage imageNamed:@"yaoqing"] forState:UIControlStateNormal];
-                
-                UILabel *timeLabel1=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
-                timeLabel1.text=M_stime;//@"2013,3,12  17:35";
-                timeLabel1.backgroundColor=[UIColor clearColor];
-                timeLabel1.tag=105;
-                timeLabel1.textColor=[UIColor lightGrayColor];
-                timeLabel1.font=[UIFont systemFontOfSize:11];
-                [cell.contentView addSubview:timeLabel1];
-                
+                [cell.contentView addSubview:button1];
                 
                 //***************************************决定时间*********************************************
                 if ([[[self.partyId objectForKey:@"P_STATUS"]substringToIndex:1] isEqualToString:@"W"]) {
@@ -1229,11 +1180,11 @@ int MessFlag=0;
                     auctionTime.font=[UIFont fontWithName:@"Helvetica-Oblique" size:18];
                     [cell.contentView addSubview:auctionTime];
                     
-                    UILabel *minLabel=[[UILabel alloc]initWithFrame:CGRectMake(270, 152, 40, 14)];
+                    UILabel *minLabel=[[UILabel alloc]initWithFrame:CGRectMake(167, 107, 40, 14)];
                     minLabel.backgroundColor=[UIColor clearColor];
                     minLabel.text=@"hrs";
                     minLabel.textColor=[UIColor colorWithRed:89.0/255 green:97.0/255 blue:104.0/255 alpha:1];
-                    minLabel.font=[UIFont fontWithName:@"Helvetica-Oblique" size:11];
+                    minLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:11.0];
                     [cell.contentView addSubview:minLabel];
                     
                 }
