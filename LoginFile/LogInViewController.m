@@ -86,7 +86,7 @@
     //********************************背景图片 end*******************************************
     
     //********************************logo图片*******************************************
-    imageView=[[UIImageView alloc]initWithFrame:CGRectMake(115, 130, 90, 63)];
+    imageView=[[UIImageView alloc]initWithFrame:CGRectMake(116, 131, 90, 63)];
     imageView.image=[UIImage imageNamed:@"loginlogo"];
     imageView.backgroundColor=[UIColor clearColor];
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(onTimer3) userInfo:nil repeats:NO];
@@ -103,7 +103,7 @@
 
 -(void) onTimer {
     
-    imageView.frame=CGRectMake(115, 130-move, 90, 63);
+    imageView.frame=CGRectMake(116, 131-move, 90, 63);
     move++;
     int y=imageView.frame.origin.y;
     
