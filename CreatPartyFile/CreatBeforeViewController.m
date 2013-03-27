@@ -39,7 +39,7 @@
     
     self.navigationItem.hidesBackButton=YES;
     UIButton* backbutton=[UIButton  buttonWithType:UIButtonTypeCustom];
-    backbutton.frame=CGRectMake(0.0, 0.0, 36, 29);
+    backbutton.frame=CGRectMake(0.0, 0.0, 40, 35);
     [backbutton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     [backbutton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchDown];
     
