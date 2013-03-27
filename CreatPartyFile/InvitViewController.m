@@ -53,6 +53,13 @@
 {
     
     stringFriId=[[NSMutableString alloc]init];
+    for (int i=0; i<[self.friendId count]; i++) {
+        if(i==0)
+            [stringFriId appendFormat:@"%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
+        else
+            [stringFriId appendFormat:@",%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
+    }
+
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
@@ -73,7 +80,7 @@
     else if(temp==2){
         UIButton* donebutton=[UIButton  buttonWithType:UIButtonTypeCustom];
         donebutton.frame=CGRectMake(0.0, 0.0, 50, 31);
-        [donebutton setImage:[UIImage imageNamed:@"goahead@2x.png"] forState:UIControlStateNormal];
+        [donebutton setImage:[UIImage imageNamed:@"fasong"] forState:UIControlStateNormal];
         [donebutton addTarget:self action:@selector(sendAction) forControlEvents:UIControlEventTouchDown];
         UIBarButtonItem* Makedone=[[UIBarButtonItem alloc]initWithCustomView:donebutton];
         self.navigationItem.rightBarButtonItem=Makedone;
@@ -115,7 +122,7 @@
     if(self.temp==1){
         label=[[UILabel alloc]initWithFrame:CGRectMake(20 , 95 , 60 , 40 )];
     }else{
-        label=[[UILabel alloc]initWithFrame:CGRectMake(20 , 131 , 60 , 40 )];
+        label=[[UILabel alloc]initWithFrame:CGRectMake(20 , 95 , 60 , 40 )];
     }
     label.text=@"40";
     label.font=[UIFont systemFontOfSize:14];
@@ -169,11 +176,7 @@
     numLabel.text=num;
 }
 
--(void)textViewDidEndEditing:(UITextView *)textView{
-    if(textView.tag==100){
-        self.examineText=textView.text;
-    };
-}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if (range.location>=40)
@@ -191,18 +194,22 @@
 -(void)sendAction{
     NSLog(@"send======%@",self.from_p_id);
     NSLog(@"申请理由========%@",self.examineText);
-    if (self.examineText==nil) {
+    if (self.examineText==nil||[self.examineText isEqualToString:@""]) {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"不填写任何申请理由？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"发送", nil];
         [alert show];
     }
     else{
-        [self sendReason];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"发送加入申请" message:@"你的请求会在30分钟内得到组织者的回复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"发送", nil];
+        [alert show];
     }
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex==1) {
+    if (buttonIndex==1&&temp==2) {
         [self sendReason];
+    }
+    if (buttonIndex==0&&temp==1) {
+        [self sendData];
     }
 }
 //******************************给服务器上传申请理由 end************************************
@@ -230,12 +237,14 @@
 -(void)rightAction{
     NSLog(@"确定");
     
-    if (self.examineText==nil||self.phone==nil) {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"请填写完整信息" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    if (self.examineText==nil||self.phone==nil||[self.examineText isEqualToString:@""]||[self.phone isEqualToString:@""]) {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"请填写完整信息" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
-    else
-        [self sendData];
+    else{
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"派对创建成功！" message:@"处于“筹备”中的派对会存在3个小时，快去召集你的伙伴加入让派对 顺利成行吧！" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
 }
 
 -(void)sendData{
@@ -277,23 +286,6 @@
                        NSURL* url=[NSURL URLWithString:strURL];
                        ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
                        
-                       NSLog(@"self.sinaArray=====%@",self.sinaArray);
-                       
-                       for (int i=0; i<[self.friendId count]; i++) {
-                           if(i==0)
-                               [stringFriId appendFormat:@"%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
-                           else
-                               [stringFriId appendFormat:@",%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
-                       }
-                       NSMutableString *sinaFriId=[[NSMutableString alloc]init];
-                       
-                       for (int i=0; i<[sinaArray count]; i++) {
-                           if(i==0)
-                               [sinaFriId appendFormat:@"%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"id"]];
-                           else
-                               [sinaFriId appendFormat:@",%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"id"]];
-                       }
-                       
                        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
                        self.from_time=[formatter stringFromDate:self.time];
@@ -329,7 +321,6 @@
                        NSLog(@"self.examineText=======%@",self.examineText);
                        NSLog(@"self.phone=======%@",self.phone);
                        NSLog(@"stringFriId====%@",stringFriId);
-                       NSLog(@"sinaFriId====%@",sinaFriId);
                        //rrequest.delegate=self;
                        [rrequest startSynchronous];
                        dispatch_async(dispatch_get_main_queue(), ^{
@@ -389,8 +380,7 @@
                        });
                    });
     
-    backSpot=2;
-    [self back];
+   [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 //******************************上传派对详细信息 end************************************
@@ -476,9 +466,7 @@
 {
     [[ASIHTTPRequest sharedQueue] cancelAllOperations];
     //中断之前的网络请求
-    if(backSpot==2) [self.navigationController popToRootViewControllerAnimated:YES];
-    else
-        [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
