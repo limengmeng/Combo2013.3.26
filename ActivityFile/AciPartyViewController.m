@@ -19,6 +19,7 @@
 @synthesize stringNamePID;
 @synthesize userUUid;
 @synthesize P_label;
+@synthesize lat,lng;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,18 +53,19 @@
     flag=0;
     self.view.backgroundColor=[UIColor colorWithRed:248.0/255 green:248.0/255 blue:248.0/255 alpha:1];
     [self getUUidForthis];
-
-    NSString* str=[NSString stringWithFormat:@"mac/party/IF00104?uuid=%@&&c_id=%@",userUUid,stringNamePID];
-    NSString *stringName=globalURL(str);
-    NSLog(@"活动中的party:接口104：网址:%@",stringName);
-    NSURL* url=[NSURL URLWithString:stringName];
-    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-    request.delegate = self;
-    request.shouldAttemptPersistentConnection = NO;
-    [request setValidatesSecureCertificate:NO];
-    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-    [request setDidFailSelector:@selector(requestDidFailed:)];
-    [request startAsynchronous];
+    //=========获取位置==============================
+    locationMamager=[[CLLocationManager alloc]init];
+    //设置委托
+    locationMamager.delegate=self;
+    //设置精度为最优
+    locationMamager.desiredAccuracy=kCLLocationAccuracyBest;
+    //设置距离筛选器
+    locationMamager.distanceFilter=100.0f;
+    locationMamager.headingFilter=0.1;
+    //开始更新数据
+    [locationMamager startUpdatingLocation];
+    [locationMamager startUpdatingHeading];
+    NSLog(@"获取你的经纬度：：：：：：：：经度:%g      纬度:%g",lng,lat);
 
 	// Do any additional setup after loading the view.
     tableview=[[UITableView alloc]initWithFrame:mainscreen style:UITableViewStyleGrouped];
@@ -75,6 +77,26 @@
     
     [self.view addSubview:tableview];
 }
+//=============经纬度代理方法=========================================
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    //    log.text=[NSString stringWithFormat:@"%g",newLocation.coordinate.longitude];
+    //    lat.text=[NSString stringWithFormat:@"%g",newLocation.coordinate.latitude];
+    lng=newLocation.coordinate.longitude;
+    lat=newLocation.coordinate.latitude;
+    NSLog(@"获取你的经纬度：：：：：：：：经度:%g      纬度:%g",lng,lat);
+    NSString* str=[NSString stringWithFormat:@"mac/party/IF00104?uuid=%@&&c_id=%@&&lat=%f&&lng=%f&&&&from=%d",userUUid,stringNamePID,self.lat,self.lng,1];
+    NSString *stringName=globalURL(str);
+    NSLog(@"活动中的party:接口104：网址:%@",stringName);
+    NSURL* url=[NSURL URLWithString:stringName];
+    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+    request.delegate = self;
+    request.shouldAttemptPersistentConnection = NO;
+    [request setValidatesSecureCertificate:NO];
+    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+    [request setDidFailSelector:@selector(requestDidFailed:)];
+    [request startAsynchronous];
+}
+
 -(void)requestDidFailed:(ASIHTTPRequest *)request
 {
     NSLog(@"wang luo bu gei li");
@@ -387,9 +409,9 @@
     else{
         //加载更多，所有
         flag++;
-        NSString* str=[NSString stringWithFormat:@"mac/party/IF00104?uuid=%@&&c_id=%@&&from=%d",userUUid,stringNamePID,[self.sumArray count]];
+        NSString* str=[NSString stringWithFormat:@"mac/party/IF00104?uuid=%@&&c_id=%@&&lat=%f&&lng=%f&&&&from=%d",userUUid,stringNamePID,self.lat,self.lng,[self.sumArray count]];
         NSString *stringUrl=globalURL(str);
-        NSLog(@"接口6:%@",stringUrl);
+        NSLog(@"接口104:%@",stringUrl);
         NSURL* url=[NSURL URLWithString:stringUrl];
         ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
         request.delegate = self;

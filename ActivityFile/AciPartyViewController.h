@@ -11,14 +11,16 @@
 #import "QuartzCore/QuartzCore.h"
 #import "ASIHTTPRequest.h"
 #import "PartyDetialLastViewController.h"
-
-@interface AciPartyViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,ASIHTTPRequestDelegate,UIScrollViewDelegate>
+#import <CoreLocation/CoreLocation.h>
+@interface AciPartyViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,ASIHTTPRequestDelegate,UIScrollViewDelegate,CLLocationManagerDelegate>
 {
     BOOL isLoading;
     PartyDetialLastViewController * partyDetialLastViewController;
     int flag;
     int total;//本次接口返回的party数量
-    
+    CLLocationManager *locationMamager;
+    CGFloat lat;//纬度
+    CGFloat lng;//经度
     UITableView *tableview;
     NSMutableArray* sumArray;//活动里面总的信息
     NSString *stringLable;//活动标签
@@ -29,6 +31,7 @@
     NSString *userUUid;
     NSString* P_label;
 }
+@property float lat,lng;
 @property (strong,nonatomic) NSString* P_label;
 @property (nonatomic,retain) NSString *userUUid;
 @property (strong,nonatomic) UITableView* tableview;
