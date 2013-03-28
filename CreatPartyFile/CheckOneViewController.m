@@ -14,7 +14,7 @@
 #import "CreatPartyViewController.h"
 #import "WeiboAccount.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import "SVProgressHUD.h"
 NSInteger prerow=-1;
 @interface CheckOneViewController ()
 
@@ -572,7 +572,8 @@ NSInteger prerow=-1;
             //[request setDelegate:self];
             [request startAsynchronous];
         }
-        
+        [SVProgressHUD show];
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(show) userInfo:nil repeats:NO];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     else{
@@ -619,6 +620,10 @@ NSInteger prerow=-1;
 //    }
 }
 //******************************上传邀请好友信息 end************************************
+
+-(void)show{
+    [SVProgressHUD dismissWithSuccess:@"成功发送邀请！"];
+}
 
 //******************************删除好友************************************
 

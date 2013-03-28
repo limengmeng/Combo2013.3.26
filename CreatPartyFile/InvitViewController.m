@@ -72,7 +72,7 @@
     //******************************确定按钮************************************
     if(temp==1){
         UIButton* donebutton=[UIButton  buttonWithType:UIButtonTypeCustom];
-        donebutton.frame=CGRectMake(0.0, 0.0, 50, 31);
+        donebutton.frame=CGRectMake(0.0, 0.0, 44, 35);
         [donebutton setImage:[UIImage imageNamed:@"done"] forState:UIControlStateNormal];
         [donebutton addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchDown];
         UIBarButtonItem* Makedone=[[UIBarButtonItem alloc]initWithCustomView:donebutton];
@@ -80,7 +80,7 @@
     }
     else if(temp==2){
         UIButton* donebutton=[UIButton  buttonWithType:UIButtonTypeCustom];
-        donebutton.frame=CGRectMake(0.0, 0.0, 50, 31);
+        donebutton.frame=CGRectMake(0.0, 0.0, 44, 35);
         [donebutton setImage:[UIImage imageNamed:@"fasong"] forState:UIControlStateNormal];
         [donebutton addTarget:self action:@selector(sendAction) forControlEvents:UIControlEventTouchDown];
         UIBarButtonItem* Makedone=[[UIBarButtonItem alloc]initWithCustomView:donebutton];
@@ -117,12 +117,12 @@
         uilabel.text=@"申请理由...";
         uilabel.font=[UIFont systemFontOfSize:14];
         
-//        UILabel *intro=[[UILabel alloc]initWithFrame:CGRectMake(35, 129, 290, 40)];
-//        intro.text=@"填写活动名称和活动时间 让你的活动更具体";
-//        intro.font=[UIFont fontWithName:@"Helvetica-Bold" size:13.0];
-//        intro.textColor=[UIColor colorWithRed:146.0/255 green:146.0/255 blue:146.0/255 alpha:1];
-//        intro.backgroundColor=[UIColor clearColor];
-//        [self.view addSubview:intro];
+        UILabel *intro=[[UILabel alloc]initWithFrame:CGRectMake(35, 129, 290, 40)];
+        intro.text=@"加入请求会在30分钟内得到组织者的回复";
+        intro.font=[UIFont fontWithName:@"Helvetica-Bold" size:13.0];
+        intro.textColor=[UIColor colorWithRed:146.0/255 green:146.0/255 blue:146.0/255 alpha:1];
+        intro.backgroundColor=[UIColor clearColor];
+        [self.view addSubview:intro];
     }
     uilabel.enabled = NO;//lable必须设置为不可用
     uilabel.backgroundColor = [UIColor clearColor];
@@ -208,18 +208,13 @@
         [alert show];
     }
     else{
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"发送加入申请" message:@"你的请求会在30分钟内得到组织者的回复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"发送", nil];
-        [alert show];
+        [self sendReason];
+        [SVProgressHUD show];
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(show) userInfo:nil repeats:NO];
     }
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex==1&&temp==2) {
-        [self sendReason];
-        [SVProgressHUD show];
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(show) userInfo:nil repeats:NO];
-        
-    }
     if (buttonIndex==0&&temp==1) {
         [self sendData];
     }
