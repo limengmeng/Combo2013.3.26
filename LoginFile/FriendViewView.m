@@ -11,6 +11,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SVProgressHUD.h"
 
 @implementation FriendViewView
 @synthesize buttonAffirm,buttonCancel;
@@ -254,10 +255,13 @@
     NSLog(@"%d",idx);
     NSLog(@"快捷键，申请添加好友");
     NSLog(@"申请添加好友,接口IF00012");
-    UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"确认添加好友?" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
-    [alert show];
+    [SVProgressHUD show];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(show) userInfo:nil repeats:NO];
 }
 
+-(void)show{
+    [SVProgressHUD dismissWithSuccess:@"发送好友申请"];
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.sumArray count];

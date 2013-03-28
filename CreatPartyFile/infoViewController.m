@@ -262,15 +262,23 @@
 
 -(void)deleFriend:(id)sender
 {
-    NSString* str=@"mac/user/IF00022";
-    NSString* strURL=globalURL(str);
-    NSURL* url=[NSURL URLWithString:strURL];
-    ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
-    [rrequest setPostValue:self.userUUid forKey:@"uuid"];
-    [rrequest setPostValue:self.user_id  forKey:@"user_id"];
-    [rrequest startSynchronous];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"从好友列表中删除此人？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
 }
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==1) {
+        NSString* str=@"mac/user/IF00022";
+        NSString* strURL=globalURL(str);
+        NSURL* url=[NSURL URLWithString:strURL];
+        ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
+        [rrequest setPostValue:self.userUUid forKey:@"uuid"];
+        [rrequest setPostValue:self.user_id  forKey:@"user_id"];
+        [rrequest startSynchronous];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ((indexPath.section==2)&&(indexPath.row==1)) {
