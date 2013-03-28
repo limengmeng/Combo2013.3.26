@@ -14,5 +14,5 @@
 #define mainscreen [UIScreen mainScreen].bounds
 #define mainscreenhight [UIScreen mainScreen].bounds.size.height
 #define globalURL(str) [NSString stringWithFormat:@"http://42.120.21.225/che/%@",str]
-#define mytotal 20
+#define mytotal 10
 #endif

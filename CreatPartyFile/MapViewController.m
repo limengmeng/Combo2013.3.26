@@ -58,6 +58,7 @@ int flag=0;
 - (void)viewDidLoad
 {
     flag=0;
+    maSearch=[MASearch maSearchWithDelegate:self];
     NSMutableString* str=[[NSMutableString alloc]init];
     self.city=str;
     NSMutableString* localstr=[[NSMutableString alloc]init];
@@ -151,41 +152,42 @@ int flag=0;
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    UITextField* searchField=[[searchBar subviews] lastObject];
-    [searchField resignFirstResponder];
-    [NSThread detachNewThreadSelector:@selector(searchPlace) toTarget:self withObject:nil];
-    //[self searchPlace:searchBar];
+    if(searchBar.text==nil||searchBar.text==@""){
+        NSLog(@"+++++请输入关键字");
+    }else{
+        MAGeoCodingSearchOption *searchOptions=[[MAGeoCodingSearchOption alloc] init];
+        searchOptions.config=@"GOC";
+        searchOptions.address=searchBar.text;
+        [maSearch geoCodingSearchWithOption:searchOptions];
+    }
+    [searchBar resignFirstResponder];
     
 }
 
-
--(void)searchPlace
-{
-    UITextField* searchField=[[mySearchBar subviews] lastObject];
-    NSLog(@"%@",searchField.text);
-    NSString *urlStr = [[NSString stringWithFormat:@"http://maps.apple.com/maps/geo?q=%@&output=csv",searchField.text] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *apiResponse = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlStr] encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"%@",apiResponse);
-    if (apiResponse.length != 0) {
-        NSArray *array = [apiResponse componentsSeparatedByString:@","];
-        NSLog(@"%@",array);
-        lat = [[array objectAtIndex:2] floatValue];
-        lng = [[array objectAtIndex:3] floatValue];
-        NSLog(@"搜索地图解析出来的经纬度：：：%f,%f",lat,lng);
-        float zoomLevel = 0.01;
-        //NSLog(@"%f,%f",map.userLocation.coordinate.latitude,map.userLocation.coordinate.longitude);
-        MKCoordinateRegion region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(lat, lng),MKCoordinateSpanMake(zoomLevel, zoomLevel));
-        [map setRegion:[map regionThatFits:region] animated:YES];
-
-        [self MakeAnnotation];
+-(void)geoCodingSearch:(MAGeoCodingSearchOption*)geoCodingSearchOption Result:(MAGeoCodingSearchResult*)result{
+    for(MAGeoPOI *poi in result.geoCodingArray){
         
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"无法查找到您需要的位置，请检查输入或网络连接" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+        NSLog(@"+++name=%@+level=%@+x=%@+y=%@+address=%@+province=%@+city=%@+district=%@+range=%@+",poi.name,poi.level,poi.x,poi.y,poi.address,poi.province,poi.city,poi.district,poi.range);
+        lat=[poi.y doubleValue];
+        lng=[poi.x doubleValue];
+        CustomAnnotation* pointAnnotation = nil;
+        pointAnnotation = [[CustomAnnotation alloc] init];
+        pointAnnotation.coordinate = CLLocationCoordinate2DMake(lat, lng);
+        MKCoordinateRegion region = MKCoordinateRegionMake(pointAnnotation.coordinate,MKCoordinateSpanMake(0.01, 0.01));
+        [self.map setRegion:[self.map regionThatFits:region] animated:YES];
+        
+        [self MakeAnnotation];
     }
     
 }
+
+
+-(NSString*)keyForSearch
+{
+    return @"81a899fc6aafa7a7e52e9421d7f05537";
+}
+
+
 - (void)showDetails
 {
 //    NSLog(@"showDetails button clicked!");

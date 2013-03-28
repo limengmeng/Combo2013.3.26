@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "MASearch.h"
 @class CustomAnnotation;
 @class CreatBeforeViewController;
 
@@ -15,14 +16,15 @@
 -(void)passLat:(float)_lat andLng:(float)_lng;
 -(void)passCity:(NSString*)city andLocal:(NSString*)local;
 @end
-@interface MapViewController : UIViewController<MKMapViewDelegate,UISearchBarDelegate>
+@interface MapViewController : UIViewController<MKMapViewDelegate,UISearchBarDelegate,MASearchDelegate>
 {
+    MASearch *maSearch;
     id<passValueDelegate> delegate;
     MKMapView* map;
     CLGeocoder* geocoder;
     UISearchBar* mySearchBar;
-    float lat;
-    float lng;
+    double lat;
+    double lng;
     UILabel* label;
     NSMutableString* city;
     NSMutableString* local;
