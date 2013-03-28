@@ -193,7 +193,7 @@
                 {
                     NSLog(@"wwwwwwwwwwwwwwwwwww%@",self.userUUid);
                     NSString *stringInStatues=[dicParty objectForKey:@"IN_STATUS"];
-                    NSString *stringTakeStatues=[dicParty objectForKey:@"take_status"];
+                    NSString *stringTakeStatues=[dicParty objectForKey:@"USER_STATUS"];
                     if ([[dicParty objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID])
                     {
                         if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {

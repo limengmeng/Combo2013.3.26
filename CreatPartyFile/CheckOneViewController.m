@@ -580,28 +580,18 @@ NSInteger prerow=-1;
         NSLog(@"self.choiceFriends=======%@",sinaFriends);
         
         NSLog(@"传值。。。。。。%@,%@",self.check_time,self.check_name);
-        
         party=[[CreatPartyViewController alloc]init];
-        
         party.from_P_type=self.type;
-        
         party.P_title=self.check_name;
-        
         party.P_time=self.check_time;
-        
         party.map_city=self.check_city;
-        
         party.map_local=self.check_local;
-        
         party.friengArr=choiceFriends;
-        
         party.sinaArr=sinaFriends;
-        
         party.lat=self.lat;
-        
         party.lng=self.lng;
-        
         party.time=self.time;
+        party.from_C_id=self.from_c_id;
         
         NSLog(@"self.choiceFriends=======%@",choiceFriends);
         NSLog(@"self.choiceFriends=======%@",sinaFriends);

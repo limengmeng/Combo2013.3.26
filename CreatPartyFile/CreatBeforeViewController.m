@@ -206,25 +206,16 @@
         
         NSLog(@"传值。。。。。====%@,%@",phone.text,name.text);
         friendList=[[CheckOneViewController alloc]init];
-        
         friendList.type=self.type;
-        
         friendList.spot=1;
-        
         friendList.check_time=phone.text;
-        
         friendList.check_name=name.text;
-        
         friendList.check_city=self.city;
-        
         friendList.check_local=self.local;
-        
         friendList.lng=self.lng;
-        
         friendList.lat=self.lat;
-        
         friendList.time=time;
-        
+        friendList.from_c_id=self.c_id;
         NSLog(@"传值。。。。。====%@",friendList.time);
 
          NSLog(@"传值。。。。。====%@,%@",friendList.check_name,friendList.check_time);
