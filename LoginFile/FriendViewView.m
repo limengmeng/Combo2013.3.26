@@ -256,11 +256,10 @@
     NSLog(@"快捷键，申请添加好友");
     NSLog(@"申请添加好友,接口IF00012");
     [SVProgressHUD show];
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(show) userInfo:nil repeats:NO];
 }
 
 -(void)show{
-    [SVProgressHUD dismissWithSuccess:@"发送好友申请"];
+    [SVProgressHUD dismissWithSuccess:@"发送好友申请" afterDelay:1.1];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
