@@ -100,67 +100,105 @@
         //NSLog(@"%@",response);
         NSError* error;
         NSDictionary* bizDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
+        NSLog(@"rrrrrrrrrrrrrrr%@",bizDic);
         self.party =[bizDic objectForKey:@"partys"];
+        NSLog(@"hhhhhhhhhhhhhhhhhhhhhh%@",party);
         self.creatUser=[party objectForKey:@"creaters"];
         self.joinUser=[party objectForKey:@"participants"];
         NSDictionary* userdict=[self.creatUser objectAtIndex:0];
         label.text=[userdict objectForKey:@"USER_NICK"];
         NSString *stringPartyStatues=[party objectForKey:@"P_STATUS"];
-        if ([[stringPartyStatues substringToIndex:1]isEqualToString:@"Y"]||[[stringPartyStatues substringToIndex:1]isEqualToString:@"W"]) {
-            UIButton *buttonJoin=[UIButton buttonWithType:UIButtonTypeCustom];
+        NSString *userStringStatues=[bizDic objectForKey:@"userStatus"];
+        UIButton *buttonJoin=[UIButton buttonWithType:UIButtonTypeCustom];
+        if ([[userStringStatues substringToIndex:1]isEqualToString:@"N"]) {
             [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
             [buttonJoin addTarget:self action:@selector(supplyParty) forControlEvents:UIControlEventTouchUpInside];//申请加入派对
-            for (NSDictionary *dicJion in [party objectForKey:@"creaters"])
-            {
-                NSString *stringInStatues=[dicJion objectForKey:@"IN_STATUS"];
-                NSString *stringTakeStatues=[dicJion objectForKey:@"take_status"];
-                if ([[dicJion objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID] ) {
-                    
-                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
-                        [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
-                        [buttonJoin addTarget:self action:@selector(noOutParty) forControlEvents:UIControlEventTouchUpInside];//是联合创建人不能推出派对
-                        numFlogJoin=1;
-                    }
-                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
-                        [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-                        [buttonJoin addTarget:self action:@selector(agreeJoinParty) forControlEvents:UIControlEventTouchUpInside];//同意联合创建
-                        numFlogJoin=1;
-                    }
-                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]) {
-                        [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-                        [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//等待同意
-                        numFlogJoin=1;
+            buttonJoin.frame=CGRectMake(0,mainscreenhight-107, 160, 44);
+            [self.view addSubview:buttonJoin];
+            UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(158, mainscreenhight-100, 2, 30)];
+            imageView.image=[UIImage imageNamed:@"CutOffRule.png"];
+            
+            [self.view addSubview:imageView];
+            //==========邀请按钮===============================
+            UIButton *inviteButton =[UIButton buttonWithType:UIButtonTypeCustom];
+            [inviteButton setImage:[UIImage imageNamed:@"Pinvite"] forState:UIControlStateNormal];
+            [inviteButton addTarget:self action:@selector(showFriendView:) forControlEvents:UIControlEventTouchUpInside];
+            [inviteButton setFrame:CGRectMake(160,mainscreenhight-107, 160, 44)];
+            [self.view addSubview:inviteButton];
+            
+        }
+        if ([[userStringStatues substringToIndex:1]isEqualToString:@"W"]) {
+            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+            [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//等待同意
+            buttonJoin.frame=CGRectMake(0,mainscreenhight-107, 160, 44);
+            [self.view addSubview:buttonJoin];
+            UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(158, mainscreenhight-100, 2, 30)];
+            imageView.image=[UIImage imageNamed:@"CutOffRule.png"];
+            
+            [self.view addSubview:imageView];
+            //==========邀请按钮===============================
+            UIButton *inviteButton =[UIButton buttonWithType:UIButtonTypeCustom];
+            [inviteButton setImage:[UIImage imageNamed:@"Pinvite"] forState:UIControlStateNormal];
+            [inviteButton addTarget:self action:@selector(showFriendView:) forControlEvents:UIControlEventTouchUpInside];
+            [inviteButton setFrame:CGRectMake(160,mainscreenhight-107, 160, 44)];
+            [self.view addSubview:inviteButton];
+            
+        }
+        if ([[userStringStatues substringToIndex:1]isEqualToString:@"Y"]) {
+            
+            if ([[stringPartyStatues substringToIndex:1]isEqualToString:@"Y"]||[[stringPartyStatues substringToIndex:1]isEqualToString:@"W"]) {
+                for (NSDictionary *dicJion in [party objectForKey:@"creaters"])
+                {
+                    NSString *stringInStatues=[dicJion objectForKey:@"IN_STATUS"];
+                    NSString *stringTakeStatues=[dicJion objectForKey:@"take_status"];
+                    if ([[dicJion objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID] ) {
+                        
+                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
+                            [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
+                            [buttonJoin addTarget:self action:@selector(noOutParty) forControlEvents:UIControlEventTouchUpInside];//是联合创建人不能推出派对
+                            numFlogJoin=1;
+                        }
+                        NSLog(@"eeeeeeeeeeeeeeeeeee%@,,,%@",stringInStatues,stringTakeStatues);
+                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
+                            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                            [buttonJoin addTarget:self action:@selector(agreeJoinParty) forControlEvents:UIControlEventTouchUpInside];//同意联合创建
+                            numFlogJoin=1;
+                        }
+                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]) {
+                            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                            [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//等待同意
+                            numFlogJoin=1;
+                        }
                     }
                 }
-            }
-            for ( NSDictionary *dicParty in [party objectForKey:@"participants"])
-            {
-                NSString *stringInStatues=[dicParty objectForKey:@"IN_STATUS"];
-                NSString *stringTakeStatues=[dicParty objectForKey:@"take_status"];
-                if ([[dicParty objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID])
+                for ( NSDictionary *dicParty in [party objectForKey:@"participants"])
                 {
-                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
-                        [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
-                        [buttonJoin addTarget:self action:@selector(outParty) forControlEvents:UIControlEventTouchUpInside];//可以退出派对不去
-                        numFlogJoin=1;
-                    }
-                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
+                    NSLog(@"wwwwwwwwwwwwwwwwwww%@",self.userUUid);
+                    NSString *stringInStatues=[dicParty objectForKey:@"IN_STATUS"];
+                    NSString *stringTakeStatues=[dicParty objectForKey:@"take_status"];
+                    if ([[dicParty objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID])
+                    {
+                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
+                            [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
+                            [buttonJoin addTarget:self action:@selector(outParty) forControlEvents:UIControlEventTouchUpInside];//可以退出派对不去
+                            numFlogJoin=1;
+                        }
+                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
+                            
+                        }
+                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]) {
+                            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                            [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//等待同意
+                            numFlogJoin=1;
+                        }
                         
                     }
-                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]) {
-                        [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-                        [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//等待同意
-                        numFlogJoin=1;
-                    }
                     
                 }
-                
             }
             
             buttonJoin.frame=CGRectMake(0,mainscreenhight-107, 160, 44);
             [self.view addSubview:buttonJoin];
-            
-            
             UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(158, mainscreenhight-100, 2, 30)];
             imageView.image=[UIImage imageNamed:@"CutOffRule.png"];
             
@@ -691,7 +729,7 @@
     UIImageView *imageView = (UIImageView *)[flowView dequeueReusableCell];
     
     NSURL *urlPic;
-    
+    int numberFloagShowFriend=0;
     if (!imageView)
     {
         imageView = [[UIImageView alloc] init];
@@ -701,45 +739,50 @@
         
         imageView.userInteractionEnabled = YES;
         imageView.layer.borderColor=[[UIColor whiteColor] CGColor];
+        NSLog(@"yyyyyyyyyyyyyyy%d",mark);
         
-        if (mark==0) {
-            NSDictionary* userdict=[self.creatUser objectAtIndex:index];
-            urlPic=[NSURL URLWithString:[userdict objectForKey:@"USER_PIC"]];
-            int i=0;
-            for (NSDictionary *dicJion in [party objectForKey:@"creaters"])
-            {
-                NSString *stringInStatues=[dicJion objectForKey:@"IN_STATUS"];
-                NSString *stringTakeStatues=[dicJion objectForKey:@"USER_STATUS"];
-                if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"])
-                {
-                    if (i==index) {
-                        imageView.layer.borderColor=[[UIColor blackColor] CGColor];
-                    }
-                }
-                i++;
-            }
-        }
-        if (mark==1) {
-            if ([self.joinUser count]>0) {
-                
-                NSDictionary* userdict=[self.joinUser objectAtIndex:index];
-                urlPic=[NSURL URLWithString:[userdict objectForKey:@"USER_PIC"]];
-            }
-        }
         [imageView setImageWithURL:urlPic refreshCache:NO placeholderImage:[UIImage imageNamed:@"placeholderImage"]];//[UIImage imageNamed:@"13.jpg"];
         imageView.layer.borderWidth=5;
         imageView.layer.shadowColor= [UIColor blackColor].CGColor;
         imageView.layer.shadowOpacity=20;
         imageView.layer.shadowOffset = CGSizeMake(0, 3);
-        self.creatUser=[party objectForKey:@"creaters"];
-        self.joinUser=[party objectForKey:@"participants"];
+        
+        
+    }
+    imageView.layer.borderColor=[[UIColor whiteColor] CGColor];
+    if (mark==0) {
+        NSDictionary* userdict=[self.creatUser objectAtIndex:index];
+        urlPic=[NSURL URLWithString:[userdict objectForKey:@"USER_PIC"]];
+        int i=0;
+        for (NSDictionary *dicJion in [party objectForKey:@"creaters"])
+        {
+            NSString *stringInStatues=[dicJion objectForKey:@"IN_STATUS"];
+            NSString *stringTakeStatues=[dicJion objectForKey:@"USER_STATUS"];
+            if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"])
+            {
+                if (i==index) {
+                    imageView.layer.borderColor=[[UIColor blackColor] CGColor];
+                    numberFloagShowFriend=1;
+                }
+            }
+            i++;
+        }
+    }
+    if (mark==1) {
+        if ([self.joinUser count]>0) {
+            
+            NSDictionary* userdict=[self.joinUser objectAtIndex:index];
+            urlPic=[NSURL URLWithString:[userdict objectForKey:@"USER_PIC"]];
+        }
+    }
+    if (numberFloagShowFriend==0) {
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTap:)];
         [imageView addGestureRecognizer:tap];
     }
     //    imageView.image = [UIImage imageNamed:[imageArray objectAtIndex:index]];
-    [imageView setImageWithURL:urlPic refreshCache:NO placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
-    return imageView;
-}
+    NSLog(@"%@",urlPic);
+    [imageView setImageWithURL:urlPic refreshCache:YES placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+    return imageView;}
 
 -(void)doTap:(UITapGestureRecognizer *)sender
 {

@@ -185,9 +185,13 @@ int itttt=0;
 {
     
     [super viewDidDisappear:animated];
+ 
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
     [buttonNew removeFromSuperview];
     [buttonNear removeFromSuperview];
-    
 }
 - (void)viewDidLoad
 {
