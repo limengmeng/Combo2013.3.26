@@ -82,7 +82,7 @@
     //======================================
     stringA=[[NSMutableString alloc]initWithCapacity:100];
     
-        //==============================
+    //==============================
     label = [[UILabel alloc] initWithFrame:CGRectMake(70,100,180,100)];
     label.numberOfLines =0;
     label.backgroundColor = [UIColor clearColor];
@@ -177,7 +177,7 @@
                 }
                 
             }
-
+            
             buttonJoin.frame=CGRectMake(0,mainscreenhight-107, 160, 44);
             [self.view addSubview:buttonJoin];
             
@@ -216,7 +216,7 @@
 -(void)agreeJoinParty
 {
     NSLog(@"同意创建派对");
-    numFlogLogout=1;
+    //numFlogLogout=1;
     NSString* str=@"mac/party/IF00053";
     NSString* strURL=globalURL(str);
     NSURL* url=[NSURL URLWithString:strURL];
@@ -224,6 +224,18 @@
     [request setPostValue:self.userUUid forKey: @"uuid"];
     [request setPostValue:self.p_id forKey:@"p_id"];
     [request startSynchronous];
+    
+    NSString* strr=[NSString stringWithFormat:@"mac/party/IF00105?p_id=%@&&uuid=%@",p_id,userUUid];
+    NSString *stringPr=globalURL(strr);
+    NSLog(@"shuchuwangzhi::::::::::::::::%@",stringPr);
+    NSURL* urlr=[NSURL URLWithString:stringPr];
+    ASIHTTPRequest* requestr=[ASIHTTPRequest requestWithURL:urlr];
+    [requestr setDelegate:self];
+    requestr.shouldAttemptPersistentConnection = NO;
+    [requestr setValidatesSecureCertificate:NO];
+    [requestr setDefaultResponseEncoding:NSUTF8StringEncoding];
+    [requestr setDidFailSelector:@selector(requestDidFailed:)];
+    [requestr startAsynchronous];
 }
 -(void)noOutParty
 {
@@ -298,13 +310,13 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-
+    
     return 120;
 }
 //=====================行的间距======================================================
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     int row=[indexPath row];
     if (row==0) {
         return 22;
@@ -340,7 +352,7 @@
     cell.selectionStyle=UITableViewCellAccessoryNone;
     if (indexPath.row==0) {
         
-        cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"party0"]];        
+        cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"party0"]];
         //不属于任何活动
         if ([[party objectForKey:@"P_TYPE"]intValue]==1)
         {
@@ -397,7 +409,7 @@
     if (indexPath.row==3) {
         cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"party3"]];
         return cell;
-         
+        
     }
     if (indexPath.row==4) {
         cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"party4"]];
@@ -419,12 +431,12 @@
         [cell setFrame:cellFrame];
         return cell;
     }
-        if (indexPath.row==5) {
+    if (indexPath.row==5) {
         cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"party5"]];
         return cell;
     }
-        
-
+    
+    
     return cell;
 }
 //=========================界面跳转=======================================
@@ -686,17 +698,6 @@
     UIImageView *imageView = (UIImageView *)[flowView dequeueReusableCell];
     
     NSURL *urlPic;
-    if (mark==0) {
-        NSDictionary* userdict=[self.creatUser objectAtIndex:index];
-        urlPic=[NSURL URLWithString:[userdict objectForKey:@"USER_PIC"]];
-    }
-    if (mark==1) {
-        if ([self.joinUser count]>0) {
-            
-            NSDictionary* userdict=[self.joinUser objectAtIndex:index];
-            urlPic=[NSURL URLWithString:[userdict objectForKey:@"U_PIC"]];
-        }
-    }
     
     if (!imageView)
     {
@@ -706,13 +707,39 @@
         imageView.layer.masksToBounds = YES;
         
         imageView.userInteractionEnabled = YES;
+        imageView.layer.borderColor=[[UIColor whiteColor] CGColor];
         
+        if (mark==0) {
+            NSDictionary* userdict=[self.creatUser objectAtIndex:index];
+            urlPic=[NSURL URLWithString:[userdict objectForKey:@"USER_PIC"]];
+            int i=0;
+            for (NSDictionary *dicJion in [party objectForKey:@"creaters"])
+            {
+                NSString *stringInStatues=[dicJion objectForKey:@"IN_STATUS"];
+                NSString *stringTakeStatues=[dicJion objectForKey:@"USER_STATUS"];
+                if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"])
+                {
+                    if (i==index) {
+                        imageView.layer.borderColor=[[UIColor blackColor] CGColor];
+                    }
+                }
+                i++;
+            }
+        }
+        if (mark==1) {
+            if ([self.joinUser count]>0) {
+                
+                NSDictionary* userdict=[self.joinUser objectAtIndex:index];
+                urlPic=[NSURL URLWithString:[userdict objectForKey:@"USER_PIC"]];
+            }
+        }
         [imageView setImageWithURL:urlPic refreshCache:NO placeholderImage:[UIImage imageNamed:@"placeholderImage"]];//[UIImage imageNamed:@"13.jpg"];
-        //imageView.layer.borderWidth=5;
+        imageView.layer.borderWidth=5;
         imageView.layer.shadowColor= [UIColor blackColor].CGColor;
         imageView.layer.shadowOpacity=20;
         imageView.layer.shadowOffset = CGSizeMake(0, 3);
-        imageView.layer.borderColor=[[UIColor whiteColor] CGColor];
+        self.creatUser=[party objectForKey:@"creaters"];
+        self.joinUser=[party objectForKey:@"participants"];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTap:)];
         [imageView addGestureRecognizer:tap];
     }
@@ -749,7 +776,7 @@
         addrdetail.C_id=[party objectForKey:@"C_ID"];
         [self.navigationController pushViewController:addrdetail animated:YES];
     }
-
+    
     if ([[party objectForKey:@"P_TYPE"]intValue]==2)
     {
         acdetail=[[DetailViewController alloc]init];

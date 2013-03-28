@@ -177,8 +177,8 @@ int itttt=0;
     [buttonNew setBackgroundImage:[UIImage imageNamed:@"nearbyai"] forState:UIControlStateSelected];
     [buttonNew addTarget:self action:@selector(mesActionbutton:) forControlEvents:UIControlEventTouchUpInside];
     [buttonNew setSelected:NO];
-    [self.tabBarController.view addSubview:buttonNew];
-    [self.tabBarController.view addSubview:buttonNear];
+    [self.navigationController.view addSubview:buttonNew];
+    [self.navigationController.view addSubview:buttonNear];
     
 }
 -(void)viewDidDisappear:(BOOL)animated
