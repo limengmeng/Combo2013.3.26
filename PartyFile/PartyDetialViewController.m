@@ -123,48 +123,73 @@
         NSLog(@"hhhhhhhhhhhhhhhhhhhhhh%@",party);
         self.creatUser=[party objectForKey:@"creaters"];
         self.joinUser=[party objectForKey:@"participants"];
+        self.title=[party objectForKey:@"P_TITLE"];
         NSDictionary* userdict=[self.creatUser objectAtIndex:0];
         label.text=[userdict objectForKey:@"USER_NICK"];
         NSString *stringPartyStatues=[party objectForKey:@"P_STATUS"];
         NSString *userStringStatues=[bizDic objectForKey:@"userStatus"];
         UIButton *buttonJoin=[UIButton buttonWithType:UIButtonTypeCustom];
-        if ([[userStringStatues substringToIndex:1]isEqualToString:@"N"]) {
-            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-            [buttonJoin addTarget:self action:@selector(supplyParty) forControlEvents:UIControlEventTouchUpInside];//申请加入派对
-            buttonJoin.frame=CGRectMake(0,mainscreenhight-107, 160, 44);
-            [self.view addSubview:buttonJoin];
-            UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(158, mainscreenhight-100, 2, 30)];
-            imageView.image=[UIImage imageNamed:@"CutOffRule.png"];
-            
-            [self.view addSubview:imageView];
-            //==========邀请按钮===============================
-            UIButton *inviteButton =[UIButton buttonWithType:UIButtonTypeCustom];
-            [inviteButton setImage:[UIImage imageNamed:@"Pinvite"] forState:UIControlStateNormal];
-            [inviteButton addTarget:self action:@selector(showFriendView:) forControlEvents:UIControlEventTouchUpInside];
-            [inviteButton setFrame:CGRectMake(160,mainscreenhight-107, 160, 44)];
-            [self.view addSubview:inviteButton];
-            
-        }
-        if ([[userStringStatues substringToIndex:1]isEqualToString:@"W"]) {
-            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-            [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//等待同意
-            buttonJoin.frame=CGRectMake(0,mainscreenhight-107, 160, 44);
-            [self.view addSubview:buttonJoin];
-            UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(158, mainscreenhight-100, 2, 30)];
-            imageView.image=[UIImage imageNamed:@"CutOffRule.png"];
-            
-            [self.view addSubview:imageView];
-            //==========邀请按钮===============================
-            UIButton *inviteButton =[UIButton buttonWithType:UIButtonTypeCustom];
-            [inviteButton setImage:[UIImage imageNamed:@"Pinvite"] forState:UIControlStateNormal];
-            [inviteButton addTarget:self action:@selector(showFriendView:) forControlEvents:UIControlEventTouchUpInside];
-            [inviteButton setFrame:CGRectMake(160,mainscreenhight-107, 160, 44)];
-            [self.view addSubview:inviteButton];
-            
-        }
-        if ([[userStringStatues substringToIndex:1]isEqualToString:@"Y"]) {
-            
-            if ([[stringPartyStatues substringToIndex:1]isEqualToString:@"Y"]||[[stringPartyStatues substringToIndex:1]isEqualToString:@"W"]) {
+        if ([[stringPartyStatues substringToIndex:1]isEqualToString:@"Y"]||[[stringPartyStatues substringToIndex:1]isEqualToString:@"W"])//只有派对没有结束的时候派对下边栏才能加进去
+        {
+            if ([[userStringStatues substringToIndex:1]isEqualToString:@"N"])//未加入活动只有游客可能
+            {
+                [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                [buttonJoin addTarget:self action:@selector(supplyParty) forControlEvents:UIControlEventTouchUpInside];//申请加入派对
+            }
+            if ([[userStringStatues substringToIndex:1]isEqualToString:@"Y"])//已经加入活动，游客和联合创建者都可以进入
+            {
+                //如果是游客则进行操作,显示我不去了按钮,这个时候游客变为参与者可以选择不去参加派对了
+                for ( NSDictionary *dicParty in [party objectForKey:@"participants"])
+                {
+                    NSLog(@"wwwwwwwwwwwwwwwwwww%@",self.userUUid);
+                    NSString *stringInStatues=[dicParty objectForKey:@"IN_STATUS"];
+                    NSString *stringTakeStatues=[dicParty objectForKey:@"USER_STATUS"];
+                    if ([[dicParty objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID])
+                    {
+                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
+                            [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
+                            [buttonJoin addTarget:self action:@selector(outParty) forControlEvents:UIControlEventTouchUpInside];//可以退出派对不去
+                            numFlogJoin=1;
+                        }
+                    }
+                    
+                }
+                //参与者结束
+                //如果自己是联合创建者
+                for (NSDictionary *dicJion in [party objectForKey:@"creaters"])
+                {
+                    NSString *stringInStatues=[dicJion objectForKey:@"IN_STATUS"];
+                    NSString *stringTakeStatues=[dicJion objectForKey:@"take_status"];
+                    if ([[dicJion objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID] ) {
+                        
+                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
+                            [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
+                            [buttonJoin addTarget:self action:@selector(noOutParty) forControlEvents:UIControlEventTouchUpInside];//是联合创建人不能推出派对
+                            numFlogJoin=1;
+                        }
+                        
+                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
+                            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                            [buttonJoin addTarget:self action:@selector(agreeJoinParty) forControlEvents:UIControlEventTouchUpInside];//同意联合创建
+                            numFlogJoin=1;
+                        }
+                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]) {
+                            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                            [buttonJoin addTarget:self action:@selector(agreeJoinParty) forControlEvents:UIControlEventTouchUpInside];//同意联合创建
+                            numFlogJoin=1;
+                        }
+                    }
+                }
+                //====自己是创建者结束=============================
+                
+            }
+            if ([[userStringStatues substringToIndex:1]isEqualToString:@"W"])//等待加入派对，游客和联合创建者都可以进入
+            {
+                //如果是游客==============
+                [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//等待同意
+                //游客结束
+                //===============
                 for (NSDictionary *dicJion in [party objectForKey:@"creaters"])
                 {
                     NSString *stringInStatues=[dicJion objectForKey:@"IN_STATUS"];
@@ -184,37 +209,14 @@
                         }
                         if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]) {
                             [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-                            [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//等待同意
+                            [buttonJoin addTarget:self action:@selector(agreeJoinParty) forControlEvents:UIControlEventTouchUpInside];//同意联合创建
                             numFlogJoin=1;
                         }
                     }
                 }
-                for ( NSDictionary *dicParty in [party objectForKey:@"participants"])
-                {
-                    NSLog(@"wwwwwwwwwwwwwwwwwww%@",self.userUUid);
-                    NSString *stringInStatues=[dicParty objectForKey:@"IN_STATUS"];
-                    NSString *stringTakeStatues=[dicParty objectForKey:@"USER_STATUS"];
-                    if ([[dicParty objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID])
-                    {
-                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
-                            [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
-                            [buttonJoin addTarget:self action:@selector(outParty) forControlEvents:UIControlEventTouchUpInside];//可以退出派对不去
-                            numFlogJoin=1;
-                        }
-                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
-                            
-                        }
-                        if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]) {
-                            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-                            [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//等待同意
-                            numFlogJoin=1;
-                        }
-                        
-                    }
-                    
-                }
+                //===============
             }
-            
+            //只有派对没有结束的时候派对下边栏才能加进去
             buttonJoin.frame=CGRectMake(0,mainscreenhight-107, 160, 44);
             [self.view addSubview:buttonJoin];
             UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(158, mainscreenhight-100, 2, 30)];
@@ -227,6 +229,7 @@
             [inviteButton addTarget:self action:@selector(showFriendView:) forControlEvents:UIControlEventTouchUpInside];
             [inviteButton setFrame:CGRectMake(160,mainscreenhight-107, 160, 44)];
             [self.view addSubview:inviteButton];
+            
         }
         
         FlowView = [[PagedFlowView alloc] initWithFrame:CGRectMake(0,0,320,140)];
@@ -762,7 +765,7 @@
         {
             NSString *stringInStatues=[dicJion objectForKey:@"IN_STATUS"];
             NSString *stringTakeStatues=[dicJion objectForKey:@"USER_STATUS"];
-            if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"])
+            if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"])
             {
                 if (i==index) {
                     imageView.layer.borderColor=[[UIColor blackColor] CGColor];
