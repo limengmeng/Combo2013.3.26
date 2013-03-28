@@ -130,7 +130,7 @@
             UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
             [picimage addGestureRecognizer:singleTap];
             
-            UILabel* namelabel=[[UILabel alloc]initWithFrame:CGRectMake(70, 20, 80, 20)];
+            UILabel* namelabel=[[UILabel alloc]initWithFrame:CGRectMake(70, 20, 140, 20)];
             namelabel.backgroundColor=[UIColor clearColor];
             if ([self.dict objectForKey:@"USER_NICK"]) {
                 namelabel.text=[self.dict objectForKey:@"USER_NICK"];

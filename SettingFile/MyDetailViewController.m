@@ -252,10 +252,10 @@ static int flag=0;//标志位，标志所选择的选择器是哪一个
         label.backgroundColor=[UIColor clearColor];
         [cell.contentView addSubview:label];
        
-        UIImageView* takeimage=[[UIImageView alloc]initWithFrame:CGRectMake(272, 26, 10, 15)];
+        UIImageView* takeimage=[[UIImageView alloc]initWithFrame:CGRectMake(282, 20, 10, 15)];//CGRectMake(272, 26, 10, 15)];
         takeimage.image=[UIImage imageNamed:@"settinggo"];
         [cell.contentView addSubview:takeimage];
-       
+        
         imageview.layer.cornerRadius=6;
         imageview.layer.masksToBounds = YES;
         if (picture!=nil) {

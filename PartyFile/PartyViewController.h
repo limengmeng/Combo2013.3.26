@@ -44,6 +44,8 @@
     UIButton *buttonNew;
     UIButton *buttonNear;
     
+    UIImageView *logoimage;
+    
 }
 @property float lat,lng;
 @property (nonatomic,retain) NSString *userUUid;

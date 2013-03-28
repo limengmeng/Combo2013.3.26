@@ -402,9 +402,9 @@
 {
     NSLog(@"本次返回的数量:%d",total);
     if (total<mytotal) {
-        //返回的结果已经是所有的了，不需要在加载
-        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"全部加载完毕" message:@"所有的信息已全部返回" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
-        [alert show];
+//        //返回的结果已经是所有的了，不需要在加载
+//        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"全部加载完毕" message:@"所有的信息已全部返回" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+//        [alert show];
     }
     else{
         //加载更多，所有

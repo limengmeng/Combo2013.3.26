@@ -66,16 +66,19 @@
     [self.tabBarController.view addSubview:buttonNew];
     [self.tabBarController.view addSubview:buttonNear];
     
-    
+    logoimage=[[UIImageView alloc]initWithFrame:CGRectMake(140, 5, 40, 34)];
+    logoimage.backgroundColor=[UIColor clearColor];
+    logoimage.image=[UIImage imageNamed:@"LOGO"];
+    [self.navigationController.navigationBar addSubview:logoimage];
 }
 
--(void)viewDidDisappear:(BOOL)animated
+-(void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidDisappear:animated];
+    [super viewWillDisappear:animated];
     [buttonNew removeFromSuperview];
     [buttonNear removeFromSuperview];
+    [logoimage removeFromSuperview];
 }
-
 
 - (void)viewDidLoad
 {
@@ -179,8 +182,6 @@
     [request setDefaultResponseEncoding:NSUTF8StringEncoding];
     [request setDidFailSelector:@selector(requestDidFailed:)];
     [request startAsynchronous];
-    
-    
 }
 
 -(void)valueChanged:(id)sender
@@ -370,7 +371,7 @@
         title.textAlignment=NSTextAlignmentCenter;
         title.backgroundColor=[UIColor clearColor];
         title.textColor=[UIColor colorWithRed:83.0/255 green:83.0/255 blue:83.0/255 alpha:1];
-        title.font=[UIFont fontWithName:@"Helvetica-Bold" size:15];
+        title.font=[UIFont fontWithName:@"Helvetica-Bold" size:19];//活动字体
         title.shadowColor=[UIColor colorWithRed:115.0/255 green:151.0/255 blue:155.0/255 alpha:1];
         title.shadowOffset=CGSizeMake(2.0, 2.0);
         [cell.contentView addSubview:title];
@@ -545,10 +546,10 @@
     //接口28，需要from and to
     flag=1;
     if (total<returntotal) {
-        NSLog(@"已经是全部");
-        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"加载完毕" message:@"所有数据已经加载完毕" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
-        [alert show];
-        
+//        NSLog(@"已经是全部");
+//        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"加载完毕" message:@"所有数据已经加载完毕" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
+//        [alert show];
+//        
     }
     else
     {
@@ -572,9 +573,9 @@
 {
     flag=1;
     if (total<returntotal) {
-        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"加载完毕" message:@"所有数据已经加载完毕" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
-        [alert show];
-        
+//        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"加载完毕" message:@"所有数据已经加载完毕" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
+//        [alert show];
+//        
         
     }
     else

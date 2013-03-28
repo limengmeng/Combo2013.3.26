@@ -180,6 +180,11 @@ int itttt=0;
     [self.navigationController.view addSubview:buttonNew];
     [self.navigationController.view addSubview:buttonNear];
     
+    logoimage=[[UIImageView alloc]initWithFrame:CGRectMake(140, 5, 40, 34)];
+    logoimage.backgroundColor=[UIColor clearColor];
+    logoimage.image=[UIImage imageNamed:@"LOGO"];
+    [self.navigationController.navigationBar addSubview:logoimage];
+    
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -192,6 +197,7 @@ int itttt=0;
     [super viewWillDisappear:animated];
     [buttonNew removeFromSuperview];
     [buttonNear removeFromSuperview];
+    [logoimage removeFromSuperview];
 }
 - (void)viewDidLoad
 {
@@ -219,7 +225,7 @@ int itttt=0;
     //=====================创建=========================================================
     UIButton* creatButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [creatButton setImage:[UIImage imageNamed:@"make"] forState:UIControlStateNormal];
-    creatButton.frame=CGRectMake(0.0, 0.0, 50, 31);
+    creatButton.frame=CGRectMake(0.0, 0.0, 44, 35);
     [creatButton addTarget:self action:@selector(CreateNewAct) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:creatButton];
     UITableView* table=[[UITableView alloc]initWithFrame:mainscreen style:UITableViewStyleGrouped];
@@ -231,23 +237,23 @@ int itttt=0;
     self.tableViewParty.dataSource=self;
     
     Allparty=[UIButton buttonWithType:UIButtonTypeCustom];
-    Allparty.frame=CGRectMake(0, 0, 105, 32);
-    [Allparty setImage:[UIImage imageNamed:@"quanbu1"] forState:UIControlStateNormal];
-    [Allparty setImage:[UIImage imageNamed:@"quanbu2"] forState:UIControlStateSelected];
+    Allparty.frame=CGRectMake(0, 0, 103, 31);
+    [Allparty setImage:[UIImage imageNamed:@"1lable"] forState:UIControlStateNormal];
+    [Allparty setImage:[UIImage imageNamed:@"11lable"] forState:UIControlStateSelected];
     [Allparty setSelected:YES];
     
     
     ReliableParty=[UIButton buttonWithType:UIButtonTypeCustom];
-    ReliableParty.frame=CGRectMake(103, 0, 115, 32);
-    [ReliableParty setImage:[UIImage imageNamed:@"kaopu1"] forState:UIControlStateNormal];
-    [ReliableParty setImage:[UIImage imageNamed:@"kaopu2"] forState:UIControlStateSelected];
+    ReliableParty.frame=CGRectMake(103, 0, 114, 31);
+    [ReliableParty setImage:[UIImage imageNamed:@"2lable"] forState:UIControlStateNormal];
+    [ReliableParty setImage:[UIImage imageNamed:@"22lable"] forState:UIControlStateSelected];
     [ReliableParty setSelected:NO];
     
     
     MyParty=[UIButton buttonWithType:UIButtonTypeCustom];
-    MyParty.frame=CGRectMake(217, 0, 105, 32);
-    [MyParty setImage:[UIImage imageNamed:@"wode1"] forState:UIControlStateNormal];
-    [MyParty setImage:[UIImage imageNamed:@"wode2"] forState:UIControlStateSelected];
+    MyParty.frame=CGRectMake(216, 0, 103, 31);
+    [MyParty setImage:[UIImage imageNamed:@"3lable"] forState:UIControlStateNormal];
+    [MyParty setImage:[UIImage imageNamed:@"33lable"] forState:UIControlStateSelected];
     [MyParty setSelected:NO];
     
     [self.view addSubview:Allparty];
@@ -258,7 +264,6 @@ int itttt=0;
     [MyParty addTarget:self action:@selector(myButtonPressed) forControlEvents:UIControlEventTouchDown];
     
     PreY=0.0;
-    
     //========下拉刷新=============================
     _slimeView=[[SRRefreshView alloc] init];
     _slimeView.delegate=self;
@@ -529,7 +534,7 @@ int itttt=0;
     UILabel *lable4;//主创建人的名字
     UILabel *lable5;//活动类型
     UILabel *lable7;//活动名称
-    imagePICView0=[[UIImageView alloc]initWithFrame:CGRectMake(252, 105, 40, 31)];
+    imagePICView0=[[UIImageView alloc]initWithFrame:CGRectMake(252, 97, 40, 31)];
     //最小的一个
     imagePICView6=[[UIImageView alloc]initWithFrame:CGRectMake(126, -8, 39, 39)];
     imagePICView1=[[UIImageView alloc]initWithFrame:CGRectMake(103, -10, 41, 41)];
@@ -539,7 +544,7 @@ int itttt=0;
     
     imagePICView5=[[UIImageView alloc]initWithFrame:CGRectMake(10, 35, 8, 10)];//性别
     
-    UIImageView* prImage=[[UIImageView alloc]initWithFrame:CGRectMake(0, 22, 300, 102)];//遮罩
+    UIImageView* prImage=[[UIImageView alloc]initWithFrame:CGRectMake(-1, 19, 302, 96)];//遮罩
     prImage.image=[UIImage imageNamed:@"partylabel"];
     UIImageView* peoImage=[[UIImageView alloc]initWithFrame:CGRectMake(10, 77, 15, 15)];
     UIImageView* timeImage=[[UIImageView alloc]initWithFrame:CGRectMake(10, 94, 15, 15)];
@@ -578,9 +583,9 @@ int itttt=0;
     lable3.textColor=[UIColor colorWithRed:99.0/255 green:99.0/255 blue:99.0/255 alpha:1];
     lable3.font=[UIFont fontWithName:@"Helvetica-Bold" size:12];
     lable4=[[UILabel alloc]initWithFrame:CGRectMake(23, 26, 120, 27)];
-    lable4.font=[UIFont systemFontOfSize:10.0];
+    lable4.font=[UIFont fontWithName:@"Helvetica-Bold" size:10.0];
     lable4.textColor=[UIColor colorWithRed:99.0/255 green:99.0/255 blue:99.0/255 alpha:1];
-    lable5=[[UILabel alloc]initWithFrame:CGRectMake(252, 95, 40, 37)];
+    lable5=[[UILabel alloc]initWithFrame:CGRectMake(252, 87, 40, 37)];
     lable5.textAlignment=NSTextAlignmentCenter;
     lable5.textColor=[UIColor whiteColor];
     lable5.font=[UIFont systemFontOfSize:10.0];
@@ -729,8 +734,8 @@ int itttt=0;
     NSLog(@"本次返回的数量:%d",total);
     if (total<mytotal) {
         //返回的结果已经是所有的了，不需要在加载
-        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"加载完毕" message:@"所有数据已经加载完毕" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
-        [alert show];
+//        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"加载完毕" message:@"所有数据已经加载完毕" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
+//        [alert show];
     }
     else{
         if (segmentNum==0) {
@@ -861,36 +866,7 @@ int itttt=0;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_slimeView scrollViewDidScroll];
-    if ((PreY<scrollView.contentOffset.y)&&(scrollView.contentOffset.y>0)) {
-        
-        if (Allparty.frame.origin.y>-32)
-        {
-            [Allparty setFrame:CGRectMake(0, Allparty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 105, 32)];
-            [ReliableParty setFrame:CGRectMake(105, ReliableParty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 110, 32)];
-            [MyParty setFrame:CGRectMake(215, MyParty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 105, 32)];
-            
-        }
-        
-        PreY=scrollView.contentOffset.y;
-    }
-    else
-    {
-        if (Allparty.frame.origin.y<0)
-        {
-            [Allparty setFrame:CGRectMake(0, Allparty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 105, 32)];
-            [ReliableParty setFrame:CGRectMake(105, ReliableParty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 110, 32)];
-            [MyParty setFrame:CGRectMake(215, MyParty.frame.origin.y+(PreY-scrollView.contentOffset.y)/3, 105, 32)];
-            
-        }
-        
-        PreY=scrollView.contentOffset.y;
-    }
     
-    
-    if (scrollView.contentOffset.y<=0) {
-        
-        
-    }
     if ((self.tableViewParty.contentOffset.y+mainscreenhight-self.tableViewParty.contentSize.height>0)&&(self.tableViewParty.contentSize.height>0)) {
         if (isLoading==NO) {
             [self PartyClickMore];
@@ -899,6 +875,7 @@ int itttt=0;
     }
     
 }
+
 
 
 #pragma mark - slimeRefresh delegate

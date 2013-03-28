@@ -294,8 +294,8 @@
 -(void)Friendlistclickmore
 {
     if (total<mytotal) {
-        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"已经返回所有消息" message:@"已经返回所有消息" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
-        [alert show];
+//        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"已经返回所有消息" message:@"已经返回所有消息" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
+//        [alert show];
     }
     else
     {

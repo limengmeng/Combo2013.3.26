@@ -12,7 +12,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "PartyDetialLastViewController.h"
-
+#import "SVProgressHUD.h"
 @interface InvitViewController ()
 
 @end
@@ -89,12 +89,12 @@
     }
     //******************************确定按钮 end************************************
     
-    UITextView *textView1=[[UITextView alloc]initWithFrame:CGRectMake(0, 0, 320, 145)];
+    UITextView *textView1=[[UITextView alloc]initWithFrame:CGRectMake(0, 0, 320, 129)];
     textView1.userInteractionEnabled=NO;
     textView1.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:textView1];
     //******************************textView 邀请函************************************
-    txtView=[[UITextView alloc]initWithFrame:CGRectMake(10, 10, 300 , 135 )];
+    txtView=[[UITextView alloc]initWithFrame:CGRectMake(10, 10, 300 , 119 )];
     self.txtView.delegate=self;
     self.txtView.backgroundColor=[UIColor whiteColor];
     self.txtView.scrollEnabled = YES;//是否可以拖动
@@ -109,21 +109,29 @@
         uilabel.text = @"碰头地点？";
         uilabel.font=[UIFont systemFontOfSize:14];
         UIImageView *imgView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Lock"]];//129
-        imgView.frame=CGRectMake(0, 135, 320, 37);
+        imgView.frame=CGRectMake(0, 129, 320, 37);
         [self.view addSubview:imgView];
+
     }
     else if(temp==2){
         uilabel.text=@"申请理由...";
         uilabel.font=[UIFont systemFontOfSize:14];
+        
+//        UILabel *intro=[[UILabel alloc]initWithFrame:CGRectMake(35, 129, 290, 40)];
+//        intro.text=@"填写活动名称和活动时间 让你的活动更具体";
+//        intro.font=[UIFont fontWithName:@"Helvetica-Bold" size:13.0];
+//        intro.textColor=[UIColor colorWithRed:146.0/255 green:146.0/255 blue:146.0/255 alpha:1];
+//        intro.backgroundColor=[UIColor clearColor];
+//        [self.view addSubview:intro];
     }
     uilabel.enabled = NO;//lable必须设置为不可用
     uilabel.backgroundColor = [UIColor clearColor];
     [self.txtView addSubview:uilabel];
     
     if(self.temp==1){
-        label=[[UILabel alloc]initWithFrame:CGRectMake(20 , 95 , 60 , 40 )];
+        label=[[UILabel alloc]initWithFrame:CGRectMake(20 ,89 , 60 , 40 )];
     }else{
-        label=[[UILabel alloc]initWithFrame:CGRectMake(20 , 95 , 60 , 40 )];
+        label=[[UILabel alloc]initWithFrame:CGRectMake(20 ,89 , 60 , 40 )];
     }
     label.text=@"40";
     label.font=[UIFont systemFontOfSize:14];
@@ -208,12 +216,19 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex==1&&temp==2) {
         [self sendReason];
+        [SVProgressHUD show];
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(show) userInfo:nil repeats:NO];
+        
     }
     if (buttonIndex==0&&temp==1) {
         [self sendData];
     }
 }
 //******************************给服务器上传申请理由 end************************************
+
+-(void)show{
+    [SVProgressHUD dismissWithSuccess:@"发送成功！"];
+}
 
 -(void)sendReason{
     NSLog(@"self.userUUid==%@",self.userUUid);

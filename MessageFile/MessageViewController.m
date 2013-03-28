@@ -16,6 +16,7 @@
 #import "SDImageView+SDWebCache.h"
 #import "MakefriendViewController.h"
 #import "ASIFormDataRequest.h"
+#import "SVProgressHUD.h"
 int MessFlag=0;
 @interface MessageViewController ()
 
@@ -533,14 +534,14 @@ int MessFlag=0;
         imageview.layer.masksToBounds=YES;
         [imageview setImageWithURL:[NSURL URLWithString:[sender objectForKey:@"SENDER_PIC"]]refreshCache:NO placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
         [cell.contentView addSubview:imageview];
-        UIImageView* seximage=[[UIImageView alloc]initWithFrame:CGRectMake(87, 16, 10, 12)];
+        UIImageView* seximage=[[UIImageView alloc]initWithFrame:CGRectMake(87, 16, 11, 13)];
         if ([[[sender objectForKey:@"SENDER_SEX"]substringToIndex:1] isEqualToString:@"M"]) {
             NSLog(@"男");
-            seximage.image=[UIImage imageNamed:@"MSGFIRMALE"];
+            seximage.image=[UIImage imageNamed:@"nan"];
         }
         else
         {
-            seximage.image=[UIImage imageNamed:@"MSGFIRFEMALE"];
+            seximage.image=[UIImage imageNamed:@"nv"];
         }
         
         [cell.contentView addSubview:seximage];
@@ -566,13 +567,13 @@ int MessFlag=0;
         NSString *confromTimespStr = [formatter stringFromDate:date];
         timeLabel.text=confromTimespStr;
         
-
+        
         //申请添加好友的消息
         if ([type isEqualToString:@"0"])
         {
             //NSLog(@"申请添加好友");
             
-         
+            
             UILabel* messinfo=[[UILabel alloc]initWithFrame:CGRectMake(100, 27, 170, 25)];
             messinfo.backgroundColor=[UIColor clearColor];
             messinfo.font=[UIFont fontWithName:@"Helvetica-Bold" size:12];
@@ -581,14 +582,14 @@ int MessFlag=0;
             [cell.contentView addSubview:messinfo];
             if (![[[sender objectForKey:@"SENDER_STATUS"] substringToIndex:1] isEqualToString:@"Y"]) {
                 //对方还不是好友
-                UIImageView* imageview=[[UIImageView alloc]initWithFrame:CGRectMake(273, 10, 42 , 17)];
+                UIImageView* imageview=[[UIImageView alloc]initWithFrame:CGRectMake(260, 10, 50 , 17)];
                 imageview.image=[UIImage imageNamed:@"MSGFIRADD"];
                 [cell.contentView addSubview:imageview];
             }
             else
             {
                 //已经是好友
-                UIImageView* imageview=[[UIImageView alloc]initWithFrame:CGRectMake(273, 10, 42 , 17)];
+                UIImageView* imageview=[[UIImageView alloc]initWithFrame:CGRectMake(260, 10, 50 , 17)];
                 imageview.image=[UIImage imageNamed:@"MSGFIRADDED"];
                 [cell.contentView addSubview:imageview];
                 
@@ -618,7 +619,7 @@ int MessFlag=0;
             if ([[[dict objectForKey:@"p_status"]substringToIndex:1]isEqualToString:@"Y"])
             {
                 //NSLog(@"已加入派对");
-                UIImageView* imageview=[[UIImageView alloc]initWithFrame:CGRectMake(273, 10, 42 , 17)];
+                UIImageView* imageview=[[UIImageView alloc]initWithFrame:CGRectMake(260, 10, 50 , 17)];
                 imageview.image=[UIImage imageNamed:@"MSGSEEMORE"];
                 [cell.contentView addSubview:imageview];
                 
@@ -627,7 +628,7 @@ int MessFlag=0;
             else
             {
                 //还未加入派对
-                UIImageView* imageview=[[UIImageView alloc]initWithFrame:CGRectMake(273, 10, 42 , 17)];
+                UIImageView* imageview=[[UIImageView alloc]initWithFrame:CGRectMake(260, 10, 50 , 17)];
                 imageview.image=[UIImage imageNamed:@"MSGSEEMORE"];
                 [cell.contentView addSubview:imageview];
                 
@@ -637,10 +638,9 @@ int MessFlag=0;
         cell.selectionStyle=UITableViewCellEditingStyleNone;
         return cell;
     }
-    
+
     //郭江伟
     if (choiceNumber==1) {
-        self.tbView.backgroundColor=[UIColor whiteColor];
         UITableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
         if (!cell) {
             cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
@@ -722,7 +722,9 @@ int MessFlag=0;
         timeLabel1.font=[UIFont systemFontOfSize:11];
         [cell.contentView addSubview:timeLabel1];
         
-        
+        if (indexPath.row==18) {
+            NSLog(@"%@",[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_CONTENT"]);
+        }
         
         if([[self.partyId objectForKey:@"P_UUID"] isEqualToNumber:self.uuid]){//如果派对的创建者的id等于uuid
             if([[self.user objectForKey:@"USER_ID"] isEqualToNumber:self.uuid]){//如果信息接收者的id等于uuid
@@ -828,7 +830,7 @@ int MessFlag=0;
                     
                 }
                 else if([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"N"]){
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
                     timeLabel.text=@"已过期";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
@@ -838,7 +840,7 @@ int MessFlag=0;
                     
                 }
                 else if([[[[self.message objectAtIndex:indexPath.row] objectForKey:@"M_STATUS"]substringToIndex:1] isEqualToString:@"Y"]){
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(207, 108, 100, 12)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
                     timeLabel.text=@"已加入";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
@@ -888,7 +890,7 @@ int MessFlag=0;
                 [cell.contentView addSubview:wantlabel];
                 
                 UILabel* infolabel=[[UILabel alloc]initWithFrame:CGRectMake(78, 40, 232, 15)];
-                infolabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
+                infolabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
                 //infolabel.font=[UIFont systemFontOfSize:11];
                 infolabel.backgroundColor=[UIColor clearColor];
                 infolabel.textColor=[UIColor colorWithRed:79.0/255 green:79.0/255 blue:79.0/255 alpha:1];
@@ -903,7 +905,10 @@ int MessFlag=0;
                 timeLabel.backgroundColor=[UIColor clearColor];
                 [cell.contentView addSubview:timeLabel];
                 UILabel *placeLabel=[[UILabel alloc]initWithFrame:CGRectMake(78, 74, 223, 15)];
-                placeLabel.text=[NSString stringWithFormat:@"地点：%@",[self.partyId objectForKey:@"P_LOCAL"]];
+                if ([self.partyId objectForKey:@"P_LOCAL"]) {
+                    placeLabel.text=[NSString stringWithFormat:@"地点：%@",[self.partyId objectForKey:@"P_LOCAL"]];
+                }else
+                    placeLabel.text=@"";
                 placeLabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
                 placeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
                 placeLabel.backgroundColor=[UIColor clearColor];
@@ -945,7 +950,7 @@ int MessFlag=0;
                     [cell.contentView addSubview:minLabel];
                 }
                 else if([[[self.partyId objectForKey:@"P_STATUS"]substringToIndex:1] isEqualToString:@"N"]){
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 100, 14)];
                     timeLabel.text=@"人数不足已删除";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
@@ -1099,6 +1104,11 @@ int MessFlag=0;
                 UIImageView *imgView2=[[UIImageView alloc]initWithFrame:CGRectMake(20, 16, 42, 42)];
                 NSURL* imageurl=[NSURL URLWithString:[[self.partyId objectForKey:@"p_user_id"] objectForKey:@"USER_PIC"]];
                 [imgView2 setImageWithURL: imageurl refreshCache:NO placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+                imgView2.layer.borderColor=[[UIColor whiteColor] CGColor];
+                imgView2.layer.borderWidth=1;
+                //圆角设置
+                imgView2.layer.cornerRadius = 6;
+                imgView2.layer.masksToBounds = YES;
                 //***************************************信息显示*********************************************
                 
                 UIImageView* seximage=[[UIImageView alloc]initWithFrame:CGRectMake(80, 16, 11, 13)];
@@ -1135,7 +1145,10 @@ int MessFlag=0;
                 [cell.contentView addSubview:timeLabel];
                 
                 UILabel *placeLabel=[[UILabel alloc]initWithFrame:CGRectMake(78, 74, 223, 15)];
-                placeLabel.text=[NSString stringWithFormat:@"地点：%@",[self.partyId objectForKey:@"P_LOCAL"]];
+                if ([self.partyId objectForKey:@"P_LOCAL"]) {
+                    placeLabel.text=[NSString stringWithFormat:@"地点：%@",[self.partyId objectForKey:@"P_LOCAL"]];
+                }else
+                    placeLabel.text=@"";
                 placeLabel.textColor=[UIColor colorWithRed:121.0/255 green:121.0/255 blue:121.0/255 alpha:1];
                 placeLabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:12.0];
                 placeLabel.backgroundColor=[UIColor clearColor];
@@ -1189,7 +1202,7 @@ int MessFlag=0;
                     
                 }
                 else if([[[self.partyId objectForKey:@"P_STATUS"]substringToIndex:1] isEqualToString:@"N"]){
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 160, 14)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 100, 14)];
                     timeLabel.text=@"人数不足已删除";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
@@ -1198,7 +1211,7 @@ int MessFlag=0;
                     [cell.contentView addSubview:timeLabel];
                 }
                 else if([[[self.partyId objectForKey:@"P_STATUS"]substringToIndex:1] isEqualToString:@"Y"]){
-                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 152, 60, 14)];
+                    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 107, 60, 14)];
                     timeLabel.text=@"已创建";
                     timeLabel.backgroundColor=[UIColor clearColor];
                     timeLabel.tag=105;
@@ -1361,6 +1374,10 @@ int MessFlag=0;
         }
         else if(sendDate==2){
             
+            [SVProgressHUD show];
+            [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showParty) userInfo:nil repeats:NO];
+            
+            
             NSString* str=@"mac/party/IF00053";
             NSString* strURL=globalURL(str);
             NSURL* url=[NSURL URLWithString:strURL];
@@ -1382,20 +1399,13 @@ int MessFlag=0;
     [request startAsynchronous];
     
 }
+-(void)showParty{
+    [SVProgressHUD dismissWithSuccess:@"派对创建成功！"];
+}
+-(void)showFriend{
+    [SVProgressHUD dismissWithSuccess:@"发送成功！"];
+}
 
-////改变head的高度------已经修改好
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    //header高度已经修改好，不需要再动
-//    if (section==0) {
-//        return 26;
-//    }
-//    return 20;
-//}
-
-//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    return 140;
-//}
 //改变行高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (choiceNumber==0) {
@@ -1522,8 +1532,8 @@ int MessFlag=0;
     flag=1;
     NSLog(@"好友消息当前返回的数量%d",total);
     if (total<mytotal) {
-        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"已经返回所有消息" message:@"已经返回所有消息" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
-        [alert show];
+//        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"已经返回所有消息" message:@"已经返回所有消息" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
+//        [alert show];
     }
     else
     {
@@ -1542,8 +1552,8 @@ int MessFlag=0;
 {
     flag=1;
     if (total<mytotal) {
-        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"已经返回所有消息" message:@"已经返回所有消息" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
-        [alert show];
+//        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"已经返回所有消息" message:@"已经返回所有消息" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
+//        [alert show];
     }
     else{
         NSString* str=[NSString stringWithFormat:@"mac/party/IF00050?uuid=%@&&m_type=party&&from=%d",userUUid,[self.message count]+1];
@@ -1563,8 +1573,8 @@ int MessFlag=0;
 {
     flag=1;
     if (total<mytotal) {
-        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"已经返回所有消息" message:@"已经返回所有消息" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
-        [alert show];
+//        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"已经返回所有消息" message:@"已经返回所有消息" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
+//        [alert show];
     }
     else{
         NSString* str=[NSString stringWithFormat:@"mac/party/IF00018?uuid=%@&&m_type=system&&from=%d",userUUid,[self.systemArray count]+1];

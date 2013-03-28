@@ -136,13 +136,6 @@
 
     //**********************************手机号end*****************************************
     
-    UILabel *intro=[[UILabel alloc]initWithFrame:CGRectMake(35, 140, 290, 40)];
-    intro.text=@"填写活动名称和活动时间 让你的活动更具体";
-    intro.font=[UIFont fontWithName:@"Helvetica-Bold" size:13.0];
-    intro.textColor=[UIColor colorWithRed:146.0/255 green:146.0/255 blue:146.0/255 alpha:1];
-    intro.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:intro];
-    
     //*******************************时间选择器*******************************
     if (DatePicker==nil) {
         DatePicker = [[UIDatePicker alloc] init];
@@ -150,7 +143,8 @@
         
         [DatePicker addTarget:self action:@selector(DatePickerChanged:) forControlEvents:UIControlEventValueChanged];
         DatePicker.datePickerMode = UIDatePickerModeDateAndTime;
-        DatePicker.minimumDate = [NSDate date];
+        NSDate *mindate=[[NSDate alloc]initWithTimeInterval:1800 sinceDate:[NSDate date]];
+        DatePicker.minimumDate = mindate;
         DatePicker.minuteInterval = 10;
     }
     

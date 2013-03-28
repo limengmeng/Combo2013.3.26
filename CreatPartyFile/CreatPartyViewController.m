@@ -28,7 +28,7 @@
 
 @synthesize activityName,activityPlace,activityTime;
 @synthesize introduce,creat;
-@synthesize DatePicker,time,keyboardToolbar;
+@synthesize time,keyboardToolbar;
 -(void)viewWillAppear:(BOOL)animated
 {
     
@@ -195,14 +195,6 @@
     //********************************联合创建人end*****************************
     
     //*******************************活动简介 end*******************************
-//    textField1=[[UITextField alloc]initWithFrame:CGRectMake(10, 239, 299, 128)];
-//    textField1.backgroundColor=[UIColor whiteColor];
-//    textField1.font=[UIFont systemFontOfSize:14];
-//    textField1.backgroundColor=[UIColor clearColor];
-//    //textField1.placeholder=@"  输入你们的活动介绍";
-//    textField1.background = [UIImage imageNamed:@"creatkuang3"];
-//    textField1.userInteractionEnabled=NO;
-//    [self.view addSubview:textField1];
     
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(25, 241, 299, 40)];
     label.text=@"输入你们的活动介绍";
@@ -239,15 +231,16 @@
     //*******************************时间选择器*******************************
     //datePicker
     // Birthday date picker
-    if (self.DatePicker==nil) {
+    if (datePicker==nil) {
        datePicker = [[UIDatePicker alloc] init];
         
         [datePicker setLocale: [[NSLocale alloc] initWithLocaleIdentifier: @"zh_CN"]];//设置时间选择器语言环境为中文
 
-        [self.DatePicker addTarget:self action:@selector(DatePickerChanged:) forControlEvents:UIControlEventValueChanged];
-        self.DatePicker.datePickerMode = UIDatePickerModeDateAndTime;
-        self.DatePicker.minimumDate = [NSDate date];
-        self.DatePicker.minuteInterval = 10;
+        [datePicker addTarget:self action:@selector(DatePickerChanged:) forControlEvents:UIControlEventValueChanged];
+        datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+        NSDate *mindate=[[NSDate alloc]initWithTimeInterval:1800 sinceDate:[NSDate date]];
+        datePicker.minimumDate = mindate;
+        datePicker.minuteInterval = 10;
     }
     
     
@@ -268,7 +261,7 @@
         [self.keyboardToolbar setItems:[NSArray arrayWithObjects:spaceBarItem, doneBarItem, nil]];
         
         self.activityTime.inputAccessoryView = self.keyboardToolbar;
-        self.activityTime.inputView = self.DatePicker;
+        self.activityTime.inputView = datePicker;
         
         //*******************************时间选择器 end*******************************
     }
@@ -392,7 +385,7 @@
 
 - (void)resignKeyboard:(id)sender
 {
-    self.time = self.DatePicker.date;
+    self.time = datePicker.date;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy年MM月dd日HH点mm分"];
     self.activityTime.text  =[formatter stringFromDate:self.time];
@@ -419,7 +412,7 @@
 //*******************************选择时间*******************************
 - (void)DatePickerChanged:(id)sender
 {
-    self.time = self.DatePicker.date;
+    self.time = datePicker.date;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy年MM月dd日HH点mm分"];
     self.activityTime.text  =[formatter stringFromDate:self.time];

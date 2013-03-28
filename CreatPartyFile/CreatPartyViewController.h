@@ -80,8 +80,6 @@
 
 @property (nonatomic, retain) UIToolbar *keyboardToolbar;
 
-@property (nonatomic, retain) UIDatePicker *DatePicker;
-
 @property (nonatomic, retain) NSDate *time;
 
 

@@ -30,6 +30,8 @@
     DetailViewController* detail;
     UIButton *buttonNew;
     UIButton *buttonNear;
+    
+    UIImageView *logoimage;
 }
 @property (strong,nonatomic) NSMutableArray* addrarray;
 @property (strong,nonatomic) NSMutableArray* actsumarray;
