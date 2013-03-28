@@ -41,9 +41,9 @@
     UIButton *back;
     UIButton *join;
     NSNumber *numberUUID;
-    int numFlogLogout;
-    
-    int partyTemp;
+    int numFlogLogout;//退出派对的标志
+    int numFlogJoin;//申请加入标志位
+    int partyTemp;//从创建派对进入
 }
 @property int partyTemp;
 @property(nonatomic,strong)PagedFlowView * FlowView;//滑动效果

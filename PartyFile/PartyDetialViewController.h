@@ -46,7 +46,8 @@
     int mark;
     NSString *userUUid;
     NSNumber *numberUUID;
-    int numFlogLogout;
+    int numFlogLogout;//退出派对的标志
+    int numFlogJoin;//申请加入标志位
 }
 @property(nonatomic,strong)PagedFlowView * FlowView;//滑动效果
 

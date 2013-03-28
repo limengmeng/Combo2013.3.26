@@ -27,6 +27,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        numFlogJoin=0;
     }
     return self;
 }
@@ -124,31 +125,59 @@
         NSDictionary* userdict=[self.creatUser objectAtIndex:0];
         label.text=[userdict objectForKey:@"USER_NICK"];
         NSString *stringPartyStatues=[party objectForKey:@"P_STATUS"];
-        NSString *stringInStatues=[party objectForKey:@"IN_STATUS"];
-        NSString *stringTakeStatues=[party objectForKey:@"take_status"];
-        UIButton *buttonJoin=[UIButton buttonWithType:UIButtonTypeCustom];
-        if ([[stringPartyStatues substringToIndex:1] isEqualToString:@"Y"]) {
-            if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
-                [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-                [buttonJoin addTarget:self action:@selector(supplyParty) forControlEvents:UIControlEventTouchUpInside];//申请加入派对
+        if ([[stringPartyStatues substringToIndex:1]isEqualToString:@"Y"]||[[stringPartyStatues substringToIndex:1]isEqualToString:@"W"]) {
+            UIButton *buttonJoin=[UIButton buttonWithType:UIButtonTypeCustom];
+            [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+            [buttonJoin addTarget:self action:@selector(supplyParty) forControlEvents:UIControlEventTouchUpInside];//申请加入派对
+            for (NSDictionary *dicJion in [party objectForKey:@"creaters"])
+            {
+                NSString *stringInStatues=[dicJion objectForKey:@"IN_STATUS"];
+                NSString *stringTakeStatues=[dicJion objectForKey:@"take_status"];
+                if ([[dicJion objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID] ) {
+                    
+                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
+                        [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
+                        [buttonJoin addTarget:self action:@selector(noOutParty) forControlEvents:UIControlEventTouchUpInside];//是联合创建人不能推出派对
+                        numFlogJoin=1;
+                    }
+                    NSLog(@"eeeeeeeeeeeeeeeeeee%@,,,%@",stringInStatues,stringTakeStatues);
+                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
+                        [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                        [buttonJoin addTarget:self action:@selector(agreeJoinParty) forControlEvents:UIControlEventTouchUpInside];//同意联合创建
+                        numFlogJoin=1;
+                    }
+                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]) {
+                        [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                        [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//等待同意
+                        numFlogJoin=1;
+                    }
+                }
+            }
+            for ( NSDictionary *dicParty in [party objectForKey:@"participants"])
+            {
+                NSLog(@"wwwwwwwwwwwwwwwwwww%@",self.userUUid);
+                NSString *stringInStatues=[dicParty objectForKey:@"IN_STATUS"];
+                NSString *stringTakeStatues=[dicParty objectForKey:@"take_status"];
+                if ([[dicParty objectForKey:@"USER_ID"] isEqualToNumber:self.numberUUID])
+                {
+                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
+                        [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
+                        [buttonJoin addTarget:self action:@selector(outParty) forControlEvents:UIControlEventTouchUpInside];//可以退出派对不去
+                        numFlogJoin=1;
+                    }
+                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
+                        
+                    }
+                    if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]) {
+                        [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
+                        [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//等待同意
+                        numFlogJoin=1;
+                    }
+                    
+                }
                 
             }
-            if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"N"]) {
-                [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-                [buttonJoin addTarget:self action:@selector(agreeJoinParty) forControlEvents:UIControlEventTouchUpInside];//同意联合创建
-            }
-            if ([[stringInStatues substringToIndex:1]isEqualToString:@"Y"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]){
-                [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
-                [buttonJoin addTarget:self action:@selector(noOutParty) forControlEvents:UIControlEventTouchUpInside];//联合创建人推出不能退
-            }
-            if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"Y"]) {
-                [buttonJoin setImage:[UIImage imageNamed:@"Pout"] forState:UIControlStateNormal];
-                [buttonJoin addTarget:self action:@selector(outParty) forControlEvents:UIControlEventTouchUpInside];//不去了
-            }
-            if ([[stringInStatues substringToIndex:1]isEqualToString:@"N"]&&[[stringTakeStatues substringToIndex:1]isEqualToString:@"W"]){
-                [buttonJoin setImage:[UIImage imageNamed:@"Pjoin"] forState:UIControlStateNormal];
-                [buttonJoin addTarget:self action:@selector(weaitJoinParty) forControlEvents:UIControlEventTouchUpInside];//不去了
-            }
+
             buttonJoin.frame=CGRectMake(0,mainscreenhight-107, 160, 44);
             [self.view addSubview:buttonJoin];
             
@@ -176,11 +205,13 @@
 -(void)supplyParty
 {
     NSLog(@"申请加入派对");
-    invit=[[InvitViewController alloc]init];
-    invit.temp=2;
-    invit.from_p_id=self.p_id;
-    NSLog(@"输出pid%@",invit.from_p_id);
-    [self.navigationController pushViewController:invit animated:YES];
+    if (numFlogJoin==0) {
+        invit=[[InvitViewController alloc]init];
+        invit.temp=2;
+        invit.from_p_id=self.p_id;
+        NSLog(@"输出pid%@",invit.from_p_id);
+        [self.navigationController pushViewController:invit animated:YES];
+    }
 }
 -(void)agreeJoinParty
 {
